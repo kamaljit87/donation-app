@@ -1,0 +1,53 @@
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// Pages
+import DonatePage from './pages/DonatePage';
+import AdminLogin from './pages/AdminLogin';
+import AdminDashboard from './pages/AdminDashboard';
+import ThankYouPage from './pages/ThankYouPage';
+
+// Context
+import { AuthProvider } from './context/AuthContext';
+
+// Components
+import ProtectedRoute from './components/ProtectedRoute';
+
+function App() {
+  return (
+    <AuthProvider>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<DonatePage />} />
+          <Route path="/donate" element={<DonatePage />} />
+          <Route path="/thank-you" element={<ThankYouPage />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route
+            path="/admin/dashboard"
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+      </div>
+    </AuthProvider>
+  );
+}
+
+export default App;
