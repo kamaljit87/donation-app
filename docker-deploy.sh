@@ -18,8 +18,8 @@ if ! command -v docker &> /dev/null; then
 fi
 
 # Get configuration from user
-read -p "Enter your domain name (or press Enter for localhost): " DOMAIN
-DOMAIN=${DOMAIN:-localhost}
+read -p "Enter your domain name [donationapp.ddns.net]: " DOMAIN
+DOMAIN=${DOMAIN:-donationapp.ddns.net}
 
 read -p "Enter database password: " -s DB_PASSWORD
 echo ""
@@ -73,14 +73,20 @@ REACT_APP_API_URL=https://$DOMAIN/api
 ADMIN_EMAIL=$ADMIN_EMAIL
 ADMIN_PASSWORD=$ADMIN_PASSWORD
 
-# Domain (for nginx proxy)
+# Domain (for Caddy reverse proxy)
 DOMAIN=$DOMAIN
 EOF
 
 echo "✅ Environment configured"
 
-# Create SSL directory
+# Create SSL directory (not needed for Caddy, but kept for compatibility)
 mkdir -p ssl
+
+# Update Caddyfile with domain
+echo "📝 Updating Caddyfile with domain..."
+sed "s/donationapp.ddns.net/$DOMAIN/g" Caddyfile > Caddyfile.tmp && mv Caddyfile.tmp Caddyfile
+sed "s/www.donationapp.ddns.net/www.$DOMAIN/g" Caddyfile > Caddyfile.tmp && mv Caddyfile.tmp Caddyfile
+sed "s/admin@donationapp.ddns.net/admin@$DOMAIN/g" Caddyfile > Caddyfile.tmp && mv Caddyfile.tmp Caddyfile
 
 # Build and start containers
 echo ""
@@ -110,14 +116,19 @@ if [ "$DOMAIN" = "localhost" ]; then
     echo ""
     echo "⚠️  For production with SSL:"
     echo "  1. Point your domain DNS to this server"
-    echo "  2. Run: ./setup-ssl.sh"
+    echo "  2. Update .env with your domain"
+    echo "  3. Restart: docker-compose restart caddy"
 else
     echo "🌐 Your application is accessible at:"
-    echo "  http://$DOMAIN (HTTP)"
+    echo "  https://$DOMAIN"
     echo ""
-    echo "🔐 To enable HTTPS with SSL certificate:"
-    echo "  1. Ensure DNS points to this server"
-    echo "  2. Run: ./setup-ssl.sh"
+    echo "🔐 SSL/HTTPS:"
+    echo "  ✅ Caddy will automatically obtain SSL certificate"
+    echo "  ✅ Certificate auto-renewal enabled"
+    echo "  ⚠️  Ensure DNS points to this server's IP"
+    echo ""
+    echo "  Check SSL status:"
+    echo "    docker-compose logs caddy"
 fi
 
 echo ""

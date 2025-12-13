@@ -78,7 +78,7 @@ services:
       context: .
       dockerfile: Dockerfile.frontend
       args:
-        REACT_APP_API_URL: ${REACT_APP_API_URL:-http://localhost/api}
+        REACT_APP_API_URL: ${REACT_APP_API_URL:-https://donationapp.ddns.net/api}
     container_name: donation-app-frontend
     restart: unless-stopped
     expose:
@@ -88,39 +88,26 @@ services:
     networks:
       - donation-network
 
-  # Nginx Reverse Proxy
-  nginx-proxy:
-    image: nginx:alpine
-    container_name: donation-app-proxy
-volumes:
-  db_data:
-    driver: local
-  backend_storage:
-    driver: local
-  backend_cache:
-    driver: local
-  certbot_data:
-    driver: local
-  certbot_conf:proxy.conf:/etc/nginx/nginx.conf
-      - ./ssl:/etc/nginx/ssl
-      - certbot_data:/var/www/certbot
-      - certbot_conf:/etc/letsencrypt
+  # Caddy Reverse Proxy with Auto SSL
+  caddy:
+    image: caddy:2-alpine
+    container_name: donation-app-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
     depends_on:
       - frontend
       - backend-nginx
     networks:
       - donation-network
-
-  # Certbot for SSL
-  certbot:
-    image: certbot/certbot
-    container_name: donation-app-certbot
-    volumes:
-      - certbot_data:/var/www/certbot
-      - certbot_conf:/etc/letsencrypt
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
-    networks:
-      - donation-network
+    environment:
+      - DOMAIN=${DOMAIN:-donationapp.ddns.net}
 
 networks:
   donation-network:
@@ -132,4 +119,8 @@ volumes:
   backend_storage:
     driver: local
   backend_cache:
+    driver: local
+  caddy_data:
+    driver: local
+  caddy_config:
     driver: local
