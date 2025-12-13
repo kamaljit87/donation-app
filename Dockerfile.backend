@@ -19,17 +19,11 @@ RUN apt-get update && apt-get install -y \
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy only composer files first for better caching
-COPY backend/composer.json backend/composer.lock* ./
-
-# Install dependencies
-RUN composer install --optimize-autoloader --no-dev --no-scripts --no-autoloader
-
-# Copy application files
+# Copy application files first
 COPY backend ./
 
-# Generate optimized autoloader
-RUN composer dump-autoload --optimize --no-dev
+# Install dependencies (no autoloader generation yet)
+RUN composer install --optimize-autoloader --no-dev --no-scripts
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html \
