@@ -15,26 +15,6 @@ donationapp.ddns.net {
         Referrer-Policy "no-referrer-when-downgrade"
     }
 
-    # Rate limiting for login
-    @admin_login {
-        path /api/admin/login
-    }
-    rate_limit @admin_login {
-        zone admin_login_zone
-        window 1m
-        events 5
-    }
-
-    # Rate limiting for API
-    @api {
-        path /api/*
-    }
-    rate_limit @api {
-        zone api_zone
-        window 1s
-        events 10
-    }
-
     # API endpoints (proxy to backend PHP-FPM via fastcgi)
     handle /api/* {
         root * /var/www/html/public
