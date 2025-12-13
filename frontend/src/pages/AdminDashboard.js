@@ -94,53 +94,34 @@ const AdminDashboard = () => {
 
       <div className="admin-dashboard">
         <header className="dashboard-header">
-          <div className="container">
-            <div className="header-content">
-              <div>
-                <h1>Admin Dashboard</h1>
-                <p>Welcome back, {user?.name}</p>
-              </div>
-              <button onClick={handleLogout} className="logout-btn">
-                Logout
-              </button>
+          <div className="header-content">
+            <div className="header-title">
+              <h1>Admin Dashboard</h1>
+              <p>Welcome back, {user?.name}</p>
             </div>
+            <button onClick={handleLogout} className="logout-button">
+              Logout
+            </button>
           </div>
         </header>
 
         <div className="dashboard-content">
-          <div className="container">
-            {statistics && (
-              <div className="stats-grid">
-                <div className="stat-card">
-                  <div className="stat-icon">💰</div>
-                  <div className="stat-details">
-                    <h3>Total Donations</h3>
-                    <p className="stat-value">{formatCurrency(statistics.total_donations)}</p>
-                  </div>
-                </div>
-                <div className="stat-card">
-                  <div className="stat-icon">👥</div>
-                  <div className="stat-details">
-                    <h3>Total Donors</h3>
-                    <p className="stat-value">{statistics.total_donors}</p>
-                  </div>
-                </div>
-                <div className="stat-card">
-                  <div className="stat-icon">✅</div>
-                  <div className="stat-details">
-                    <h3>Successful</h3>
-                    <p className="stat-value">{statistics.successful_donations}</p>
-                  </div>
-                </div>
-                <div className="stat-card">
-                  <div className="stat-icon">⏳</div>
-                  <div className="stat-details">
-                    <h3>Pending</h3>
-                    <p className="stat-value">{statistics.pending_donations}</p>
-                  </div>
-                </div>
+          {statistics && (
+            <div className="stats-grid">
+              <div className="stat-card">
+                <div className="stat-label">Total Donations</div>
+                <div className="stat-value">{formatCurrency(statistics.total_donations)}</div>
               </div>
-            )}
+              <div className="stat-card">
+                <div className="stat-label">Total Donors</div>
+                <div className="stat-value">{statistics.total_donors}</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-label">Successful</div>
+                <div className="stat-value">{statistics.successful_donations}</div>
+              </div>
+            </div>
+          )}
 
             <div className="donations-section">
               <div className="section-header">
@@ -156,7 +137,7 @@ const AdminDashboard = () => {
                   <select
                     value={filters.status}
                     onChange={(e) => handleFilterChange('status', e.target.value)}
-                    className="status-filter"
+                    className="filter-select"
                   >
                     <option value="">All Status</option>
                     <option value="success">Success</option>
@@ -198,7 +179,7 @@ const AdminDashboard = () => {
                               </span>
                             </td>
                             <td>{formatDate(donation.created_at)}</td>
-                            <td className="payment-id">
+                            <td>
                               {donation.razorpay_payment_id || '-'}
                             </td>
                           </tr>
@@ -212,7 +193,7 @@ const AdminDashboard = () => {
                       <button
                         onClick={() => handleFilterChange('page', filters.page - 1)}
                         disabled={filters.page === 1}
-                        className="pagination-btn"
+                        className="pagination-button"
                       >
                         Previous
                       </button>
@@ -222,7 +203,7 @@ const AdminDashboard = () => {
                       <button
                         onClick={() => handleFilterChange('page', filters.page + 1)}
                         disabled={filters.page === donations.last_page}
-                        className="pagination-btn"
+                        className="pagination-button"
                       >
                         Next
                       </button>
@@ -230,10 +211,12 @@ const AdminDashboard = () => {
                   )}
                 </>
               ) : (
-                <div className="empty-state">No donations found</div>
+                <div className="no-donations">
+                  <div className="no-donations-icon">📋</div>
+                  <p>No donations found</p>
+                </div>
               )}
             </div>
-          </div>
         </div>
       </div>
     </>

@@ -53,52 +53,51 @@ const AdminLogin = () => {
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
-      <div className="admin-login-page">
-        <div className="login-container">
-          <div className="login-card">
-            <div className="login-header">
-              <h1>Admin Login</h1>
-              <p>Access your admin dashboard</p>
-            </div>
-
-            <form onSubmit={handleSubmit} className="login-form">
-              <div className="form-group">
-                <label htmlFor="email">Email Address</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  autoComplete="username"
-                  placeholder="admin@donationapp.com"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                  autoComplete="current-password"
-                  placeholder="Enter your password"
-                />
-              </div>
-
-              <button type="submit" className="login-btn" disabled={loading}>
-                {loading ? 'Logging in...' : 'Login'}
-              </button>
-            </form>
-
-            <div className="login-footer">
-              <p>Protected area for authorized personnel only</p>
-            </div>
+      <div className="admin-login">
+        <div className="login-card">
+          <div className="login-header">
+            <div className="login-icon"></div>
+            <h1>Admin Login</h1>
+            <p>Access your admin dashboard</p>
           </div>
+
+          <form onSubmit={handleSubmit} className="login-form">
+            <div className="form-group">
+              <label htmlFor="email" className="form-label">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                autoComplete="username"
+                placeholder="admin@donationapp.com"
+                className="form-input"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="password" className="form-label">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                autoComplete="current-password"
+                placeholder="Enter your password"
+                className="form-input"
+              />
+            </div>
+
+            <button type="submit" className="login-button" disabled={loading}>
+              {loading ? 'Logging in...' : 'Login'}
+            </button>
+          </form>
+
+          <a href="/" className="back-link">← Return to Home</a>
         </div>
       </div>
     </>
