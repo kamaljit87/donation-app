@@ -35,19 +35,15 @@ donationapp.ddns.net {
         events 10
     }
 
-    # API endpoints (proxy to backend)
+    # API endpoints (proxy to backend PHP-FPM via fastcgi)
     handle /api/* {
-        reverse_proxy backend-nginx:80 {
-            header_up Host {host}
-            header_up X-Real-IP {remote_host}
-            header_up X-Forwarded-For {remote_host}
-            header_up X-Forwarded-Proto {scheme}
-        }
+        root * /var/www/html/public
+        php_fastcgi backend:9000
     }
 
     # Frontend application (React SPA)
     handle {
-        reverse_proxy frontend:80 {
+        reverse_proxy frontend:3000 {
             header_up Host {host}
             header_up X-Real-IP {remote_host}
             header_up X-Forwarded-For {remote_host}
