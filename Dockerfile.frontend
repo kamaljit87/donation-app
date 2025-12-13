@@ -6,8 +6,10 @@ WORKDIR /app
 # Copy package files
 COPY frontend/package*.json ./
 
-# Clean install with force and no cache to avoid dependency issues
-RUN npm cache clean --force && npm install --force
+# Clean install and explicitly install ajv to fix dependency
+RUN npm cache clean --force && \
+    npm install --force && \
+    npm install ajv@^8.12.0 --save-dev --force
 
 # Copy application files
 COPY frontend ./
