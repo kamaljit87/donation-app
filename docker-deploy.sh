@@ -35,13 +35,13 @@ read -sp "Enter admin password [Admin@123]: " ADMIN_PASSWORD
 ADMIN_PASSWORD=${ADMIN_PASSWORD:-Admin@123}
 echo -e "\n"
 
-# Clone repository if not exists
-if [ ! -d "donation-app" ]; then
-    echo "📥 Cloning repository..."
-    git clone https://github.com/kamaljit87/donation-app.git
+# Check if we're already in the app directory
+if [ ! -f "docker-compose.yml" ]; then
+    echo "❌ Error: docker-compose.yml not found!"
+    echo "Please run this script from the donation-app directory"
+    echo "Or download the repository files first"
+    exit 1
 fi
-
-cd donation-app
 
 # Create .env file
 echo "📝 Creating .env file..."

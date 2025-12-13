@@ -39,8 +39,11 @@ This script will:
 ### 2. Deploy Application
 
 ```bash
-# Download deployment script
-curl -o docker-deploy.sh https://raw.githubusercontent.com/kamaljit87/donation-app/main/docker-deploy.sh
+# Clone repository
+git clone https://github.com/kamaljit87/donation-app.git
+cd donation-app
+
+# Run deployment script
 chmod +x docker-deploy.sh
 ./docker-deploy.sh
 ```
@@ -327,7 +330,12 @@ For issues or questions, check:
 ```bash
 # Deploy from scratch
 curl -o cleanup.sh https://raw.githubusercontent.com/kamaljit87/donation-app/main/cleanup-and-install-docker.sh && chmod +x cleanup.sh && sudo ./cleanup.sh
-curl -o docker-deploy.sh https://raw.githubusercontent.com/kamaljit87/donation-app/main/docker-deploy.sh && chmod +x docker-deploy.sh && ./docker-deploy.sh
+
+# Clone and deploy
+git clone https://github.com/kamaljit87/donation-app.git
+cd donation-app
+chmod +x docker-deploy.sh
+./docker-deploy.sh
 
 # Start/Stop
 docker-compose up -d
