@@ -108,18 +108,18 @@ ADMIN_PASSWORD=YourPassword123
 ### Start Services
 
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 ### View Logs
 
 ```bash
 # All services
-docker-compose logs -f
+docker compose logs -f
 
 # Specific service
-docker-compose logs -f backend
-docker-compose logs -f caddy
+docker compose logs -f backend
+docker compose logs -f caddy
 ```
 
 ## 🎯 Docker Services
@@ -141,7 +141,7 @@ Caddy automatically obtains and renews SSL certificates from Let's Encrypt when:
 
 Check SSL status:
 ```bash
-docker-compose logs caddy
+docker compose logs caddy
 ```
 
 ## 🛠️ Useful Commands
@@ -150,48 +150,48 @@ docker-compose logs caddy
 
 ```bash
 # Stop all services
-docker-compose down
+docker compose down
 
 # Start services
-docker-compose up -d
+docker compose up -d
 
 # Restart specific service
-docker-compose restart caddy
+docker compose restart caddy
 
 # View service status
-docker-compose ps
+docker compose ps
 
 # Remove all containers and volumes
-docker-compose down -v
+docker compose down -v
 ```
 
 ### Laravel Commands
 
 ```bash
 # Run migrations
-docker-compose exec backend php artisan migrate
+docker compose exec backend php artisan migrate
 
 # Seed database
-docker-compose exec backend php artisan db:seed
+docker compose exec backend php artisan db:seed
 
 # Clear cache
-docker-compose exec backend php artisan cache:clear
+docker compose exec backend php artisan cache:clear
 
 # Generate app key
-docker-compose exec backend php artisan key:generate
+docker compose exec backend php artisan key:generate
 ```
 
 ### Database Access
 
 ```bash
 # MySQL CLI
-docker-compose exec db mysql -u root -p
+docker compose exec db mysql -u root -p
 
 # Backup database
-docker-compose exec db mysqldump -u root -p donation_app > backup.sql
+docker compose exec db mysqldump -u root -p donation_app > backup.sql
 
 # Restore database
-docker-compose exec -T db mysql -u root -p donation_app < backup.sql
+docker compose exec -T db mysql -u root -p donation_app < backup.sql
 ```
 
 ## 📊 Admin Panel
@@ -226,42 +226,42 @@ docker-compose exec -T db mysql -u root -p donation_app < backup.sql
 
 ```bash
 # Check logs
-docker-compose logs
+docker compose logs
 
 # Rebuild containers
-docker-compose down
-docker-compose up -d --build
+docker compose down
+docker compose up -d --build
 ```
 
 ### Database Connection Failed
 
 ```bash
 # Check database status
-docker-compose exec db mysqladmin ping -h localhost
+docker compose exec db mysqladmin ping -h localhost
 
 # Wait for database to be ready
-docker-compose ps
+docker compose ps
 ```
 
 ### SSL Certificate Issues
 
 ```bash
 # Check Caddy logs
-docker-compose logs caddy
+docker compose logs caddy
 
 # Verify DNS points to server
 dig donationapp.ddns.net
 
 # Restart Caddy
-docker-compose restart caddy
+docker compose restart caddy
 ```
 
 ### Permission Errors
 
 ```bash
 # Fix Laravel storage permissions
-docker-compose exec backend chown -R www-data:www-data /var/www/html/storage
-docker-compose exec backend chmod -R 775 /var/www/html/storage
+docker compose exec backend chown -R www-data:www-data /var/www/html/storage
+docker compose exec backend chmod -R 775 /var/www/html/storage
 ```
 
 ## 📁 Project Structure
@@ -283,7 +283,7 @@ donation-app/
 │       ├── pages/
 │       ├── services/
 │       └── context/
-├── docker-compose.yml      # Docker orchestration
+├── docker compose.yml      # Docker orchestration
 ├── Dockerfile.backend      # Backend container
 ├── Dockerfile.frontend     # Frontend container
 ├── Caddyfile              # Caddy configuration
@@ -309,7 +309,7 @@ donation-app/
 - Use strong database passwords
 - Change default admin credentials
 - Keep Razorpay keys secure (never commit to git)
-- Regular security updates: `docker-compose pull`
+- Regular security updates: `docker compose pull`
 - Enable firewall: `ufw enable`
 - Use environment variables for sensitive data
 - Regular database backups
@@ -321,7 +321,7 @@ This project is open-source and available under the MIT License.
 ## 🙋 Support
 
 For issues or questions, check:
-- Docker logs: `docker-compose logs -f`
+- Docker logs: `docker compose logs -f`
 - GitHub Issues
 - [Docker Documentation](DOCKER_DEPLOYMENT.md)
 
@@ -338,14 +338,14 @@ chmod +x docker-deploy.sh
 ./docker-deploy.sh
 
 # Start/Stop
-docker-compose up -d
-docker-compose down
+docker compose up -d
+docker compose down
 
 # View logs
-docker-compose logs -f
+docker compose logs -f
 
 # Access database
-docker-compose exec db mysql -u root -p
+docker compose exec db mysql -u root -p
 ```
 
 **Live URL:** https://donationapp.ddns.net

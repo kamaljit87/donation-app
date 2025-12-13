@@ -36,7 +36,7 @@ Edit `.env` and set:
 ### 3. Build and Start Services
 
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 This will:
@@ -78,37 +78,37 @@ This will:
 ### View Logs
 ```bash
 # All services
-docker-compose logs -f
+docker compose logs -f
 
 # Specific service
-docker-compose logs -f backend
-docker-compose logs -f frontend
-docker-compose logs -f db
+docker compose logs -f backend
+docker compose logs -f frontend
+docker compose logs -f db
 ```
 
 ### Stop Services
 ```bash
-docker-compose stop
+docker compose stop
 ```
 
 ### Start Services
 ```bash
-docker-compose start
+docker compose start
 ```
 
 ### Restart Services
 ```bash
-docker-compose restart
+docker compose restart
 ```
 
 ### Rebuild Containers
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 ### Remove All Containers and Volumes
 ```bash
-docker-compose down -v
+docker compose down -v
 ```
 
 ## Laravel Artisan Commands
@@ -117,13 +117,13 @@ Run artisan commands inside the backend container:
 
 ```bash
 # General format
-docker-compose exec backend php artisan <command>
+docker compose exec backend php artisan <command>
 
 # Examples
-docker-compose exec backend php artisan migrate
-docker-compose exec backend php artisan db:seed
-docker-compose exec backend php artisan cache:clear
-docker-compose exec backend php artisan config:clear
+docker compose exec backend php artisan migrate
+docker compose exec backend php artisan db:seed
+docker compose exec backend php artisan cache:clear
+docker compose exec backend php artisan config:clear
 ```
 
 ## Database Access
@@ -131,7 +131,7 @@ docker-compose exec backend php artisan config:clear
 Access MySQL directly:
 
 ```bash
-docker-compose exec db mysql -u root -p
+docker compose exec db mysql -u root -p
 # Enter password from .env (DB_PASSWORD)
 ```
 
@@ -151,7 +151,7 @@ REACT_APP_API_URL=https://yourdomain.com/api
 
 ### 2. Use Production Docker Compose
 
-Create `docker-compose.prod.yml`:
+Create `docker compose.prod.yml`:
 
 ```yaml
 version: '3.8'
@@ -170,7 +170,7 @@ services:
 
 Run with:
 ```bash
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+docker compose -f docker compose.yml -f docker compose.prod.yml up -d --build
 ```
 
 ### 3. SSL/HTTPS Setup
@@ -214,7 +214,7 @@ server {
 
 **Option B: Traefik (Recommended)**
 
-Add to `docker-compose.yml`:
+Add to `docker compose.yml`:
 ```yaml
   traefik:
     image: traefik:v2.10
@@ -248,42 +248,42 @@ Add to `docker-compose.yml`:
 
 Check logs:
 ```bash
-docker-compose logs backend
+docker compose logs backend
 ```
 
 ### Database Connection Failed
 
 1. Ensure database is healthy:
 ```bash
-docker-compose ps
+docker compose ps
 ```
 
 2. Wait for MySQL to be ready:
 ```bash
-docker-compose exec db mysqladmin ping -h localhost
+docker compose exec db mysqladmin ping -h localhost
 ```
 
 ### Permission Errors
 
 Fix Laravel storage permissions:
 ```bash
-docker-compose exec backend chown -R www-data:www-data /var/www/html/storage
-docker-compose exec backend chmod -R 775 /var/www/html/storage
+docker compose exec backend chown -R www-data:www-data /var/www/html/storage
+docker compose exec backend chmod -R 775 /var/www/html/storage
 ```
 
 ### Clear All Caches
 
 ```bash
-docker-compose exec backend php artisan cache:clear
-docker-compose exec backend php artisan config:clear
-docker-compose exec backend php artisan route:clear
-docker-compose exec backend php artisan view:clear
+docker compose exec backend php artisan cache:clear
+docker compose exec backend php artisan config:clear
+docker compose exec backend php artisan route:clear
+docker compose exec backend php artisan view:clear
 ```
 
 ### Reset Database
 
 ```bash
-docker-compose exec backend php artisan migrate:fresh --seed
+docker compose exec backend php artisan migrate:fresh --seed
 ```
 
 ## Backup and Restore
@@ -291,13 +291,13 @@ docker-compose exec backend php artisan migrate:fresh --seed
 ### Backup Database
 
 ```bash
-docker-compose exec db mysqldump -u root -p donation_app > backup.sql
+docker compose exec db mysqldump -u root -p donation_app > backup.sql
 ```
 
 ### Restore Database
 
 ```bash
-docker-compose exec -T db mysql -u root -p donation_app < backup.sql
+docker compose exec -T db mysql -u root -p donation_app < backup.sql
 ```
 
 ## Performance Optimization
@@ -306,20 +306,20 @@ docker-compose exec -T db mysql -u root -p donation_app < backup.sql
 
 ```bash
 # Optimize autoloader
-docker-compose exec backend composer install --optimize-autoloader --no-dev
+docker compose exec backend composer install --optimize-autoloader --no-dev
 
 # Cache everything
-docker-compose exec backend php artisan config:cache
-docker-compose exec backend php artisan route:cache
-docker-compose exec backend php artisan view:cache
+docker compose exec backend php artisan config:cache
+docker compose exec backend php artisan route:cache
+docker compose exec backend php artisan view:cache
 
 # Optimize Laravel
-docker-compose exec backend php artisan optimize
+docker compose exec backend php artisan optimize
 ```
 
 ### Resource Limits
 
-Add to `docker-compose.yml`:
+Add to `docker compose.yml`:
 ```yaml
 services:
   backend:
@@ -339,7 +339,7 @@ services:
 
 View service health:
 ```bash
-docker-compose ps
+docker compose ps
 ```
 
 ### Resource Usage
@@ -353,7 +353,7 @@ docker stats
 1. **Never commit `.env` file**
 2. **Use strong passwords** for database and admin
 3. **Limit exposed ports** in production
-4. **Regular updates**: `docker-compose pull && docker-compose up -d`
+4. **Regular updates**: `docker compose pull && docker compose up -d`
 5. **Use secrets** for sensitive data in production
 6. **Run as non-root** user inside containers
 7. **Enable firewall** on host machine
@@ -361,6 +361,6 @@ docker stats
 ## Support
 
 For issues or questions:
-- Check logs: `docker-compose logs -f`
+- Check logs: `docker compose logs -f`
 - Review documentation in `/docs` directory
 - Check GitHub issues

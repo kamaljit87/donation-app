@@ -91,7 +91,7 @@ sed "s/admin@donationapp.ddns.net/admin@$DOMAIN/g" Caddyfile > Caddyfile.tmp && 
 # Build and start containers
 echo ""
 echo "🐳 Building and starting Docker containers..."
-docker-compose up -d --build
+docker compose up -d --build
 
 # Wait for services to be ready
 echo ""
@@ -101,7 +101,7 @@ sleep 10
 # Check service status
 echo ""
 echo "📊 Service Status:"
-docker-compose ps
+docker compose ps
 
 echo ""
 echo "=========================================="
@@ -117,7 +117,7 @@ if [ "$DOMAIN" = "localhost" ]; then
     echo "⚠️  For production with SSL:"
     echo "  1. Point your domain DNS to this server"
     echo "  2. Update .env with your domain"
-    echo "  3. Restart: docker-compose restart caddy"
+    echo "  3. Restart: docker compose restart caddy"
 else
     echo "🌐 Your application is accessible at:"
     echo "  https://$DOMAIN"
@@ -128,7 +128,7 @@ else
     echo "  ⚠️  Ensure DNS points to this server's IP"
     echo ""
     echo "  Check SSL status:"
-    echo "    docker-compose logs caddy"
+    echo "    docker compose logs caddy"
 fi
 
 echo ""
@@ -137,7 +137,7 @@ echo "  Email: $ADMIN_EMAIL"
 echo "  Password: $ADMIN_PASSWORD"
 echo ""
 echo "📊 Useful commands:"
-echo "  View logs: docker-compose logs -f"
-echo "  Stop: docker-compose down"
-echo "  Restart: docker-compose restart"
+echo "  View logs: docker compose logs -f"
+echo "  Stop: docker compose down"
+echo "  Restart: docker compose restart"
 echo ""
