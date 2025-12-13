@@ -1,491 +1,343 @@
-# Donation Application - Laravel + React.js
+# Donation Application
 
-A comprehensive single-page donation application built with Laravel backend and React.js frontend, featuring Razorpay payment integration and an admin dashboard.
-
-## 📋 Table of Contents
-
-- [Features](#features)
-- [Technology Stack](#technology-stack)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Database Setup](#database-setup)
-- [Running the Application](#running-the-application)
-- [API Documentation](#api-documentation)
-- [Usage Guide](#usage-guide)
-- [Security Features](#security-features)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
+A full-stack donation application with Laravel backend and React frontend, featuring Razorpay payment integration and admin dashboard.
 
 ## ✨ Features
 
-### Donation Page
-- Modern, responsive UI inspired by Akshaya Patra
-- Predefined and custom donation amounts
-- One-time and monthly donation options
-- Comprehensive donor information capture
-- Anonymous donation option
-- Tax exemption certificate request
-- Real-time payment processing with Razorpay
-- Payment status feedback (success, pending, failed)
+- **Modern Donation Page** - Predefined amounts, custom amounts, one-time/monthly donations
+- **Razorpay Integration** - Secure payment processing with real-time verification
+- **Admin Dashboard** - View donations, search, filter, and manage donor information
+- **SEO Optimized** - Meta tags, Open Graph, React Helmet
+- **Auto SSL** - Caddy reverse proxy with automatic HTTPS
+- **Fully Dockerized** - Easy deployment with Docker Compose
 
-### SEO Optimization
-- Meta tags for search engines
-- Open Graph tags for social media
-- React Helmet for dynamic meta management
-- Semantic HTML structure
-- Optimized images and assets
+## 🚀 Quick Deploy
 
-### Admin Dashboard
-- Secure login system (no signup)
-- Dashboard with key statistics
-- View all donations with filtering
-- Search functionality
-- Payment status tracking
-- Donor information management
-- Pagination support
+### Prerequisites
+- Server with Ubuntu 22.04 LTS
+- Docker & Docker Compose installed
+- Domain pointing to your server (e.g., donationapp.ddns.net)
 
-### Security Features
-- Laravel Sanctum authentication
-- CORS configuration
-- CSRF protection
-- SQL injection prevention
-- XSS protection
-- Secure password hashing
-- API rate limiting
+### 1. Clean Server & Install Docker
 
-## 🛠 Technology Stack
+```bash
+# SSH into your server
+ssh root@your_server_ip
+
+# Download and run cleanup script
+curl -o cleanup.sh https://raw.githubusercontent.com/kamaljit87/donation-app/main/cleanup-and-install-docker.sh
+chmod +x cleanup.sh
+sudo ./cleanup.sh
+```
+
+This script will:
+- Backup MySQL databases
+- Remove Apache/Nginx/PHP/MySQL
+- Install Docker & Docker Compose
+- Configure firewall (ports 22, 80, 443)
+
+### 2. Deploy Application
+
+```bash
+# Download deployment script
+curl -o docker-deploy.sh https://raw.githubusercontent.com/kamaljit87/donation-app/main/docker-deploy.sh
+chmod +x docker-deploy.sh
+./docker-deploy.sh
+```
+
+Follow the prompts to enter:
+- Domain name (e.g., donationapp.ddns.net)
+- Database password
+- Razorpay Key ID and Secret
+- Admin email and password
+
+### 3. Access Your Application
+
+- **Frontend:** https://donationapp.ddns.net
+- **Admin Panel:** https://donationapp.ddns.net (login with your admin credentials)
+
+## 📦 Technology Stack
 
 ### Backend
-- **Framework**: Laravel 10.x
-- **Database**: MySQL
-- **Authentication**: Laravel Sanctum
-- **Payment Gateway**: Razorpay PHP SDK
+- **Laravel 10.x** - PHP framework
+- **MySQL 8.0** - Database
+- **Laravel Sanctum** - API authentication
+- **Razorpay PHP SDK** - Payment processing
 
 ### Frontend
-- **Framework**: React 18.x
-- **Routing**: React Router DOM v6
-- **HTTP Client**: Axios
-- **SEO**: React Helmet Async
-- **Notifications**: React Toastify
+- **React 18** - UI library
+- **React Router** - SPA routing
+- **Axios** - HTTP client
+- **React Helmet** - SEO management
 
-## 📦 Prerequisites
+### Infrastructure
+- **Docker** - Containerization
+- **Docker Compose** - Multi-container orchestration
+- **Caddy 2** - Reverse proxy with auto SSL
+- **Nginx** - Static file serving
 
-Before you begin, ensure you have the following installed:
+## 🔧 Local Development
 
-- PHP >= 8.1
-- Composer
-- Node.js >= 16.x
-- npm or yarn
-- MySQL >= 5.7
-- Git
+### Clone Repository
 
-## 🚀 Installation
+```bash
+git clone https://github.com/kamaljit87/donation-app.git
+cd donation-app
+```
 
-### 1. Clone the Repository
+### Configure Environment
 
-\`\`\`bash
-cd /Users/kamaljitsingh/Documents/work-gigs/donation\ app
-\`\`\`
+```bash
+cp .env.example .env
+nano .env
+```
 
-### 2. Backend Setup
+Update these values:
+```env
+DB_PASSWORD=your_secure_password
+RAZORPAY_KEY_ID=your_razorpay_key
+RAZORPAY_KEY_SECRET=your_razorpay_secret
+DOMAIN=donationapp.ddns.net
+ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=YourPassword123
+```
 
-\`\`\`bash
-cd backend
+### Start Services
 
-# Install PHP dependencies
-composer install
+```bash
+docker-compose up -d --build
+```
 
-# Copy environment file
-cp ../.env.example .env
+### View Logs
 
-# Generate application key
-php artisan key:generate
-\`\`\`
+```bash
+# All services
+docker-compose logs -f
 
-### 3. Frontend Setup
+# Specific service
+docker-compose logs -f backend
+docker-compose logs -f caddy
+```
 
-\`\`\`bash
-cd ../frontend
+## 🎯 Docker Services
 
-# Install Node dependencies
-npm install
+| Service | Container | Port | Description |
+|---------|-----------|------|-------------|
+| MySQL | donation-app-db | 3306 | Database server |
+| Laravel | donation-app-backend | - | PHP-FPM backend |
+| Backend Nginx | donation-app-backend-nginx | - | API server |
+| React | donation-app-frontend | - | Frontend SPA |
+| Caddy | donation-app-caddy | 80, 443 | Reverse proxy with SSL |
 
-# Create environment file
-echo "REACT_APP_API_URL=http://localhost:8000/api" > .env
-\`\`\`
+## 🔐 SSL/HTTPS
 
-## ⚙️ Configuration
+Caddy automatically obtains and renews SSL certificates from Let's Encrypt when:
+1. Domain DNS points to your server
+2. Ports 80 and 443 are accessible
+3. Domain is properly configured in `.env`
 
-### Backend Configuration (.env)
+Check SSL status:
+```bash
+docker-compose logs caddy
+```
 
-Edit `backend/.env` file:
+## 🛠️ Useful Commands
 
-\`\`\`env
-# Application
-APP_NAME="Donation App"
-APP_ENV=local
-APP_DEBUG=true
-APP_URL=http://localhost:8000
+### Container Management
 
-# Database
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=donation_app
-DB_USERNAME=root
-DB_PASSWORD=your_password
+```bash
+# Stop all services
+docker-compose down
 
-# Razorpay
-RAZORPAY_KEY_ID=your_razorpay_key_id
-RAZORPAY_KEY_SECRET=your_razorpay_key_secret
+# Start services
+docker-compose up -d
 
-# Frontend
-FRONTEND_URL=http://localhost:3000
+# Restart specific service
+docker-compose restart caddy
 
-# Admin Credentials
-ADMIN_EMAIL=admin@donationapp.com
-ADMIN_PASSWORD=Admin@123
-\`\`\`
+# View service status
+docker-compose ps
 
-### Frontend Configuration (.env)
+# Remove all containers and volumes
+docker-compose down -v
+```
 
-Edit `frontend/.env` file:
+### Laravel Commands
 
-\`\`\`env
-REACT_APP_API_URL=http://localhost:8000/api
-\`\`\`
+```bash
+# Run migrations
+docker-compose exec backend php artisan migrate
 
-### Razorpay Setup
+# Seed database
+docker-compose exec backend php artisan db:seed
 
-1. Sign up at [Razorpay Dashboard](https://dashboard.razorpay.com/)
-2. Navigate to Settings > API Keys
-3. Generate API keys for Test/Live mode
-4. Copy Key ID and Key Secret to your `.env` file
+# Clear cache
+docker-compose exec backend php artisan cache:clear
 
-## 🗄 Database Setup
+# Generate app key
+docker-compose exec backend php artisan key:generate
+```
 
-### 1. Create Database
+### Database Access
 
-\`\`\`bash
-# Login to MySQL
-mysql -u root -p
+```bash
+# MySQL CLI
+docker-compose exec db mysql -u root -p
 
-# Create database
-CREATE DATABASE donation_app;
-exit;
-\`\`\`
+# Backup database
+docker-compose exec db mysqldump -u root -p donation_app > backup.sql
 
-### 2. Run Migrations
+# Restore database
+docker-compose exec -T db mysql -u root -p donation_app < backup.sql
+```
 
-\`\`\`bash
-cd backend
+## 📊 Admin Panel
 
-# Run database migrations
-php artisan migrate
-
-# Seed admin user
-php artisan db:seed
-\`\`\`
-
-The seeder will create an admin user with credentials from your `.env` file:
+**Default Credentials:**
 - Email: admin@donationapp.com
-- Password: Admin@123
+- Password: Admin@123 (change in `.env`)
 
-## 🏃 Running the Application
+**Features:**
+- Dashboard with statistics (total donations, today's donations, monthly total)
+- Donation list with search and filter
+- Donor information management
+- Payment status tracking
+- Pagination
 
-### Start Backend Server
+## 💳 Razorpay Configuration
 
-\`\`\`bash
-cd backend
-php artisan serve
-# Server runs at http://localhost:8000
-\`\`\`
-
-### Start Frontend Development Server
-
-\`\`\`bash
-cd frontend
-npm start
-# Application opens at http://localhost:3000
-\`\`\`
-
-## 📚 API Documentation
-
-### Public Endpoints
-
-#### Create Donation
-\`\`\`
-POST /api/donations
-Content-Type: application/json
-
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "phone": "1234567890",
-  "age": 30,
-  "address": "123 Street",
-  "city": "Mumbai",
-  "state": "Maharashtra",
-  "country": "India",
-  "pincode": "400001",
-  "pan_number": "ABCDE1234F",
-  "amount": 1000,
-  "donation_type": "one-time",
-  "purpose": "mid-day-meals",
-  "anonymous": false,
-  "tax_exemption_certificate": true
-}
-\`\`\`
-
-#### Create Payment Order
-\`\`\`
-POST /api/payment/create-order
-Content-Type: application/json
-
-{
-  "donation_id": 1,
-  "amount": 1000
-}
-\`\`\`
-
-#### Verify Payment
-\`\`\`
-POST /api/payment/verify
-Content-Type: application/json
-
-{
-  "razorpay_order_id": "order_xxx",
-  "razorpay_payment_id": "pay_xxx",
-  "razorpay_signature": "signature_xxx"
-}
-\`\`\`
-
-### Admin Endpoints (Requires Authentication)
-
-#### Admin Login
-\`\`\`
-POST /api/auth/login
-Content-Type: application/json
-
-{
-  "email": "admin@donationapp.com",
-  "password": "Admin@123"
-}
-\`\`\`
-
-#### Get All Donations
-\`\`\`
-GET /api/admin/donations?status=success&search=john&page=1&per_page=15
-Authorization: Bearer {token}
-\`\`\`
-
-#### Get Donation Statistics
-\`\`\`
-GET /api/admin/statistics
-Authorization: Bearer {token}
-\`\`\`
-
-#### Logout
-\`\`\`
-POST /api/auth/logout
-Authorization: Bearer {token}
-\`\`\`
-
-## 📖 Usage Guide
-
-### For Donors
-
-1. **Visit the Donation Page**: Navigate to http://localhost:3000
-2. **Select Amount**: Choose from predefined amounts or enter custom amount
-3. **Choose Donation Type**: Select one-time or monthly donation
-4. **Select Purpose**: Choose the purpose for your donation
-5. **Fill Personal Information**: Provide your details
-6. **Submit**: Click "Donate" button
-7. **Complete Payment**: Complete payment through Razorpay
-8. **Confirmation**: Receive confirmation on success page
-
-### For Administrators
-
-1. **Login**: Navigate to http://localhost:3000/admin/login
-2. **View Dashboard**: See statistics and recent donations
-3. **Filter Donations**: Use search and status filters
-4. **View Details**: Click on any donation to see full details
-5. **Export Data**: Use browser tools to export data as needed
-
-## 🔒 Security Features
-
-### Backend Security
-- **Sanctum Authentication**: Token-based authentication for API
-- **CSRF Protection**: Built-in Laravel CSRF protection
-- **SQL Injection Prevention**: Eloquent ORM with prepared statements
-- **XSS Protection**: Input sanitization and output escaping
-- **Password Hashing**: Bcrypt password hashing
-- **Rate Limiting**: API rate limiting to prevent abuse
-
-### Frontend Security
-- **HTTPS**: Use HTTPS in production
-- **Token Storage**: Secure token storage in localStorage
-- **XSS Prevention**: React's built-in XSS protection
-- **CORS**: Configured CORS policy
-- **Input Validation**: Client-side validation before API calls
+1. Sign up at [Razorpay Dashboard](https://dashboard.razorpay.com)
+2. Get API keys from Settings → API Keys
+3. Update `.env`:
+   ```env
+   RAZORPAY_KEY_ID=rzp_live_xxxxx
+   RAZORPAY_KEY_SECRET=your_secret
+   ```
+4. Configure webhook (optional):
+   - URL: `https://donationapp.ddns.net/api/payment/webhook`
+   - Events: payment.captured, payment.failed
 
 ## 🐛 Troubleshooting
 
-### Common Issues
+### Services Won't Start
 
-#### 1. Database Connection Error
-\`\`\`bash
-# Check MySQL is running
-sudo systemctl status mysql
+```bash
+# Check logs
+docker-compose logs
 
-# Verify credentials in .env file
-# Test connection
-php artisan migrate:status
-\`\`\`
+# Rebuild containers
+docker-compose down
+docker-compose up -d --build
+```
 
-#### 2. CORS Error
-- Ensure `FRONTEND_URL` in backend `.env` matches frontend URL
-- Clear browser cache
-- Check `config/cors.php` configuration
+### Database Connection Failed
 
-#### 3. Payment Integration Error
-- Verify Razorpay API keys are correct
-- Check if Razorpay is in Test mode
-- Ensure Razorpay script is loading properly
+```bash
+# Check database status
+docker-compose exec db mysqladmin ping -h localhost
 
-#### 4. Admin Login Not Working
-\`\`\`bash
-# Re-run seeder
-php artisan db:seed --class=AdminSeeder
+# Wait for database to be ready
+docker-compose ps
+```
 
-# Check credentials in .env file
-\`\`\`
+### SSL Certificate Issues
 
-#### 5. Frontend Build Error
-\`\`\`bash
-# Clear node_modules and reinstall
-rm -rf node_modules package-lock.json
-npm install
-\`\`\`
+```bash
+# Check Caddy logs
+docker-compose logs caddy
 
-## 📱 Production Deployment
+# Verify DNS points to server
+dig donationapp.ddns.net
 
-### Backend Deployment
+# Restart Caddy
+docker-compose restart caddy
+```
 
-\`\`\`bash
-# Set environment to production
-APP_ENV=production
-APP_DEBUG=false
+### Permission Errors
 
-# Optimize application
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
+```bash
+# Fix Laravel storage permissions
+docker-compose exec backend chown -R www-data:www-data /var/www/html/storage
+docker-compose exec backend chmod -R 775 /var/www/html/storage
+```
 
-# Set proper file permissions
-chmod -R 755 storage bootstrap/cache
-\`\`\`
+## 📁 Project Structure
 
-### Frontend Deployment
+```
+donation-app/
+├── backend/                 # Laravel backend
+│   ├── app/
+│   │   ├── Http/Controllers/
+│   │   └── Models/
+│   ├── database/
+│   │   ├── migrations/
+│   │   └── seeders/
+│   └── routes/
+├── frontend/               # React frontend
+│   ├── public/
+│   └── src/
+│       ├── components/
+│       ├── pages/
+│       ├── services/
+│       └── context/
+├── docker-compose.yml      # Docker orchestration
+├── Dockerfile.backend      # Backend container
+├── Dockerfile.frontend     # Frontend container
+├── Caddyfile              # Caddy configuration
+├── nginx-backend.conf     # Backend nginx config
+├── nginx.conf             # Frontend nginx config
+└── .env.example           # Environment template
+```
 
-\`\`\`bash
-# Build for production
-npm run build
+## 📝 Environment Variables
 
-# Deploy 'build' folder to your hosting service
-\`\`\`
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `APP_URL` | Application URL | `https://donationapp.ddns.net` |
+| `DB_PASSWORD` | Database password | `secure_password123` |
+| `RAZORPAY_KEY_ID` | Razorpay API key | `rzp_live_xxxxx` |
+| `RAZORPAY_KEY_SECRET` | Razorpay secret | `your_secret_key` |
+| `DOMAIN` | Domain name | `donationapp.ddns.net` |
+| `ADMIN_EMAIL` | Admin login email | `admin@example.com` |
+| `ADMIN_PASSWORD` | Admin password | `YourPassword123` |
 
-### Environment Variables for Production
+## 🔒 Security Best Practices
 
-- Use strong passwords
-- Use production Razorpay keys
-- Enable HTTPS
-- Set proper CORS origins
-- Configure proper database credentials
-- Enable error logging
-
-## 🧪 Testing
-
-### Backend Testing
-\`\`\`bash
-cd backend
-php artisan test
-\`\`\`
-
-### Frontend Testing
-\`\`\`bash
-cd frontend
-npm test
-\`\`\`
-
-## 📝 Database Schema
-
-### Users Table
-- id (Primary Key)
-- name
-- email (Unique)
-- password (Hashed)
-- is_admin (Boolean)
-- timestamps
-
-### Donors Table
-- id (Primary Key)
-- name
-- email
-- phone
-- age
-- address
-- city
-- state
-- country
-- pincode
-- pan_number
-- anonymous (Boolean)
-- timestamps
-
-### Donations Table
-- id (Primary Key)
-- donor_id (Foreign Key)
-- amount (Decimal)
-- currency
-- donation_type
-- purpose
-- payment_method
-- status (Enum: pending, success, failed, refunded)
-- razorpay_order_id
-- razorpay_payment_id
-- razorpay_signature
-- payment_response (JSON)
-- notes
-- tax_exemption_certificate (Boolean)
-- payment_date
-- timestamps
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
+- Use strong database passwords
+- Change default admin credentials
+- Keep Razorpay keys secure (never commit to git)
+- Regular security updates: `docker-compose pull`
+- Enable firewall: `ufw enable`
+- Use environment variables for sensitive data
+- Regular database backups
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+This project is open-source and available under the MIT License.
 
-## 👥 Support
+## 🙋 Support
 
-For support, email support@donationapp.com or open an issue in the repository.
+For issues or questions, check:
+- Docker logs: `docker-compose logs -f`
+- GitHub Issues
+- [Docker Documentation](DOCKER_DEPLOYMENT.md)
 
-## 🙏 Acknowledgments
+## 🚀 Quick Reference
 
-- Design inspired by [Akshaya Patra](https://www.akshayapatra.org)
-- Payment processing by [Razorpay](https://razorpay.com)
-- Built with [Laravel](https://laravel.com) and [React](https://react.dev)
+```bash
+# Deploy from scratch
+curl -o cleanup.sh https://raw.githubusercontent.com/kamaljit87/donation-app/main/cleanup-and-install-docker.sh && chmod +x cleanup.sh && sudo ./cleanup.sh
+curl -o docker-deploy.sh https://raw.githubusercontent.com/kamaljit87/donation-app/main/docker-deploy.sh && chmod +x docker-deploy.sh && ./docker-deploy.sh
 
----
+# Start/Stop
+docker-compose up -d
+docker-compose down
 
-**Note**: Remember to replace all placeholder credentials and API keys with your actual values before deployment.
+# View logs
+docker-compose logs -f
+
+# Access database
+docker-compose exec db mysql -u root -p
+```
+
+**Live URL:** https://donationapp.ddns.net
