@@ -28,10 +28,11 @@ echo -e "\n"
 
 # Clone or update repository
 echo "📥 Cloning/updating repository..."
-cd $APP_DIR
-if [ ! -d ".git" ]; then
-    git clone git@github.com:kamaljit87/donation-app.git .
+if [ ! -d "$APP_DIR" ]; then
+    mkdir -p $APP_DIR
+    git clone git@github.com:kamaljit87/donation-app.git $APP_DIR
 else
+    cd $APP_DIR
     git pull origin main
 fi
 
@@ -43,7 +44,9 @@ cd $APP_DIR/backend
 composer install --optimize-autoloader --no-dev
 
 # Configure environment
-cp ../.env.example .env
+if [ ! -f .env ]; then
+    cp .env.example .env
+fi
 sed -i "s/APP_ENV=.*/APP_ENV=production/" .env
 sed -i "s/APP_DEBUG=.*/APP_DEBUG=false/" .env
 sed -i "s/APP_URL=.*/APP_URL=https:\/\/$DOMAIN/" .env
