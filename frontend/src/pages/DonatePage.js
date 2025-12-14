@@ -211,6 +211,144 @@ const DonatePageNew = () => {
           </div>
         </section>
 
+        {/* About Us Section */}
+        <section className="about-section" id="about">
+          <div className="about-container">
+            <div className="about-content">
+              <div className="about-text">
+                <h2>About HopeFoundation</h2>
+                <p className="about-intro">
+                  We are a dedicated non-profit organization committed to ending child hunger 
+                  and ensuring every child has access to nutritious meals and quality education.
+                </p>
+                <p>
+                  Since our inception, we've been working tirelessly to provide mid-day meals 
+                  to underprivileged children across India. Our mission is simple yet powerful: 
+                  no child should go to bed hungry, and no child should miss school because of hunger.
+                </p>
+                <p>
+                  With the support of generous donors like you, we've been able to expand our reach 
+                  and impact millions of lives. Every meal we serve is more than just food – it's 
+                  hope, it's education, and it's a brighter future.
+                </p>
+                <div className="about-features">
+                  <div className="feature-item">
+                    <span className="feature-icon">🎯</span>
+                    <div>
+                      <strong>Our Mission</strong>
+                      <p>Eliminate child hunger and promote education through nutritious meal programs</p>
+                    </div>
+                  </div>
+                  <div className="feature-item">
+                    <span className="feature-icon">👁️</span>
+                    <div>
+                      <strong>Our Vision</strong>
+                      <p>A world where every child has the opportunity to learn, grow, and thrive</p>
+                    </div>
+                  </div>
+                  <div className="feature-item">
+                    <span className="feature-icon">💪</span>
+                    <div>
+                      <strong>Our Values</strong>
+                      <p>Transparency, compassion, integrity, and unwavering commitment to children</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="about-image">
+                <div className="image-placeholder">
+                  <span className="placeholder-icon">🤝</span>
+                  <p>Together We Make a Difference</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Our Impact Section */}
+        <section className="impact-section" id="impact">
+          <div className="impact-container">
+            <h2>Our Impact</h2>
+            <p className="impact-subtitle">See the difference your donations make in the lives of children</p>
+
+            <div className="impact-grid">
+              <div className="impact-card">
+                <div className="impact-icon">🍽️</div>
+                <h3>Nutritious Meals</h3>
+                <div className="impact-number">2M+</div>
+                <p>Mid-day meals served to children every year, ensuring they have the energy to learn</p>
+              </div>
+
+              <div className="impact-card">
+                <div className="impact-icon">📚</div>
+                <h3>Education Support</h3>
+                <div className="impact-number">85%</div>
+                <p>Increase in school attendance among children enrolled in our meal program</p>
+              </div>
+
+              <div className="impact-card">
+                <div className="impact-icon">🏫</div>
+                <h3>Schools Reached</h3>
+                <div className="impact-number">1,200+</div>
+                <p>Schools across India partnering with us to ensure no child goes hungry</p>
+              </div>
+
+              <div className="impact-card">
+                <div className="impact-icon">👨‍👩‍👧‍👦</div>
+                <h3>Communities Served</h3>
+                <div className="impact-number">500+</div>
+                <p>Villages and communities benefiting from our nutrition and education programs</p>
+              </div>
+
+              <div className="impact-card">
+                <div className="impact-icon">💚</div>
+                <h3>Health Improvement</h3>
+                <div className="impact-number">92%</div>
+                <p>Children showing improved health and nutrition levels within 6 months</p>
+              </div>
+
+              <div className="impact-card">
+                <div className="impact-icon">🎓</div>
+                <h3>Better Performance</h3>
+                <div className="impact-number">78%</div>
+                <p>Students showing improved academic performance after joining our program</p>
+              </div>
+            </div>
+
+            <div className="impact-stories">
+              <h3>Success Stories</h3>
+              <div className="stories-grid">
+                <div className="story-card">
+                  <div className="story-quote">"</div>
+                  <p>
+                    Before the mid-day meal program, I used to skip school because there was 
+                    no food at home. Now I never miss a day and I'm top of my class!
+                  </p>
+                  <div className="story-author">- Priya, 10 years old, Maharashtra</div>
+                </div>
+
+                <div className="story-card">
+                  <div className="story-quote">"</div>
+                  <p>
+                    The meal program has been life-changing for our village. Children are healthier, 
+                    attendance has doubled, and parents can focus on work knowing their kids are fed.
+                  </p>
+                  <div className="story-author">- Ramesh Kumar, School Teacher, Bihar</div>
+                </div>
+
+                <div className="story-card">
+                  <div className="story-quote">"</div>
+                  <p>
+                    My daughter was malnourished and weak. Thanks to the nutritious meals at school, 
+                    she's now healthy, energetic, and dreams of becoming a doctor.
+                  </p>
+                  <div className="story-author">- Lakshmi Devi, Parent, Uttar Pradesh</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Donation Form */}
         <div className="donate-container" id="donation-form">
           <h2 className="donation-section-title">Make Your Donation</h2>
