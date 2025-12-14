@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { donationService, paymentService } from '../services';
 import './DonatePage.css';
 
-const DonatePage = () => {
+const DonatePageNew = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -23,7 +23,7 @@ const DonatePage = () => {
     donation_type: 'one-time',
     purpose: 'mid-day-meals',
     anonymous: false,
-    tax_exemption_certificate: false,
+    tax_exemption_certificate: true,
   });
 
   const predefinedAmounts = [500, 1000, 2500, 5000, 10000];
@@ -52,9 +52,9 @@ const DonatePage = () => {
 
   const handlePayment = async (donationId, amount) => {
     try {
-      const res = await loadRazorpayScript();
-      if (!res) {
-        toast.error('Razorpay SDK failed to load. Please check your connection.');
+      const scriptLoaded = await loadRazorpayScript();
+      if (!scriptLoaded) {
+        toast.error('Failed to load payment gateway');
         return;
       }
 
@@ -65,27 +65,28 @@ const DonatePage = () => {
       }
 
       const options = {
-        key: orderData.data.key,
+        key: orderData.data.razorpay_key,
         amount: orderData.data.amount,
         currency: orderData.data.currency,
-        name: 'Donation App',
-        description: `Donation for ${formData.purpose}`,
         order_id: orderData.data.order_id,
+        name: 'HopeFoundation',
+        description: 'Donation for Mid-Day Meals',
         handler: async (response) => {
           try {
             const verifyData = await paymentService.verifyPayment({
-              razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_order_id: response.razorpay_order_id,
               razorpay_signature: response.razorpay_signature,
             });
 
             if (verifyData.success) {
-              toast.success('Donation successful! Thank you for your contribution.');
+              toast.success('Payment successful! Thank you for your donation.');
               navigate('/thank-you', { state: { amount: formData.amount } });
+            } else {
+              toast.error('Payment verification failed');
             }
           } catch (error) {
-            toast.error('Payment verification failed');
-            await paymentService.paymentFailed(response.razorpay_order_id, error);
+            toast.error('Payment verification error');
           }
         },
         prefill: {
@@ -94,7 +95,7 @@ const DonatePage = () => {
           contact: formData.phone,
         },
         theme: {
-          color: '#ff6b35',
+          color: '#FF6B6B',
         },
         modal: {
           ondismiss: async () => {
@@ -114,7 +115,7 @@ const DonatePage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!formData.amount || formData.amount < 1) {
       toast.error('Please enter a valid donation amount');
       return;
@@ -139,291 +140,285 @@ const DonatePage = () => {
   return (
     <>
       <Helmet>
-        <title>Donate Now - Make a Difference with Your Contribution</title>
-        <meta name="description" content="Support our cause by making a donation. Every contribution helps us provide meals, education, and support to those in need." />
-        <meta name="keywords" content="donate, donation, charity, support, contribute, help, meals, education" />
-        <meta property="og:title" content="Donate Now - Make a Difference" />
-        <meta property="og:description" content="Your donation can change lives. Support our mission today." />
-        <meta property="og:type" content="website" />
-        <link rel="canonical" href={window.location.href} />
+        <title>Donate Now - HopeFoundation | Feed a Child, Nurture a Dream</title>
+        <meta name="description" content="Your donation provides nutritious mid-day meals to underprivileged children, ensuring they have the energy to learn and grow." />
+        <meta property="og:title" content="Donate Now - HopeFoundation" />
+        <meta property="og:description" content="Feed a Child, Nurture a Dream. Support mid-day meals for underprivileged children." />
       </Helmet>
 
-      <div className="donate-page">
-        <header className="donate-header">
-          <div className="container">
-            <h1>Make a Difference Today</h1>
-            <p>Your contribution can bring hope and happiness to those in need</p>
+      {/* Header Navigation */}
+      <header className="donate-header">
+        <nav className="header-nav">
+          <div className="logo">HopeFoundation</div>
+          <div className="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#impact">Our Impact</a>
+            <a href="/admin/login">Admin</a>
+            <button className="donate-button-nav" onClick={() => document.getElementById('donation-form').scrollIntoView({ behavior: 'smooth' })}>
+              Donate Now
+            </button>
           </div>
-        </header>
+        </nav>
+      </header>
 
-        <div className="donate-content">
-          <div className="container">
-            <div className="donate-grid">
-              <div className="donate-info">
-                <h2>Why Donate?</h2>
-                <div className="info-card">
-                  <h3>🍽️ Mid-Day Meals</h3>
-                  <p>Provide nutritious meals to children and support their education</p>
-                </div>
-                <div className="info-card">
-                  <h3>📚 Education Support</h3>
-                  <p>Help children access quality education and build a better future</p>
-                </div>
-                <div className="info-card">
-                  <h3>💝 Community Development</h3>
-                  <p>Support community programs that create lasting impact</p>
-                </div>
-                <div className="impact-stats">
-                  <h3>Your Impact</h3>
-                  <div className="stat-item">
-                    <strong>₹500</strong>
-                    <span>Feeds 10 children for a week</span>
-                  </div>
-                  <div className="stat-item">
-                    <strong>₹1000</strong>
-                    <span>Provides educational supplies for 5 children</span>
-                  </div>
-                  <div className="stat-item">
-                    <strong>₹5000</strong>
-                    <span>Supports a child's education for a month</span>
-                  </div>
-                </div>
-              </div>
+      <div className="donate-page">
+        {/* Hero Section */}
+        <section className="donate-hero">
+          <h1>Feed a Child, Nurture a Dream</h1>
+          <p className="hero-subtitle">
+            Your donation provides nutritious mid-day meals to underprivileged children,
+            ensuring they have the energy to learn and grow.
+          </p>
 
-              <div className="donate-form-container">
-                <form className="donate-form" onSubmit={handleSubmit}>
-                  <h2>Donation Details</h2>
-
-                  <div className="form-section">
-                    <h3>Choose Amount</h3>
-                    <div className="amount-buttons">
-                      {predefinedAmounts.map((amt) => (
-                        <button
-                          key={amt}
-                          type="button"
-                          className={`amount-btn ${formData.amount == amt ? 'active' : ''}`}
-                          onClick={() => handleAmountClick(amt)}
-                        >
-                          ₹{amt}
-                        </button>
-                      ))}
-                    </div>
-                    <div className="form-group">
-                      <label>Custom Amount (₹)</label>
-                      <input
-                        type="number"
-                        name="amount"
-                        value={formData.amount}
-                        onChange={handleInputChange}
-                        placeholder="Enter custom amount"
-                        min="1"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div className="form-section">
-                    <h3>Donation Type</h3>
-                    <div className="radio-group">
-                      <label className="radio-label">
-                        <input
-                          type="radio"
-                          name="donation_type"
-                          value="one-time"
-                          checked={formData.donation_type === 'one-time'}
-                          onChange={handleInputChange}
-                        />
-                        <span>One-Time Donation</span>
-                      </label>
-                      <label className="radio-label">
-                        <input
-                          type="radio"
-                          name="donation_type"
-                          value="monthly"
-                          checked={formData.donation_type === 'monthly'}
-                          onChange={handleInputChange}
-                        />
-                        <span>Monthly Donation</span>
-                      </label>
-                    </div>
-                  </div>
-
-                  <div className="form-section">
-                    <h3>Purpose</h3>
-                    <select
-                      name="purpose"
-                      value={formData.purpose}
-                      onChange={handleInputChange}
-                      required
-                    >
-                      <option value="mid-day-meals">Mid-Day Meals</option>
-                      <option value="education">Education Support</option>
-                      <option value="community">Community Development</option>
-                      <option value="general">General Donation</option>
-                    </select>
-                  </div>
-
-                  <div className="form-section">
-                    <h3>Personal Information</h3>
-                    <div className="form-row">
-                      <div className="form-group">
-                        <label>Full Name *</label>
-                        <input
-                          type="text"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleInputChange}
-                          required
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label>Email *</label>
-                        <input
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div className="form-row">
-                      <div className="form-group">
-                        <label>Phone</label>
-                        <input
-                          type="tel"
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleInputChange}
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label>Age</label>
-                        <input
-                          type="number"
-                          name="age"
-                          value={formData.age}
-                          onChange={handleInputChange}
-                          min="1"
-                          max="120"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="form-group">
-                      <label>Address</label>
-                      <textarea
-                        name="address"
-                        value={formData.address}
-                        onChange={handleInputChange}
-                        rows="2"
-                      ></textarea>
-                    </div>
-
-                    <div className="form-row">
-                      <div className="form-group">
-                        <label>City</label>
-                        <input
-                          type="text"
-                          name="city"
-                          value={formData.city}
-                          onChange={handleInputChange}
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label>State</label>
-                        <input
-                          type="text"
-                          name="state"
-                          value={formData.state}
-                          onChange={handleInputChange}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="form-row">
-                      <div className="form-group">
-                        <label>Country</label>
-                        <input
-                          type="text"
-                          name="country"
-                          value={formData.country}
-                          onChange={handleInputChange}
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label>Pincode</label>
-                        <input
-                          type="text"
-                          name="pincode"
-                          value={formData.pincode}
-                          onChange={handleInputChange}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="form-group">
-                      <label>PAN Number (for 80G certificate)</label>
-                      <input
-                        type="text"
-                        name="pan_number"
-                        value={formData.pan_number}
-                        onChange={handleInputChange}
-                        placeholder="ABCDE1234F"
-                        maxLength="10"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="form-section">
-                    <div className="checkbox-group">
-                      <label className="checkbox-label">
-                        <input
-                          type="checkbox"
-                          name="anonymous"
-                          checked={formData.anonymous}
-                          onChange={handleInputChange}
-                        />
-                        <span>Make my donation anonymous</span>
-                      </label>
-                      <label className="checkbox-label">
-                        <input
-                          type="checkbox"
-                          name="tax_exemption_certificate"
-                          checked={formData.tax_exemption_certificate}
-                          onChange={handleInputChange}
-                        />
-                        <span>I need an 80G tax exemption certificate</span>
-                      </label>
-                    </div>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="submit-btn"
-                    disabled={loading}
-                  >
-                    {loading ? 'Processing...' : `Donate ₹${formData.amount || 0}`}
-                  </button>
-
-                  <p className="secure-text">
-                    🔒 Your payment is secure and encrypted
-                  </p>
-                </form>
-              </div>
+          {/* Statistics */}
+          <div className="stats-hero">
+            <div className="stat-item">
+              <div className="stat-number">2M+</div>
+              <div className="stat-label">Children Fed</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">50K+</div>
+              <div className="stat-label">Donors</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">₹950</div>
+              <div className="stat-label">Feeds a child for 1 month</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">100%</div>
+              <div className="stat-label">Transparent utilization</div>
             </div>
           </div>
-        </div>
 
-        <footer className="donate-footer">
-          <div className="container">
-            <p>&copy; 2024 Donation App. All rights reserved.</p>
+          {/* Trust Badges */}
+          <div className="trust-badges">
+            <div className="trust-badge">
+              <div className="badge-icon">💯</div>
+              <div className="badge-label">100%</div>
+              <div className="badge-sublabel">Transparent utilization</div>
+            </div>
+            <div className="trust-badge">
+              <div className="badge-icon">🏆</div>
+              <div className="badge-label">80G</div>
+              <div className="badge-sublabel">Tax exemption certificate</div>
+            </div>
+            <div className="trust-badge">
+              <div className="badge-icon">📧</div>
+              <div className="badge-label">Regular Updates</div>
+              <div className="badge-sublabel">On your impact</div>
+            </div>
           </div>
-        </footer>
+        </section>
+
+        {/* Donation Form */}
+        <div className="donate-container" id="donation-form">
+          <h2 className="donation-section-title">Make Your Donation</h2>
+
+          <div className="donate-form-card">
+            <form onSubmit={handleSubmit}>
+              {/* Donation Type Selection */}
+              <div className="donation-type-section">
+                <h3 className="section-title">Select Donation Type</h3>
+                <div className="donation-type-toggle">
+                  <label className={`toggle-option ${formData.donation_type === 'one-time' ? 'active' : ''}`}>
+                    <input
+                      type="radio"
+                      name="donation_type"
+                      value="one-time"
+                      checked={formData.donation_type === 'one-time'}
+                      onChange={handleInputChange}
+                    />
+                    <div className="toggle-title">One-Time Donation</div>
+                    <div className="toggle-description">Make a single contribution</div>
+                  </label>
+                  <label className={`toggle-option ${formData.donation_type === 'monthly' ? 'active' : ''}`}>
+                    <input
+                      type="radio"
+                      name="donation_type"
+                      value="monthly"
+                      checked={formData.donation_type === 'monthly'}
+                      onChange={handleInputChange}
+                    />
+                    <div className="toggle-title">Monthly Donation</div>
+                    <div className="toggle-description">Recurring contribution</div>
+                  </label>
+                </div>
+              </div>
+
+              {/* Amount Selection */}
+              <div className="amount-selection">
+                <h3 className="section-title">Select Amount (₹)</h3>
+                <div className="amount-buttons">
+                  {predefinedAmounts.map((amt) => (
+                    <button
+                      key={amt}
+                      type="button"
+                      className={`amount-button ${formData.amount == amt ? 'active' : ''}`}
+                      onClick={() => handleAmountClick(amt)}
+                    >
+                      ₹{amt}
+                    </button>
+                  ))}
+                </div>
+                <input
+                  type="number"
+                  name="amount"
+                  value={formData.amount}
+                  onChange={handleInputChange}
+                  placeholder="Enter custom amount"
+                  className="custom-amount-input"
+                  min="1"
+                  required
+                />
+              </div>
+
+              {/* Personal Information */}
+              <h3 className="section-title">Personal Information</h3>
+              <div className="form-grid">
+                <div className="form-group">
+                  <label className="form-label">Full Name *</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    className="form-input"
+                    placeholder="Enter your full name"
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label className="form-label">Email Address *</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="form-input"
+                    placeholder="your.email@example.com"
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label className="form-label">Phone Number *</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    className="form-input"
+                    placeholder="+91 XXXXX XXXXX"
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label className="form-label">Age</label>
+                  <input
+                    type="number"
+                    name="age"
+                    value={formData.age}
+                    onChange={handleInputChange}
+                    className="form-input"
+                    placeholder="Your age"
+                    min="1"
+                  />
+                </div>
+                <div className="form-group full-width">
+                  <label className="form-label">Address</label>
+                  <input
+                    type="text"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleInputChange}
+                    className="form-input"
+                    placeholder="Street address"
+                  />
+                </div>
+                <div className="form-group">
+                  <label className="form-label">City</label>
+                  <input
+                    type="text"
+                    name="city"
+                    value={formData.city}
+                    onChange={handleInputChange}
+                    className="form-input"
+                    placeholder="City"
+                  />
+                </div>
+                <div className="form-group">
+                  <label className="form-label">State</label>
+                  <input
+                    type="text"
+                    name="state"
+                    value={formData.state}
+                    onChange={handleInputChange}
+                    className="form-input"
+                    placeholder="State"
+                  />
+                </div>
+                <div className="form-group">
+                  <label className="form-label">Pincode</label>
+                  <input
+                    type="text"
+                    name="pincode"
+                    value={formData.pincode}
+                    onChange={handleInputChange}
+                    className="form-input"
+                    placeholder="Pincode"
+                  />
+                </div>
+                <div className="form-group">
+                  <label className="form-label">PAN Number (for 80G)</label>
+                  <input
+                    type="text"
+                    name="pan_number"
+                    value={formData.pan_number}
+                    onChange={handleInputChange}
+                    className="form-input"
+                    placeholder="ABCDE1234F"
+                  />
+                </div>
+              </div>
+
+              {/* Additional Options */}
+              <div className="checkbox-group">
+                <label className="checkbox-label">
+                  <input
+                    type="checkbox"
+                    name="tax_exemption_certificate"
+                    checked={formData.tax_exemption_certificate}
+                    onChange={handleInputChange}
+                  />
+                  <span>I would like to receive 80G Tax Exemption Certificate</span>
+                </label>
+                <label className="checkbox-label">
+                  <input
+                    type="checkbox"
+                    name="anonymous"
+                    checked={formData.anonymous}
+                    onChange={handleInputChange}
+                  />
+                  <span>Make this donation anonymous</span>
+                </label>
+              </div>
+
+              {/* Submit Button */}
+              <button type="submit" className="submit-button" disabled={loading}>
+                {loading ? 'Processing...' : 'Proceed to Donate'}
+              </button>
+
+              {/* Security Badge */}
+              <div className="security-badge">
+                <span className="security-icon">🔒</span>
+                <span>100% secure payment powered by Razorpay</span>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </>
   );
 };
 
-export default DonatePage;
+export default DonatePageNew;
