@@ -55,7 +55,7 @@ services:
         condition: service_healthy
     networks:
       - donation-network
-    command: sh -c "php artisan migrate --force && php artisan db:seed --force && php artisan config:cache && php artisan route:cache && php artisan view:cache && php-fpm"
+    command: sh -c "php artisan migrate --force && php artisan db:seed --force && php-fpm"
     expose:
       - "9000"
 
