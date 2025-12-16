@@ -40,10 +40,10 @@ const Gallery = () => {
     <div className="gallery-section">
       <div className="gallery-container">
         <h2 className="gallery-title">
-          <span className="gradient-text">Our Prasadam Distribution</span>
+          Witness the <span className="gradient-text">Power of Prasadam</span>
         </h2>
         <p className="gallery-subtitle">
-          Witness the joy of serving free prasadam to those in need
+          See how your generosity transforms lives through sacred meals served with love
         </p>
 
         <div className="carousel-wrapper">

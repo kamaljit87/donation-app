@@ -6,10 +6,8 @@ WORKDIR /app
 # Copy package files
 COPY frontend/package*.json ./
 
-# Clean install and explicitly install ajv to fix dependency
-RUN npm cache clean --force && \
-    npm install --force && \
-    npm install ajv@^8.12.0 --save-dev --force
+# Install dependencies (cached layer - only rebuilds if package.json changes)
+RUN npm install --legacy-peer-deps && npm install ajv@^8.12.0 --save-dev
 
 # Copy application files
 COPY frontend ./

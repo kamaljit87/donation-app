@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { donationService, paymentService } from '../services';
-import ImageGallery from '../components/ImageGallery';
 import Gallery from '../components/Gallery';
 import './DonatePage.css';
 import './DonatePageModern.css';
@@ -290,9 +289,6 @@ const DonatePageNew = () => {
 
         {/* Gallery Section */}
         <Gallery />
-
-        {/* Image Gallery Section */}
-        <ImageGallery />
 
         {/* Our Programs Section */}
         <section className="impact-section" id="programs">
