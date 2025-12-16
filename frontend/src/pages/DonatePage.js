@@ -6,6 +6,7 @@ import { donationService, paymentService } from '../services';
 import ImageGallery from '../components/ImageGallery';
 import Gallery from '../components/Gallery';
 import './DonatePage.css';
+import './DonatePageModern.css';
 
 const DonatePageNew = () => {
   const navigate = useNavigate();
@@ -170,50 +171,55 @@ const DonatePageNew = () => {
       <div className="donate-page">
         {/* Hero Section */}
         <section className="donate-hero">
-          <h1>No One Should Sleep Hungry</h1>
+          <div className="hero-badge">🙏 Transforming Lives Through Prasadam</div>
+          <h1>Every Meal is an Act of <span className="gradient-text">Love</span></h1>
           <p className="hero-subtitle">
-            Free Food Distribution in the Service of Humanity and the Supreme Lord
+            Join us in serving sacred food to those in need. Together, we can end hunger with compassion.
           </p>
           <p className="hero-quote">
-            Serving prasadam with love, dignity, and devotion inspired by the teachings of His Divine Grace A.C. Bhaktivedanta Swami Srila Prabhupada.
+            "When you feed the hungry, you're not just giving food—you're offering dignity, hope, and divine grace."
           </p>
 
           {/* Statistics */}
           <div className="stats-hero">
-            <div className="stat-item">
+            <div className="stat-item hover-lift">
+              <div className="stat-icon">🍽️</div>
               <div className="stat-number">1M+</div>
-              <div className="stat-label">Prasadam Meals Served</div>
+              <div className="stat-label">Lives Nourished</div>
             </div>
-            <div className="stat-item">
-              <div className="stat-number">10,000+</div>
-              <div className="stat-label">Meals in 6 Months</div>
+            <div className="stat-item hover-lift">
+              <div className="stat-icon">❤️</div>
+              <div className="stat-number">10K+</div>
+              <div className="stat-label">Monthly Meals</div>
             </div>
-            <div className="stat-item">
-              <div className="stat-number">₹1,100</div>
-              <div className="stat-label">Serves 100 prasadam meals</div>
+            <div className="stat-item hover-lift">
+              <div className="stat-icon">🌟</div>
+              <div className="stat-number">100%</div>
+              <div className="stat-label">Transparency</div>
             </div>
-            <div className="stat-item">
-              <div className="stat-number">₹2,500</div>
-              <div className="stat-label">Feeds a child for 1 year</div>
+            <div className="stat-item hover-lift">
+              <div className="stat-icon">🙌</div>
+              <div className="stat-number">24/7</div>
+              <div className="stat-label">Distribution</div>
             </div>
           </div>
 
           {/* Trust Badges */}
           <div className="trust-badges">
-            <div className="trust-badge">
+            <div className="trust-badge glass-card">
               <div className="badge-icon">🍲</div>
-              <div className="badge-label">ANNA DAAN</div>
-              <div className="badge-sublabel">is Maha Daan</div>
+              <div className="badge-label">Food, Not Cash</div>
+              <div className="badge-sublabel">Direct impact guaranteed</div>
             </div>
-            <div className="trust-badge">
+            <div className="trust-badge glass-card">
+              <div className="badge-icon">📸</div>
+              <div className="badge-label">100% Transparent</div>
+              <div className="badge-sublabel">Photo proof of every meal</div>
+            </div>
+            <div className="trust-badge glass-card">
               <div className="badge-icon">🙏</div>
-              <div className="badge-label">Meals Only</div>
-              <div className="badge-sublabel">No cash misuse</div>
-            </div>
-            <div className="trust-badge">
-              <div className="badge-icon">📧</div>
-              <div className="badge-label">Photo Updates</div>
-              <div className="badge-sublabel">Complete transparency</div>
+              <div className="badge-label">Sacred Service</div>
+              <div className="badge-sublabel">Blessed with devotion</div>
             </div>
           </div>
         </section>
@@ -223,50 +229,53 @@ const DonatePageNew = () => {
           <div className="about-container">
             <div className="about-content">
               <div className="about-text">
-                <h2>About Srila Prabhupada Annakshetra</h2>
+                <h2>Feeding Souls, <span className="gradient-text">Transforming Lives</span></h2>
                 <p className="about-intro">
-                  We are a humble initiative dedicated to serving free food as devotional service.
+                  We're on a mission to end hunger through sacred food distribution—one blessed meal at a time.
+                </p>
+                <div className="quote-highlight">
+                  <div className="quote-mark">"</div>
+                  <p className="quote-text">No one within ten miles should go hungry</p>
+                  <p className="quote-author">— Srila Prabhupada</p>
+                </div>
+                <p>
+                  Inspired by this timeless vision, we serve nutritious, sanctified prasadam to thousands every day. 
+                  Our food isn't just sustenance—it's prepared with devotion, blessed with mantras, and served with 
+                  unconditional love.
                 </p>
                 <p>
-                  <strong>"Nobody shall go hungry within a ten mile radius"</strong> - Srila Prabhupada
-                </p>
-                <p>
-                  Inspired by Srila Prabhupada's vision that no one within ten miles of a temple should go hungry, 
-                  we serve prasadam with love and humility. At Srila Prabhupada Annakshetra, we believe that annadanam 
-                  (offering food) is the highest charity. We serve sanctified, freshly cooked food to the hungry as an 
-                  act of devotion and compassion.
-                </p>
-                <p>
-                  Every meal is prepared with care, offered with prayer, and served with dignity.
+                  <strong>Every donation becomes divine action.</strong> You're not just feeding bodies; you're nourishing 
+                  souls and restoring faith in humanity.
                 </p>
                 <div className="about-features">
-                  <div className="feature-item">
+                  <div className="feature-item glass-card">
                     <span className="feature-icon">🎯</span>
                     <div>
                       <strong>Our Mission</strong>
-                      <p>To serve humanity by distributing food sanctified through devotion, restoring dignity, health, and hope to every hungry soul</p>
+                      <p>End hunger through compassionate action. Every meal served is a step toward a world where no one sleeps on an empty stomach.</p>
                     </div>
                   </div>
-                  <div className="feature-item">
-                    <span className="feature-icon">🙏</span>
+                  <div className="feature-item glass-card">
+                    <span className="feature-icon">❤️</span>
                     <div>
                       <strong>Our Values</strong>
-                      <p>Devotion through service • Compassion without discrimination • Transparency and honesty • Respect for every life</p>
+                      <p>Unconditional love • Radical transparency • Sacred service • Dignity for all</p>
                     </div>
                   </div>
-                  <div className="feature-item">
-                    <span className="feature-icon">💪</span>
+                  <div className="feature-item glass-card">
+                    <span className="feature-icon">👊</span>
                     <div>
-                      <strong>What We Do</strong>
-                      <p>Daily free food distribution • Meal support for specially abled children • Meal sponsorship on special occasions</p>
+                      <strong>Our Impact</strong>
+                      <p>10,000+ monthly meals • Year-round support for specially abled children • Special occasion sponsorships</p>
                     </div>
                   </div>
                 </div>
-                <div className="quote-section">
+                <div className="quote-section glass-card">
+                  <div className="quote-icon">✨</div>
                   <p className="divine-quote">
-                    "If you simply love God, love Krishna, and give people Krishna prasadam, your life will be successful."
+                    "Love God, serve prasadam, transform lives—this is the path to meaningful existence."
                   </p>
-                  <p className="quote-author">— His Divine Grace A.C. Bhaktivedanta Swami Srila Prabhupada 🙏</p>
+                  <p className="quote-author">— Srila Prabhupada 🙏</p>
                 </div>
               </div>
               <div className="about-image">
@@ -288,65 +297,65 @@ const DonatePageNew = () => {
         {/* Our Programs Section */}
         <section className="impact-section" id="programs">
           <div className="impact-container">
-            <h2>Our Programs</h2>
-            <p className="impact-subtitle">Every meal is prepared with care, offered with prayer, and served with dignity</p>
+            <h2>Ways to <span className="gradient-text">Make Impact</span></h2>
+            <p className="impact-subtitle">Choose how you want to transform lives through sacred food service</p>
 
             <div className="impact-grid">
-              <div className="impact-card">
+              <div className="impact-card glass-card hover-lift">
                 <div className="impact-icon">🍲</div>
-                <h3>Free Food Distribution</h3>
-                <div className="impact-number">Daily</div>
-                <p>We distribute free, freshly cooked meals to homeless individuals, daily wage workers, elderly without support, and underprivileged children. Food is prepared hygienically and served equally, without discrimination.</p>
+                <h3>Daily Distribution</h3>
+                <div className="impact-number">Ongoing</div>
+                <p>Support our daily prasadam service reaching homeless souls, day laborers, elderly without family, and children in need. Every meal served with dignity and devotion.</p>
               </div>
 
-              <div className="impact-card">
+              <div className="impact-card glass-card hover-lift featured-card">
+                <div className="featured-badge">🌟 Most Popular</div>
                 <div className="impact-icon">🧠</div>
-                <h3>Meal Seva for Specially Abled Children</h3>
-                <div className="impact-number">₹2,500/year</div>
-                <p>Specially abled children require regular nourishment and care. Through meal sponsorship, we ensure daily nutritious food, stability and routine, service with patience and dignity. No money. No materials. Only meals offered with love.</p>
+                <h3>Support a Child for 1 Year</h3>
+                <div className="impact-number">₹2,500</div>
+                <p>Provide daily nutritious meals to a specially-abled child for an entire year. Give them stability, health, and hope through consistent nourishment.</p>
               </div>
 
-              <div className="impact-card">
+              <div className="impact-card glass-card hover-lift">
                 <div className="impact-icon">🌸</div>
-                <h3>Make Your Special Day Divine</h3>
+                <h3>Celebrate with Service</h3>
                 <div className="impact-number">₹1,100</div>
-                <p>Celebrate birthdays, anniversaries, weddings, or remembrance days by sponsoring 100 prasadam meals. Turn your joy into service. Let the Lord be pleased by feeding His children.</p>
+                <p>Turn your special day into divine blessings. Sponsor 100 prasadam meals on birthdays, anniversaries, or memorial days.</p>
               </div>
 
-              <div className="impact-card">
+              <div className="impact-card glass-card hover-lift">
                 <div className="impact-icon">🙌</div>
                 <h3>Full Day Sponsorship</h3>
-                <div className="impact-number">₹10,000</div>
-                <p>Sponsor an entire day of free prasadam distribution. Your one-day sponsorship can feed hundreds of souls and bring divine blessings. Contact us at 8910777090 for special occasions.</p>
+                <div className="impact-number">₹10,000+</div>
+                <p>Feed hundreds in a single day. Perfect for corporate giving or major celebrations. Includes photo documentation. Call 891-077-7090</p>
               </div>
             </div>
 
             <div className="impact-stories">
-              <h3>How It Works</h3>
+              <h3>Simple. Transparent. <span className="gradient-text">Life-Changing.</span></h3>
               <div className="stories-grid">
-                <div className="story-card">
-                  <div className="story-quote">1</div>
-                  <h4>Choose Your Occasion</h4>
+                <div className="story-card glass-card">
+                  <div className="story-number">1</div>
+                  <h4>Choose Your Impact</h4>
                   <p>
-                    Birthday, Anniversary, Wedding, Memorial, or any special day
+                    Select a sponsorship that resonates with your heart and budget
                   </p>
                 </div>
 
-                <div className="story-card">
-                  <div className="story-quote">2</div>
-                  <h4>Select Sponsorship</h4>
+                <div className="story-card glass-card">
+                  <div className="story-number">2</div>
+                  <h4>Make Your Donation</h4>
                   <p>
-                    Decide the number of meals you wish to offer - from 1 meal to full day sponsorship
+                    Secure payment through Razorpay. Food only—never cash
                   </p>
                 </div>
 
-                <div className="story-card">
-                  <div className="story-quote">3</div>
+                <div className="story-card glass-card">
+                  <div className="story-number">3</div>
+                  <h4>See Your Impact</h4>
                   <p>
-                    My daughter was malnourished and weak. Thanks to the nutritious meals at school, 
-                    she's now healthy, energetic, and dreams of becoming a doctor.
+                    Receive photos and updates of meals served in your name
                   </p>
-                  <div className="story-author">- Lakshmi Devi, Parent, Uttar Pradesh</div>
                 </div>
               </div>
             </div>
