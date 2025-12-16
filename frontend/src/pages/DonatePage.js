@@ -21,12 +21,12 @@ const DonatePageNew = () => {
     pan_number: '',
     amount: '',
     donation_type: 'one-time',
-    purpose: 'mid-day-meals',
+    purpose: 'prasadam-meals',
     anonymous: false,
     tax_exemption_certificate: true,
   });
 
-  const predefinedAmounts = [500, 1000, 2500, 5000, 10000];
+  const predefinedAmounts = [1100, 2500, 5000, 10000, 25000];
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -140,20 +140,20 @@ const DonatePageNew = () => {
   return (
     <>
       <Helmet>
-        <title>Donate Now - HopeFoundation | Feed a Child, Nurture a Dream</title>
-        <meta name="description" content="Your donation provides nutritious mid-day meals to underprivileged children, ensuring they have the energy to learn and grow." />
-        <meta property="og:title" content="Donate Now - HopeFoundation" />
-        <meta property="og:description" content="Feed a Child, Nurture a Dream. Support mid-day meals for underprivileged children." />
+        <title>Donate Now - Srila Prabhupada Annakshetra | Feed the Hungry</title>
+        <meta name="description" content="Donate by meal only. One meal offered, one soul nourished. Support free prasadam distribution and make your special day divine." />
+        <meta property="og:title" content="Donate Now - Srila Prabhupada Annakshetra" />
+        <meta property="og:description" content="No one should sleep hungry. Support free prasadam distribution to the needy." />
       </Helmet>
 
       {/* Header Navigation */}
       <header className="donate-header">
         <nav className="header-nav">
-          <div className="logo">HopeFoundation</div>
+          <div className="logo">Srila Prabhupada Annakshetra</div>
           <div className="nav-links">
             <a href="#home">Home</a>
             <a href="#about">About Us</a>
-            <a href="#impact">Our Impact</a>
+            <a href="#programs">Programs</a>
             <a href="/admin/login">Admin</a>
             <button className="donate-button-nav" onClick={() => document.getElementById('donation-form').scrollIntoView({ behavior: 'smooth' })}>
               Donate Now
@@ -165,48 +165,50 @@ const DonatePageNew = () => {
       <div className="donate-page">
         {/* Hero Section */}
         <section className="donate-hero">
-          <h1>Feed a Child, Nurture a Dream</h1>
+          <h1>No One Should Sleep Hungry</h1>
           <p className="hero-subtitle">
-            Your donation provides nutritious mid-day meals to underprivileged children,
-            ensuring they have the energy to learn and grow.
+            Free Food Distribution in the Service of Humanity and the Supreme Lord
+          </p>
+          <p className="hero-quote">
+            Serving prasadam with love, dignity, and devotion inspired by the teachings of His Divine Grace A.C. Bhaktivedanta Swami Srila Prabhupada.
           </p>
 
           {/* Statistics */}
           <div className="stats-hero">
             <div className="stat-item">
-              <div className="stat-number">2M+</div>
-              <div className="stat-label">Children Fed</div>
+              <div className="stat-number">1M+</div>
+              <div className="stat-label">Prasadam Meals Served</div>
             </div>
             <div className="stat-item">
-              <div className="stat-number">50K+</div>
-              <div className="stat-label">Donors</div>
+              <div className="stat-number">10,000+</div>
+              <div className="stat-label">Meals in 6 Months</div>
             </div>
             <div className="stat-item">
-              <div className="stat-number">₹950</div>
-              <div className="stat-label">Feeds a child for 1 month</div>
+              <div className="stat-number">₹1,100</div>
+              <div className="stat-label">Serves 100 prasadam meals</div>
             </div>
             <div className="stat-item">
-              <div className="stat-number">100%</div>
-              <div className="stat-label">Transparent utilization</div>
+              <div className="stat-number">₹2,500</div>
+              <div className="stat-label">Feeds a child for 1 year</div>
             </div>
           </div>
 
           {/* Trust Badges */}
           <div className="trust-badges">
             <div className="trust-badge">
-              <div className="badge-icon">💯</div>
-              <div className="badge-label">100%</div>
-              <div className="badge-sublabel">Transparent utilization</div>
+              <div className="badge-icon">🍲</div>
+              <div className="badge-label">ANNA DAAN</div>
+              <div className="badge-sublabel">is Maha Daan</div>
             </div>
             <div className="trust-badge">
-              <div className="badge-icon">🏆</div>
-              <div className="badge-label">80G</div>
-              <div className="badge-sublabel">Tax exemption certificate</div>
+              <div className="badge-icon">🙏</div>
+              <div className="badge-label">Meals Only</div>
+              <div className="badge-sublabel">No cash misuse</div>
             </div>
             <div className="trust-badge">
               <div className="badge-icon">📧</div>
-              <div className="badge-label">Regular Updates</div>
-              <div className="badge-sublabel">On your impact</div>
+              <div className="badge-label">Photo Updates</div>
+              <div className="badge-sublabel">Complete transparency</div>
             </div>
           </div>
         </section>
@@ -216,128 +218,119 @@ const DonatePageNew = () => {
           <div className="about-container">
             <div className="about-content">
               <div className="about-text">
-                <h2>About HopeFoundation</h2>
+                <h2>About Srila Prabhupada Annakshetra</h2>
                 <p className="about-intro">
-                  We are a dedicated non-profit organization committed to ending child hunger 
-                  and ensuring every child has access to nutritious meals and quality education.
+                  We are a humble initiative dedicated to serving free food as devotional service.
                 </p>
                 <p>
-                  Since our inception, we've been working tirelessly to provide mid-day meals 
-                  to underprivileged children across India. Our mission is simple yet powerful: 
-                  no child should go to bed hungry, and no child should miss school because of hunger.
+                  <strong>"Nobody shall go hungry within a ten mile radius"</strong> - Srila Prabhupada
                 </p>
                 <p>
-                  With the support of generous donors like you, we've been able to expand our reach 
-                  and impact millions of lives. Every meal we serve is more than just food – it's 
-                  hope, it's education, and it's a brighter future.
+                  Inspired by Srila Prabhupada's vision that no one within ten miles of a temple should go hungry, 
+                  we serve prasadam with love and humility. At Srila Prabhupada Annakshetra, we believe that annadanam 
+                  (offering food) is the highest charity. We serve sanctified, freshly cooked food to the hungry as an 
+                  act of devotion and compassion.
+                </p>
+                <p>
+                  Every meal is prepared with care, offered with prayer, and served with dignity.
                 </p>
                 <div className="about-features">
                   <div className="feature-item">
                     <span className="feature-icon">🎯</span>
                     <div>
                       <strong>Our Mission</strong>
-                      <p>Eliminate child hunger and promote education through nutritious meal programs</p>
+                      <p>To serve humanity by distributing food sanctified through devotion, restoring dignity, health, and hope to every hungry soul</p>
                     </div>
                   </div>
                   <div className="feature-item">
-                    <span className="feature-icon">👁️</span>
+                    <span className="feature-icon">🙏</span>
                     <div>
-                      <strong>Our Vision</strong>
-                      <p>A world where every child has the opportunity to learn, grow, and thrive</p>
+                      <strong>Our Values</strong>
+                      <p>Devotion through service • Compassion without discrimination • Transparency and honesty • Respect for every life</p>
                     </div>
                   </div>
                   <div className="feature-item">
                     <span className="feature-icon">💪</span>
                     <div>
-                      <strong>Our Values</strong>
-                      <p>Transparency, compassion, integrity, and unwavering commitment to children</p>
+                      <strong>What We Do</strong>
+                      <p>Daily free food distribution • Meal support for specially abled children • Meal sponsorship on special occasions</p>
                     </div>
                   </div>
+                </div>
+                <div className="quote-section">
+                  <p className="divine-quote">
+                    "If you simply love God, love Krishna, and give people Krishna prasadam, your life will be successful."
+                  </p>
+                  <p className="quote-author">— His Divine Grace A.C. Bhaktivedanta Swami Srila Prabhupada 🙏</p>
                 </div>
               </div>
               <div className="about-image">
                 <div className="image-placeholder">
-                  <span className="placeholder-icon">🤝</span>
-                  <p>Together We Make a Difference</p>
+                  <span className="placeholder-icon">🙏</span>
+                  <p>Serving Food as Devotion</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Our Impact Section */}
-        <section className="impact-section" id="impact">
+        {/* Our Programs Section */}
+        <section className="impact-section" id="programs">
           <div className="impact-container">
-            <h2>Our Impact</h2>
-            <p className="impact-subtitle">See the difference your donations make in the lives of children</p>
+            <h2>Our Programs</h2>
+            <p className="impact-subtitle">Every meal is prepared with care, offered with prayer, and served with dignity</p>
 
             <div className="impact-grid">
               <div className="impact-card">
-                <div className="impact-icon">🍽️</div>
-                <h3>Nutritious Meals</h3>
-                <div className="impact-number">2M+</div>
-                <p>Mid-day meals served to children every year, ensuring they have the energy to learn</p>
+                <div className="impact-icon">🍲</div>
+                <h3>Free Food Distribution</h3>
+                <div className="impact-number">Daily</div>
+                <p>We distribute free, freshly cooked meals to homeless individuals, daily wage workers, elderly without support, and underprivileged children. Food is prepared hygienically and served equally, without discrimination.</p>
               </div>
 
               <div className="impact-card">
-                <div className="impact-icon">📚</div>
-                <h3>Education Support</h3>
-                <div className="impact-number">85%</div>
-                <p>Increase in school attendance among children enrolled in our meal program</p>
+                <div className="impact-icon">🧠</div>
+                <h3>Meal Seva for Specially Abled Children</h3>
+                <div className="impact-number">₹2,500/year</div>
+                <p>Specially abled children require regular nourishment and care. Through meal sponsorship, we ensure daily nutritious food, stability and routine, service with patience and dignity. No money. No materials. Only meals offered with love.</p>
               </div>
 
               <div className="impact-card">
-                <div className="impact-icon">🏫</div>
-                <h3>Schools Reached</h3>
-                <div className="impact-number">1,200+</div>
-                <p>Schools across India partnering with us to ensure no child goes hungry</p>
+                <div className="impact-icon">🌸</div>
+                <h3>Make Your Special Day Divine</h3>
+                <div className="impact-number">₹1,100</div>
+                <p>Celebrate birthdays, anniversaries, weddings, or remembrance days by sponsoring 100 prasadam meals. Turn your joy into service. Let the Lord be pleased by feeding His children.</p>
               </div>
 
               <div className="impact-card">
-                <div className="impact-icon">👨‍👩‍👧‍👦</div>
-                <h3>Communities Served</h3>
-                <div className="impact-number">500+</div>
-                <p>Villages and communities benefiting from our nutrition and education programs</p>
-              </div>
-
-              <div className="impact-card">
-                <div className="impact-icon">💚</div>
-                <h3>Health Improvement</h3>
-                <div className="impact-number">92%</div>
-                <p>Children showing improved health and nutrition levels within 6 months</p>
-              </div>
-
-              <div className="impact-card">
-                <div className="impact-icon">🎓</div>
-                <h3>Better Performance</h3>
-                <div className="impact-number">78%</div>
-                <p>Students showing improved academic performance after joining our program</p>
+                <div className="impact-icon">🙌</div>
+                <h3>Full Day Sponsorship</h3>
+                <div className="impact-number">₹10,000</div>
+                <p>Sponsor an entire day of free prasadam distribution. Your one-day sponsorship can feed hundreds of souls and bring divine blessings. Contact us at 8910777090 for special occasions.</p>
               </div>
             </div>
 
             <div className="impact-stories">
-              <h3>Success Stories</h3>
+              <h3>How It Works</h3>
               <div className="stories-grid">
                 <div className="story-card">
-                  <div className="story-quote">"</div>
+                  <div className="story-quote">1</div>
+                  <h4>Choose Your Occasion</h4>
                   <p>
-                    Before the mid-day meal program, I used to skip school because there was 
-                    no food at home. Now I never miss a day and I'm top of my class!
+                    Birthday, Anniversary, Wedding, Memorial, or any special day
                   </p>
-                  <div className="story-author">- Priya, 10 years old, Maharashtra</div>
                 </div>
 
                 <div className="story-card">
-                  <div className="story-quote">"</div>
+                  <div className="story-quote">2</div>
+                  <h4>Select Sponsorship</h4>
                   <p>
-                    The meal program has been life-changing for our village. Children are healthier, 
-                    attendance has doubled, and parents can focus on work knowing their kids are fed.
+                    Decide the number of meals you wish to offer - from 1 meal to full day sponsorship
                   </p>
-                  <div className="story-author">- Ramesh Kumar, School Teacher, Bihar</div>
                 </div>
 
                 <div className="story-card">
-                  <div className="story-quote">"</div>
+                  <div className="story-quote">3</div>
                   <p>
                     My daughter was malnourished and weak. Thanks to the nutritious meals at school, 
                     she's now healthy, energetic, and dreams of becoming a doctor.
@@ -554,6 +547,30 @@ const DonatePageNew = () => {
             </form>
           </div>
         </div>
+
+        {/* Footer */}
+        <footer className="site-footer">
+          <div className="footer-content">
+            <div className="footer-section">
+              <h3>Srila Prabhupada Annakshetra</h3>
+              <p>Serving Food as Devotion. Feeding Souls with Love.</p>
+              <p className="footer-quote">"Nobody shall go hungry within a ten mile radius" - Srila Prabhupada</p>
+            </div>
+            <div className="footer-section">
+              <h4>Contact Us</h4>
+              <p>📞 Call / WhatsApp: 8910777090</p>
+              <p>📧 Email: contact@annakshetra.org</p>
+              <p>📍 Serving across India with devotion</p>
+            </div>
+            <div className="footer-section">
+              <h4>Transparency & Trust</h4>
+              <p>We believe in honest service. Donors receive photos and updates of meal distribution activities.</p>
+            </div>
+          </div>
+          <div className="footer-bottom">
+            <p>© 2024 Srila Prabhupada Annakshetra. All rights reserved. | Serving with devotion and compassion</p>
+          </div>
+        </footer>
       </div>
     </>
   );

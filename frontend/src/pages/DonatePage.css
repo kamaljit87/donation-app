@@ -802,3 +802,94 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Additional Styles for Annakshetra */
+.hero-quote {
+  font-size: 1.1rem;
+  font-style: italic;
+  margin-top: 1rem;
+  color: #666;
+}
+
+.quote-section {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: #fff8e1;
+  border-left: 4px solid #ff9800;
+  border-radius: 8px;
+}
+
+.divine-quote {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #333;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.quote-author {
+  text-align: right;
+  color: #666;
+  font-weight: 500;
+}
+
+.amount-help {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.form-description {
+  font-size: 1rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.site-footer {
+  background: #2c3e50;
+  color: #fff;
+  padding: 3rem 2rem 1rem;
+  margin-top: 4rem;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-section h3, .footer-section h4 {
+  margin-bottom: 1rem;
+  color: #ff9800;
+}
+
+.footer-section p {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.footer-quote {
+  font-style: italic;
+  margin-top: 1rem;
+  color: #ddd;
+}
+
+.footer-bottom {
+  border-top: 1px solid #444;
+  padding-top: 1rem;
+  text-align: center;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
