@@ -91,7 +91,6 @@
   font-size: 0.95rem;
   color: var(--text-secondary);
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 12px;
 }
@@ -168,7 +167,6 @@
   font-size: 0.9rem;
   font-weight: 700;
   color: var(--text-primary);
-  text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
