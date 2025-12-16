@@ -5,9 +5,34 @@ import galleryManifest from '../data/gallery-manifest.json';
 const Gallery = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [loadedImages, setLoadedImages] = useState(new Set());
+  const [loadedImages, setLoadedImages] = useState(new Set([0]));
 
   const images = galleryManifest;
+
+  // Preload first 3 images on mount
+  useEffect(() => {
+    [0, 1, 2].forEach(index => {
+      if (images[index]) {
+        const img = new Image();
+        img.src = images[index].path;
+        img.onload = () => handleImageLoad(index);
+      }
+    });
+  }, []);
+
+  // Prefetch adjacent images
+  useEffect(() => {
+    const nextIndex = (currentIndex + 1) % images.length;
+    const prevIndex = (currentIndex - 1 + images.length) % images.length;
+    
+    [nextIndex, prevIndex].forEach(index => {
+      if (!loadedImages.has(index) && images[index]) {
+        const img = new Image();
+        img.src = images[index].path;
+        img.onload = () => handleImageLoad(index);
+      }
+    });
+  }, [currentIndex, images.length]);
 
   // Auto-play functionality
   useEffect(() => {
