@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { donationService, paymentService } from '../services';
+import ImageGallery from '../components/ImageGallery';
+import Gallery from '../components/Gallery';
 import './DonatePage.css';
 
 const DonatePageNew = () => {
@@ -149,7 +151,10 @@ const DonatePageNew = () => {
       {/* Header Navigation */}
       <header className="donate-header">
         <nav className="header-nav">
-          <div className="logo">Srila Prabhupada Annakshetra</div>
+          <div className="logo">
+            <img src="/images/logo.png" alt="Srila Prabhupada Annakshetra" className="logo-image" />
+            <span>Srila Prabhupada Annakshetra</span>
+          </div>
           <div className="nav-links">
             <a href="#home">Home</a>
             <a href="#about">About Us</a>
@@ -266,13 +271,19 @@ const DonatePageNew = () => {
               </div>
               <div className="about-image">
                 <div className="image-placeholder">
-                  <span className="placeholder-icon">🙏</span>
+                  <img src="/images/logo.png" alt="Srila Prabhupada" className="about-logo" />
                   <p>Serving Food as Devotion</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
+
+        {/* Gallery Section */}
+        <Gallery />
+
+        {/* Image Gallery Section */}
+        <ImageGallery />
 
         {/* Our Programs Section */}
         <section className="impact-section" id="programs">

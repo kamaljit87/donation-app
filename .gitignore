@@ -30,6 +30,12 @@
 /frontend/yarn-debug.log*
 /frontend/yarn-error.log*
 
+# Gallery Images (large files, managed separately)
+/frontend/public/images/gallery/*.JPG
+/frontend/public/images/gallery/*.jpg
+/frontend/public/images/gallery/*.png
+/frontend/public/images/gallery/*.PNG
+
 # General
 .DS_Store
 .idea
