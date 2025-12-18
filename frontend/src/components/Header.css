@@ -1,18 +1,18 @@
 /* ===== Header Navigation ===== */
 .donate-header {
-  background: rgba(255, 255, 255, 0.98);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid rgba(255, 152, 0, 0.1);
+  border-bottom: none;
 }
 
 .header-nav {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 16px 32px;
+  padding: 20px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,72 +23,59 @@
   align-items: center;
   gap: 12px;
   text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #ff9800, #ff5722);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -0.5px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1a202c;
+  letter-spacing: -0.3px;
 }
 
 .logo-image {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
 }
 
 .nav-links {
   display: flex;
-  gap: 40px;
+  gap: 48px;
   align-items: center;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: #2d3748;
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
+  color: #4b5563;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
   position: relative;
+  letter-spacing: 0.3px;
 }
 
 .nav-links a:hover {
-  color: #ff9800;
-  transform: translateY(-2px);
+  color: #1a202c;
 }
 
 .nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(135deg, #FF6B6B, #FF8E53);
-  transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after {
-  width: 100%;
+  display: none;
 }
 
 .donate-button-nav {
-  padding: 12px 28px;
-  background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+  padding: 10px 24px;
+  background: #1a202c;
   color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 0.95rem;
+  border: 1px solid #1a202c;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.9rem;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  letter-spacing: 0.3px;
 }
 
 .donate-button-nav:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(255, 107, 107, 0.4);
+  background: #374151;
+  border-color: #374151;
+  transform: translateY(-1px);
 }
 
 /* Mobile Menu Toggle */
