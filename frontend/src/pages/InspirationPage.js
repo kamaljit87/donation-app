@@ -27,34 +27,46 @@ const InspirationPage = () => {
         </div>
 
         <div className="inspiration-content">
-          <div className="story-section">
-            <div className="story-card">
-              <div className="story-icon">📖</div>
-              <h2>A Moment That Changed Everything</h2>
-              <div className="story-text">
-                <p>
-                  One day, while looking out of a window in Mayapur, a small hamlet near 
-                  Calcutta, Srila Prabhupada saw a group of children fighting with stray dogs 
-                  over scraps of food.
-                </p>
-                <p>
-                  Deeply moved by this incident, he resolved to ensure that no one within a 
-                  ten mile radius of his centre would go hungry. This direction to his followers 
-                  inspired the genesis of various charitable feeding initiatives.
-                </p>
+          {/* Featured Image Section */}
+          <div className="featured-image-section">
+            <div className="featured-image-card">
+              <img 
+                src="/images/srila-prabhupada.jpg" 
+                alt="His Divine Grace A.C. Bhaktivedanta Swami Srila Prabhupada"
+                className="featured-image"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.nextElementSibling.style.display = 'flex';
+                }}
+              />
+              <div className="image-placeholder" style={{ display: 'none' }}>
+                <div className="placeholder-icon">🙏</div>
+                <p className="placeholder-text">Srila Prabhupada</p>
               </div>
             </div>
+            <p className="featured-caption">
+              His Divine Grace A.C. Bhaktivedanta Swami Prabhupada
+            </p>
+          </div>
 
-            <div className="image-section">
-              <div className="image-card">
-                <div className="image-placeholder">
-                  <div className="placeholder-icon">🕉️</div>
-                  <p className="placeholder-text">Srila Prabhupada</p>
-                </div>
-                <p className="image-caption">
-                  His Divine Grace A.C. Bhaktivedanta Swami Prabhupada
-                </p>
-              </div>
+          {/* Story Section */}
+          <div className="story-content">
+            <div className="story-header">
+              <div className="story-icon">📖</div>
+              <h2>A Moment That Changed Everything</h2>
+            </div>
+            
+            <div className="story-text">
+              <p>
+                One day, while looking out of a window in Mayapur, a small hamlet near 
+                Calcutta, Srila Prabhupada saw a group of children fighting with stray dogs 
+                over scraps of food.
+              </p>
+              <p>
+                Deeply moved by this incident, he resolved to ensure that no one within a 
+                ten mile radius of his centre would go hungry. This direction to his followers 
+                inspired the genesis of various charitable feeding initiatives.
+              </p>
             </div>
           </div>
 
@@ -99,27 +111,19 @@ const InspirationPage = () => {
             </div>
           </div>
 
-          <div className="meditation-section">
-            <div className="meditation-image">
-              <div className="image-placeholder meditation-placeholder">
-                <div className="placeholder-icon">🙏</div>
-                <p className="placeholder-text">In Meditation</p>
-              </div>
-            </div>
-            <div className="meditation-text">
-              <h2>A Life of Service</h2>
-              <p>
-                Srila Prabhupada dedicated his life to spreading Krishna consciousness and 
-                serving humanity. At the age of 69, he traveled to America with just a few 
-                rupees and a trunk of books, establishing a global movement that would touch 
-                millions of lives.
-              </p>
-              <p>
-                His teachings emphasized that spiritual advancement and social welfare go 
-                hand in hand. The prasadam distribution program is a perfect embodiment of 
-                this philosophy—nourishing both body and soul.
-              </p>
-            </div>
+          <div className="legacy-section">
+            <h2>A Life of Service</h2>
+            <p>
+              Srila Prabhupada dedicated his life to spreading Krishna consciousness and 
+              serving humanity. At the age of 69, he traveled to America with just a few 
+              rupees and a trunk of books, establishing a global movement that would touch 
+              millions of lives.
+            </p>
+            <p>
+              His teachings emphasized that spiritual advancement and social welfare go 
+              hand in hand. The prasadam distribution program is a perfect embodiment of 
+              this philosophy—nourishing both body and soul.
+            </p>
           </div>
 
           <div className="cta-section">

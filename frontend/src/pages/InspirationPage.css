@@ -43,50 +43,72 @@
   padding: 0 32px 80px;
 }
 
-/* Story Section */
-.story-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  margin-bottom: 60px;
-  align-items: center;
-}
-
-.story-card {
-  background: white;
-  border-radius: 12px;
-  padding: 40px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-.story-icon {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
+/* Featured Image Section */
+.featured-image-section {
+  max-width: 600px;
+  margin: 0 auto 60px;
   text-align: center;
 }
 
-.story-card h2 {
-  font-size: 1.8rem;
-  color: #1a202c;
+.featured-image-card {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  background: white;
   margin-bottom: 20px;
-  font-weight: 700;
 }
 
-.story-text p {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: #4a5568;
+.featured-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.featured-caption {
+  font-size: 1.1rem;
+  color: #2d3748;
+  font-weight: 600;
+  margin: 0;
+  padding: 0 20px;
+}
+
+/* Story Section */
+.story-content {
+  background: white;
+  border-radius: 12px;
+  padding: 40px;
+  margin-bottom: 60px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.story-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.story-icon {
+  font-size: 3rem;
   margin-bottom: 16px;
 }
 
-.image-section {
+.story-content h2 {
+  font-size: 2rem;
+  color: #1a202c;
+  margin-bottom: 0;
+  font-weight: 700;
 }
 
-.image-card {
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-  background: white;
+.story-text {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.story-text p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #4a5568;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .image-placeholder {
@@ -215,37 +237,31 @@
   color: #718096;
 }
 
-/* Meditation Section */
-.meditation-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
-  margin-bottom: 60px;
-}
-
-.meditation-image {
+/* Legacy Section */
+.legacy-section {
+  background: white;
   border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  margin-bottom: 60px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.meditation-placeholder {
-  aspect-ratio: 4/5;
-}
-
-.meditation-text h2 {
-  font-size: 1.8rem;
+.legacy-section h2 {
+  font-size: 2rem;
   color: #1a202c;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   font-weight: 700;
+  text-align: center;
 }
 
-.meditation-text p {
+.legacy-section p {
   font-size: 1.05rem;
-  line-height: 1.7;
+  line-height: 1.8;
   color: #4a5568;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* CTA Section */
@@ -305,12 +321,6 @@
 
 /* Responsive Design */
 @media (max-width: 992px) {
-  .story-section,
-  .meditation-section {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
   .impact-grid {
     grid-template-columns: 1fr;
   }
@@ -329,11 +339,15 @@
     padding: 0 20px 60px;
   }
 
-  .story-card {
+  .featured-image-section {
+    margin-bottom: 40px;
+  }
+
+  .story-content {
     padding: 28px 20px;
   }
 
-  .story-card h2 {
+  .story-content h2 {
     font-size: 1.5rem;
   }
 
@@ -355,8 +369,16 @@
 
   .meditation-text h2 {
     font-size: 1.5rem;
+  }legacy-section {
+    padding: 32px 20px;
   }
 
+  .legacy-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .legacy-section p {
+    font-size: 1
   .cta-section {
     padding: 36px 24px;
   }
@@ -373,20 +395,24 @@
   .cta-button {
     width: 100%;
     max-width: 280px;
-  }
-}
-
-@media (max-width: 480px) {
-  .inspiration-hero h1 {
-    font-size: 1.6rem;
-  }
-
-  .story-card h2 {
+  }ontent h2 {
     font-size: 1.3rem;
   }
 
   .quote-mark {
     font-size: 4rem;
+  }
+
+  .quote-text {
+    font-size: 1rem;
+  }
+
+  .impact-card {
+    padding: 28px 20px;
+  }
+
+  .legacy-section h2 {
+    font-size: 1.3rem
   }
 
   .quote-text {
