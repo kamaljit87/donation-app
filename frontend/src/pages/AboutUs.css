@@ -1,0 +1,24 @@
+/* About Us Page */
+.about-us-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fff5e6 0%, #ffe8cc 100%);
+}
+
+.about-us-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .about-us-container {
+    padding: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-us-page {
+    padding: 0;
+  }
+}

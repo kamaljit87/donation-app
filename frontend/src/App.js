@@ -8,6 +8,7 @@ import DonatePage from './pages/DonatePage';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import ThankYouPage from './pages/ThankYouPage';
+import AboutUs from './pages/AboutUs';
 
 // Context
 import { AuthProvider } from './context/AuthContext';
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<DonatePage />} />
           <Route path="/donate" element={<DonatePage />} />
+          <Route path="/about" element={<AboutUs />} />
           <Route path="/thank-you" element={<ThankYouPage />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route
