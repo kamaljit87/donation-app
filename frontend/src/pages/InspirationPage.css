@@ -8,7 +8,7 @@
 .inspiration-hero {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 80px 40px 60px;
+  padding: 60px 40px 40px;
   text-align: center;
 }
 
@@ -21,7 +21,7 @@
   border-radius: 50px;
   font-weight: 500;
   font-size: 0.85rem;
-  margin-bottom: 32px;
+  margin-bottom: 20px;
   letter-spacing: 0.5px;
 }
 
@@ -43,13 +43,13 @@
 .inspiration-content {
   max-width: 900px;
   margin: 0 auto;
-  padding: 0 40px 100px;
+  padding: 0 40px 60px;
 }
 
 /* Featured Image Section */
 .featured-image-section {
   max-width: 500px;
-  margin: 0 auto 80px;
+  margin: 0 auto 60px;
   text-align: center;
 }
 
@@ -99,17 +99,17 @@
 
 /* Story Section */
 .story-content {
-  margin-bottom: 80px;
+  margin-bottom: 60px;
 }
 
 .story-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 }
 
 .story-icon {
   font-size: 2.5rem;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   opacity: 0.8;
 }
 
@@ -128,22 +128,22 @@
 
 .story-text p {
   font-size: 1.1rem;
-  line-height: 2;
+  line-height: 1.7;
   color: #4b5563;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
   text-align: left;
   font-weight: 300;
 }
 
 /* Quote Section */
 .quote-section {
-  margin-bottom: 80px;
+  margin-bottom: 60px;
 }
 
 .quote-card {
   background: transparent;
   border-left: 3px solid #FF6B6B;
-  padding: 40px 0 40px 40px;
+  padding: 32px 0 32px 32px;
   position: relative;
 }
 
@@ -169,14 +169,14 @@
 
 /* Impact Section */
 .impact-section {
-  margin-bottom: 80px;
+  margin-bottom: 60px;
 }
 
 .impact-section h2 {
   font-size: 1.8rem;
   color: #1a202c;
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   font-weight: 600;
   letter-spacing: -0.3px;
 }
@@ -199,7 +199,7 @@
 
 .impact-icon {
   font-size: 2.5rem;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   opacity: 0.8;
 }
 
@@ -219,14 +219,14 @@
 
 /* Legacy Section */
 .legacy-section {
-  margin-bottom: 80px;
+  margin-bottom: 60px;
   padding: 0;
 }
 
 .legacy-section h2 {
   font-size: 1.8rem;
   color: #1a202c;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
   font-weight: 600;
   text-align: center;
   letter-spacing: -0.3px;
@@ -234,9 +234,9 @@
 
 .legacy-section p {
   font-size: 1.05rem;
-  line-height: 2;
+  line-height: 1.7;
   color: #4b5563;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
@@ -246,7 +246,7 @@
 /* CTA Section */
 .cta-section {
   text-align: center;
-  padding: 60px 0;
+  padding: 48px 0;
   background: transparent;
   border-top: 1px solid #e5e7eb;
   border-radius: 0;
