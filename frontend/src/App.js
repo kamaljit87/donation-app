@@ -24,8 +24,8 @@ function App() {
         <Routes>
           <Route path="/" element={<DonatePage />} />
           <Route path="/donate" element={<DonatePage />} />
-          <Route path="/about" element={<AboutUs />} />
-          <Route path="/inspiration" element={<InspirationPage />} />
+          <Route path="/about" element={<InspirationPage />} />
+          <Route path="/inspiration" element={<AboutUs />} />
           <Route path="/thank-you" element={<ThankYouPage />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route

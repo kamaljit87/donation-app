@@ -29,7 +29,7 @@ const InspirationPage = () => {
         <div className="inspiration-content">
           <div className="story-section">
             <div className="story-card">
-              <div className="quote-icon">📖</div>
+              <div className="story-icon">📖</div>
               <h2>A Moment That Changed Everything</h2>
               <div className="story-text">
                 <p>
@@ -47,11 +47,10 @@ const InspirationPage = () => {
 
             <div className="image-section">
               <div className="image-card">
-                <img 
-                  src="/images/srila-prabhupada-1.jpg" 
-                  alt="His Divine Grace A.C. Bhaktivedanta Swami Srila Prabhupada"
-                  className="prabhupada-image"
-                />
+                <div className="image-placeholder">
+                  <div className="placeholder-icon">🕉️</div>
+                  <p className="placeholder-text">Srila Prabhupada</p>
+                </div>
                 <p className="image-caption">
                   His Divine Grace A.C. Bhaktivedanta Swami Prabhupada
                 </p>
@@ -102,11 +101,10 @@ const InspirationPage = () => {
 
           <div className="meditation-section">
             <div className="meditation-image">
-              <img 
-                src="/images/srila-prabhupada-2.jpg" 
-                alt="Srila Prabhupada in meditation"
-                className="meditation-photo"
-              />
+              <div className="image-placeholder meditation-placeholder">
+                <div className="placeholder-icon">🙏</div>
+                <p className="placeholder-text">In Meditation</p>
+              </div>
             </div>
             <div className="meditation-text">
               <h2>A Life of Service</h2>
