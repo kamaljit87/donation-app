@@ -207,6 +207,179 @@ const DonatePageNew = () => {
           </div>
         </section>
 
+        {/* Gallery Section */}
+        <Gallery />
+
+        {/* Donation Form */}
+        <div className="donate-container" id="donation-form">
+          <h2 className="donation-section-title">Make Your Donation</h2>
+
+          <div className="donate-form-card">
+            <form onSubmit={handleSubmit}>
+              {/* Donation Type Selection */}
+              <div className="donation-type-section">
+                <h3 className="section-title">Select Donation Type</h3>
+                <div className="donation-type-toggle">
+                  <label className={`toggle-option ${formData.donation_type === 'one-time' ? 'active' : ''}`}>
+                    <input
+                      type="radio"
+                      name="donation_type"
+                      value="one-time"
+                      checked={formData.donation_type === 'one-time'}
+                      onChange={handleInputChange}
+                    />
+                    <div className="toggle-title">One-Time Donation</div>
+                    <div className="toggle-description">Make a single contribution</div>
+                  </label>
+                  <label className={`toggle-option ${formData.donation_type === 'monthly' ? 'active' : ''}`}>
+                    <input
+                      type="radio"
+                      name="donation_type"
+                      value="monthly"
+                      checked={formData.donation_type === 'monthly'}
+                      onChange={handleInputChange}
+                    />
+                    <div className="toggle-title">Monthly Donation</div>
+                    <div className="toggle-description">Recurring contribution</div>
+                  </label>
+                </div>
+              </div>
+
+              {/* Amount Selection */}
+              <div className="amount-selection">
+                <h3 className="section-title">Select Amount (₹)</h3>
+                <div className="amount-buttons">
+                  {predefinedAmounts.map((amt) => (
+                    <button
+                      key={amt}
+                      type="button"
+                      className={`amount-button ${formData.amount == amt ? 'active' : ''}`}
+                      onClick={() => handleAmountClick(amt)}
+                    >
+                      ₹{amt}
+                    </button>
+                  ))}
+                </div>
+                <input
+                  type="number"
+                  name="amount"
+                  value={formData.amount}
+                  onChange={handleInputChange}
+                  placeholder="Enter custom amount"
+                  className="custom-amount-input"
+                  min="1"
+                  required
+                />
+              </div>
+
+              {/* Personal Information */}
+              <div className="donor-info-section">
+                <h3 className="section-title">Your Information</h3>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label className="form-label">Full Name *</label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="form-input"
+                      placeholder="Enter your name"
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Email *</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="form-input"
+                      placeholder="your@email.com"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label className="form-label">Phone Number *</label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="form-input"
+                      placeholder="Enter phone number"
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Address</label>
+                    <input
+                      type="text"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleInputChange}
+                      className="form-input"
+                      placeholder="Your address"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Tax Information */}
+              <div className="tax-info-section">
+                <h3 className="section-title">Tax Information (Optional)</h3>
+                <div className="form-group">
+                  <label className="form-label">PAN Number (for 80G)</label>
+                  <input
+                    type="text"
+                    name="pan_number"
+                    value={formData.pan_number}
+                    onChange={handleInputChange}
+                    className="form-input"
+                    placeholder="ABCDE1234F"
+                  />
+                </div>
+              </div>
+
+              {/* Additional Options */}
+              <div className="checkbox-group">
+                <label className="checkbox-label">
+                  <input
+                    type="checkbox"
+                    name="tax_exemption_certificate"
+                    checked={formData.tax_exemption_certificate}
+                    onChange={handleInputChange}
+                  />
+                  <span>I would like to receive 80G Tax Exemption Certificate</span>
+                </label>
+                <label className="checkbox-label">
+                  <input
+                    type="checkbox"
+                    name="anonymous"
+                    checked={formData.anonymous}
+                    onChange={handleInputChange}
+                  />
+                  <span>Make this donation anonymous</span>
+                </label>
+              </div>
+
+              {/* Submit Button */}
+              <button type="submit" className="submit-button" disabled={loading}>
+                {loading ? 'Processing...' : 'Proceed to Donate'}
+              </button>
+
+              {/* Security Badge */}
+              <div className="security-badge">
+                <span className="security-icon">🔒</span>
+                <span>100% secure payment powered by Razorpay</span>
+              </div>
+            </form>
+          </div>
+        </div>
+
         {/* About Us Section */}
         <section className="about-section" id="about">
           <div className="about-container">
@@ -270,9 +443,6 @@ const DonatePageNew = () => {
             </div>
           </div>
         </section>
-
-        {/* Gallery Section */}
-        <Gallery />
 
         {/* Our Programs Section */}
         <section className="impact-section" id="programs">
@@ -341,212 +511,6 @@ const DonatePageNew = () => {
             </div>
           </div>
         </section>
-
-        {/* Donation Form */}
-        <div className="donate-container" id="donation-form">
-          <h2 className="donation-section-title">Make Your Donation</h2>
-
-          <div className="donate-form-card">
-            <form onSubmit={handleSubmit}>
-              {/* Donation Type Selection */}
-              <div className="donation-type-section">
-                <h3 className="section-title">Select Donation Type</h3>
-                <div className="donation-type-toggle">
-                  <label className={`toggle-option ${formData.donation_type === 'one-time' ? 'active' : ''}`}>
-                    <input
-                      type="radio"
-                      name="donation_type"
-                      value="one-time"
-                      checked={formData.donation_type === 'one-time'}
-                      onChange={handleInputChange}
-                    />
-                    <div className="toggle-title">One-Time Donation</div>
-                    <div className="toggle-description">Make a single contribution</div>
-                  </label>
-                  <label className={`toggle-option ${formData.donation_type === 'monthly' ? 'active' : ''}`}>
-                    <input
-                      type="radio"
-                      name="donation_type"
-                      value="monthly"
-                      checked={formData.donation_type === 'monthly'}
-                      onChange={handleInputChange}
-                    />
-                    <div className="toggle-title">Monthly Donation</div>
-                    <div className="toggle-description">Recurring contribution</div>
-                  </label>
-                </div>
-              </div>
-
-              {/* Amount Selection */}
-              <div className="amount-selection">
-                <h3 className="section-title">Select Amount (₹)</h3>
-                <div className="amount-buttons">
-                  {predefinedAmounts.map((amt) => (
-                    <button
-                      key={amt}
-                      type="button"
-                      className={`amount-button ${formData.amount == amt ? 'active' : ''}`}
-                      onClick={() => handleAmountClick(amt)}
-                    >
-                      ₹{amt}
-                    </button>
-                  ))}
-                </div>
-                <input
-                  type="number"
-                  name="amount"
-                  value={formData.amount}
-                  onChange={handleInputChange}
-                  placeholder="Enter custom amount"
-                  className="custom-amount-input"
-                  min="1"
-                  required
-                />
-              </div>
-
-              {/* Personal Information */}
-              <h3 className="section-title">Personal Information</h3>
-              <div className="form-grid">
-                <div className="form-group">
-                  <label className="form-label">Full Name *</label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="form-input"
-                    placeholder="Enter your full name"
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label className="form-label">Email Address *</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="form-input"
-                    placeholder="your.email@example.com"
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label className="form-label">Phone Number *</label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="form-input"
-                    placeholder="+91 XXXXX XXXXX"
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label className="form-label">Age</label>
-                  <input
-                    type="number"
-                    name="age"
-                    value={formData.age}
-                    onChange={handleInputChange}
-                    className="form-input"
-                    placeholder="Your age"
-                    min="1"
-                  />
-                </div>
-                <div className="form-group full-width">
-                  <label className="form-label">Address</label>
-                  <input
-                    type="text"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleInputChange}
-                    className="form-input"
-                    placeholder="Street address"
-                  />
-                </div>
-                <div className="form-group">
-                  <label className="form-label">City</label>
-                  <input
-                    type="text"
-                    name="city"
-                    value={formData.city}
-                    onChange={handleInputChange}
-                    className="form-input"
-                    placeholder="City"
-                  />
-                </div>
-                <div className="form-group">
-                  <label className="form-label">State</label>
-                  <input
-                    type="text"
-                    name="state"
-                    value={formData.state}
-                    onChange={handleInputChange}
-                    className="form-input"
-                    placeholder="State"
-                  />
-                </div>
-                <div className="form-group">
-                  <label className="form-label">Pincode</label>
-                  <input
-                    type="text"
-                    name="pincode"
-                    value={formData.pincode}
-                    onChange={handleInputChange}
-                    className="form-input"
-                    placeholder="Pincode"
-                  />
-                </div>
-                <div className="form-group">
-                  <label className="form-label">PAN Number (for 80G)</label>
-                  <input
-                    type="text"
-                    name="pan_number"
-                    value={formData.pan_number}
-                    onChange={handleInputChange}
-                    className="form-input"
-                    placeholder="ABCDE1234F"
-                  />
-                </div>
-              </div>
-
-              {/* Additional Options */}
-              <div className="checkbox-group">
-                <label className="checkbox-label">
-                  <input
-                    type="checkbox"
-                    name="tax_exemption_certificate"
-                    checked={formData.tax_exemption_certificate}
-                    onChange={handleInputChange}
-                  />
-                  <span>I would like to receive 80G Tax Exemption Certificate</span>
-                </label>
-                <label className="checkbox-label">
-                  <input
-                    type="checkbox"
-                    name="anonymous"
-                    checked={formData.anonymous}
-                    onChange={handleInputChange}
-                  />
-                  <span>Make this donation anonymous</span>
-                </label>
-              </div>
-
-              {/* Submit Button */}
-              <button type="submit" className="submit-button" disabled={loading}>
-                {loading ? 'Processing...' : 'Proceed to Donate'}
-              </button>
-
-              {/* Security Badge */}
-              <div className="security-badge">
-                <span className="security-icon">🔒</span>
-                <span>100% secure payment powered by Razorpay</span>
-              </div>
-            </form>
-          </div>
-        </div>
 
         {/* Footer */}
         <footer className="site-footer">
