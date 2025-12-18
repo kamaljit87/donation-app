@@ -9,6 +9,7 @@ import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import ThankYouPage from './pages/ThankYouPage';
 import AboutUs from './pages/AboutUs';
+import InspirationPage from './pages/InspirationPage';
 
 // Context
 import { AuthProvider } from './context/AuthContext';
@@ -24,6 +25,7 @@ function App() {
           <Route path="/" element={<DonatePage />} />
           <Route path="/donate" element={<DonatePage />} />
           <Route path="/about" element={<AboutUs />} />
+          <Route path="/inspiration" element={<InspirationPage />} />
           <Route path="/thank-you" element={<ThankYouPage />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route

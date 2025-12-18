@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { donationService, paymentService } from '../services';
 import Gallery from '../components/Gallery';
+import Header from '../components/Header';
 import './DonatePage.css';
 import './DonatePageModern.css';
 
@@ -148,24 +149,7 @@ const DonatePageNew = () => {
         <meta property="og:description" content="No one should sleep hungry. Support free prasadam distribution to the needy." />
       </Helmet>
 
-      {/* Header Navigation */}
-      <header className="donate-header">
-        <nav className="header-nav">
-          <div className="logo">
-            <img src="/images/logo.png" alt="Srila Prabhupada Annakshetra" className="logo-image" />
-            <span>Srila Prabhupada Annakshetra</span>
-          </div>
-          <div className="nav-links">
-            <a href="#home">Home</a>
-            <a href="#about">About Us</a>
-            <a href="#programs">Programs</a>
-            <a href="/admin/login">Admin</a>
-            <button className="donate-button-nav" onClick={() => document.getElementById('donation-form').scrollIntoView({ behavior: 'smooth' })}>
-              Donate Now
-            </button>
-          </div>
-        </nav>
-      </header>
+      <Header />
 
       <div className="donate-page">
         {/* Hero Section */}
