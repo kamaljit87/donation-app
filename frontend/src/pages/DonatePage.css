@@ -398,60 +398,95 @@
 
 .donation-section-title {
   text-align: center;
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #1a1a1a;
-  margin-bottom: 48px;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 56px;
+  letter-spacing: -0.5px;
 }
 
 .donate-form-card {
-  background: white;
+  background: #ffffff;
   border-radius: 24px;
-  padding: 56px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  padding: 64px;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04);
   max-width: 900px;
   margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.donate-form-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #FF6B6B, #FF8E53, #FFB84D);
 }
 
 /* ===== Donation Type Toggle ===== */
 .donation-type-section {
-  margin-bottom: 48px;
+  margin-bottom: 56px;
 }
 
 .section-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 20px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 24px;
   text-align: center;
+  letter-spacing: -0.3px;
 }
 
 .donation-type-toggle {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 20px;
   margin-bottom: 16px;
 }
 
 .toggle-option {
-  padding: 24px 32px;
-  border: 3px solid #e5e5e5;
+  padding: 28px 32px;
+  border: 2px solid #e5e7eb;
   border-radius: 16px;
-  background: white;
+  background: #fafafa;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.toggle-option::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 107, 107, 0.05), transparent);
+  transition: left 0.5s ease;
+}
+
+.toggle-option:hover::before {
+  left: 100%;
 }
 
 .toggle-option:hover {
-  border-color: #FFB6B6;
-  background: #FFF8F8;
+  border-color: #FF6B6B;
+  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.15);
 }
 
 .toggle-option.active {
   border-color: #FF6B6B;
-  background: linear-gradient(135deg, #FFF5F5, #FFF8F8);
-  box-shadow: 0 4px 16px rgba(255, 107, 107, 0.2);
+  background: linear-gradient(135deg, #FFF5F5 0%, #ffffff 100%);
+  box-shadow: 0 8px 24px rgba(255, 107, 107, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
 }
 
 .toggle-option input[type="radio"] {
@@ -459,10 +494,12 @@
 }
 
 .toggle-title {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: #1a202c;
   margin-bottom: 8px;
+  letter-spacing: -0.2px;
+  transition: color 0.3s ease;
 }
 
 .toggle-option.active .toggle-title {
@@ -470,67 +507,101 @@
 }
 
 .toggle-description {
-  font-size: 0.95rem;
-  color: #666;
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-weight: 400;
+  transition: color 0.3s ease;
+}
+
+.toggle-option.active .toggle-description {
+  color: #9ca3af;
 }
 
 /* ===== Amount Selection ===== */
 .amount-selection {
-  margin-bottom: 48px;
+  margin-bottom: 56px;
 }
 
 .amount-buttons {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 14px;
+  margin-bottom: 28px;
 }
 
 .amount-button {
-  padding: 20px;
-  border: 3px solid #e5e5e5;
-  border-radius: 12px;
-  background: white;
-  font-size: 1.25rem;
+  padding: 24px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 14px;
+  background: #fafafa;
+  font-size: 1.3rem;
   font-weight: 700;
-  color: #333;
+  color: #1a202c;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.amount-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 142, 83, 0.1));
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .amount-button:hover {
-  border-color: #FFB6B6;
-  background: #FFF8F8;
-  transform: translateY(-2px);
+  border-color: #FF6B6B;
+  background: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(255, 107, 107, 0.2);
+}
+
+.amount-button:hover::before {
+  opacity: 1;
 }
 
 .amount-button.active {
-  border-color: #FF6B6B;
-  background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+  border-color: transparent;
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
   color: white;
-  box-shadow: 0 4px 16px rgba(255, 107, 107, 0.3);
-  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(255, 107, 107, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.amount-button.active::before {
+  display: none;
 }
 
 .custom-amount-input {
   width: 100%;
-  padding: 20px 24px;
-  border: 3px solid #e5e5e5;
-  border-radius: 12px;
-  font-size: 1.125rem;
+  padding: 22px 24px;
+  border: 2px solid #e5e7eb;
+  border-radius: 14px;
+  font-size: 1.15rem;
   font-weight: 600;
-  color: #333;
-  transition: all 0.3s ease;
+  color: #1a202c;
+  background: #fafafa;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.custom-amount-input:hover {
+  border-color: #d1d5db;
+  background: #ffffff;
 }
 
 .custom-amount-input:focus {
   outline: none;
   border-color: #FF6B6B;
-  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.12), 0 4px 12px rgba(255, 107, 107, 0.15);
 }
 
 .custom-amount-input::placeholder {
-  color: #999;
+  color: #9ca3af;
+  font-weight: 400;
 }
 
 /* ===== Form Fields ===== */
@@ -551,23 +622,31 @@
 }
 
 .form-label {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  color: #333;
+  color: #374151;
   margin-bottom: 10px;
+  letter-spacing: -0.1px;
 }
 
 .form-input,
 .form-select,
 .form-textarea {
-  padding: 16px 20px;
-  border: 2px solid #e5e5e5;
-  border-radius: 10px;
+  padding: 18px 20px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
   font-size: 1rem;
   font-family: inherit;
-  color: #333;
-  transition: all 0.3s ease;
-  background: white;
+  color: #1a202c;
+  background: #fafafa;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-input:hover,
+.form-select:hover,
+.form-textarea:hover {
+  border-color: #d1d5db;
+  background: #ffffff;
 }
 
 .form-input:focus,
@@ -575,7 +654,9 @@
 .form-textarea:focus {
   outline: none;
   border-color: #FF6B6B;
-  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.12), 0 2px 8px rgba(255, 107, 107, 0.1);
+  transform: translateY(-1px);
 }
 
 .form-textarea {
@@ -583,62 +664,125 @@
   min-height: 100px;
 }
 
+/* ===== Form Sections ===== */
+.donor-info-section,
+.tax-info-section {
+  margin-bottom: 48px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
 /* ===== Checkboxes ===== */
 .checkbox-group {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin: 32px 0;
-  padding: 24px;
-  background: #F9FAFB;
-  border-radius: 12px;
+  gap: 18px;
+  margin: 40px 0;
+  padding: 28px;
+  background: #fafafa;
+  border: 1px solid #f0f0f0;
+  border-radius: 14px;
+  transition: all 0.3s ease;
+}
+
+.checkbox-group:hover {
+  background: #ffffff;
+  border-color: #e5e7eb;
 }
 
 .checkbox-label {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   cursor: pointer;
   font-size: 0.95rem;
-  color: #333;
+  color: #374151;
+  transition: color 0.3s ease;
+  padding: 4px 0;
+}
+
+.checkbox-label:hover {
+  color: #1a202c;
 }
 
 .checkbox-label input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   cursor: pointer;
   accent-color: #FF6B6B;
+  transition: transform 0.2s ease;
+}
+
+.checkbox-label input[type="checkbox"]:hover {
+  transform: scale(1.1);
 }
 
 /* ===== Submit Button ===== */
 .submit-button {
   width: 100%;
-  padding: 20px 32px;
-  background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+  padding: 22px 32px;
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 50%, #FFB84D 100%);
+  background-size: 200% 100%;
+  background-position: left;
   color: white;
   border: none;
-  border-radius: 12px;
-  font-size: 1.25rem;
+  border-radius: 14px;
+  font-size: 1.3rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
-  margin-top: 32px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 24px rgba(255, 107, 107, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  margin-top: 40px;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.3px;
+}
+
+.submit-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.submit-button:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 .submit-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(255, 107, 107, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(255, 107, 107, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  background-position: right;
 }
 
 .submit-button:active {
-  transform: translateY(0);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
 }
 
 .submit-button:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+  background: #d1d5db;
+  box-shadow: none;
+}
+
+.submit-button:disabled:hover {
+  transform: none;
+  background-position: left;
 }
 
 /* ===== Security Badge ===== */
@@ -646,18 +790,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  margin-top: 24px;
-  padding: 16px;
-  background: #F0FDF4;
-  border-radius: 10px;
+  gap: 10px;
+  margin-top: 28px;
+  padding: 18px 24px;
+  background: linear-gradient(135deg, #f0fdf4, #ffffff);
+  border-radius: 12px;
+  border: 1px solid #d1fae5;
   font-size: 0.95rem;
-  color: #059669;
+  color: #047857;
   font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.security-badge:hover {
+  background: linear-gradient(135deg, #ecfdf5, #f0fdf4);
+  border-color: #a7f3d0;
 }
 
 .security-icon {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
 /* ===== Responsive Design ===== */
