@@ -3,8 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { toast } from 'react-toastify';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import donationService from '../services/donationService';
-import paymentService from '../services/paymentService';
+import { donationService, paymentService } from '../services';
 import './DonatePageNew.css';
 
 const DonatePageNew = () => {
