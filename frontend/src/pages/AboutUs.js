@@ -83,7 +83,7 @@ const AboutUs = () => {
           <div className="cta-section">
             <h2>Inspired by Divine Compassion</h2>
             <p>Learn about the vision of Srila Prabhupada that drives our mission</p>
-            <Link to="/inspiration" className="cta-button">
+            <Link to="/about" className="cta-button">
               Discover Our Inspiration →
             </Link>
           </div>
