@@ -68,7 +68,11 @@ const Header = () => {
                 <i className="fas fa-chevron-down"></i>
               </button>
               {showDropdown && (
-                <div className="dropdown-menu">
+                <div 
+                  className="dropdown-menu"
+                  onMouseEnter={() => setShowDropdown(true)}
+                  onMouseLeave={() => setShowDropdown(false)}
+                >
                   <button onClick={() => handleInitiativeClick('daily-distribution')}>
                     Daily Food Distribution
                   </button>
