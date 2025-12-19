@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { donationService, paymentService } from '../services';
 import Gallery from '../components/Gallery';
@@ -10,6 +10,7 @@ import './DonatePageModern.css';
 
 const DonatePageNew = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -28,6 +29,19 @@ const DonatePageNew = () => {
     anonymous: false,
     tax_exemption_certificate: true,
   });
+
+  // Handle scrolling to specific sections
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      const sectionId = location.state.scrollTo;
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, [location]);
 
   const predefinedAmounts = [1100, 2500, 5000, 10000, 25000];
 
@@ -451,24 +465,24 @@ const DonatePageNew = () => {
             <p className="impact-subtitle">Choose how you want to transform lives through sacred food service</p>
 
             <div className="impact-grid">
-              <div className="impact-card glass-card hover-lift">
+              <div className="impact-card glass-card hover-lift" id="daily-distribution">
                 <div className="impact-icon">🍲</div>
-                <h3>Daily Distribution</h3>
+                <h3>Daily Food Distribution</h3>
                 <div className="impact-number">Ongoing</div>
                 <p>Support our daily prasadam service reaching homeless souls, day laborers, elderly without family, and children in need. Every meal served with dignity and devotion.</p>
               </div>
 
-              <div className="impact-card glass-card hover-lift featured-card">
+              <div className="impact-card glass-card hover-lift featured-card" id="mental-abled">
                 <div className="featured-badge">🌟 Most Popular</div>
                 <div className="impact-icon">🧠</div>
-                <h3>Support a Child for 1 Year</h3>
+                <h3>Mental Abled Child Support</h3>
                 <div className="impact-number">₹2,500</div>
                 <p>Provide daily nutritious meals to a specially-abled child for an entire year. Give them stability, health, and hope through consistent nourishment.</p>
               </div>
 
-              <div className="impact-card glass-card hover-lift">
+              <div className="impact-card glass-card hover-lift" id="special-day">
                 <div className="impact-icon">🌸</div>
-                <h3>Celebrate with Service</h3>
+                <h3>Make Your Day Special</h3>
                 <div className="impact-number">₹1,100</div>
                 <p>Turn your special day into divine blessings. Sponsor 100 prasadam meals on birthdays, anniversaries, or memorial days.</p>
               </div>
@@ -532,7 +546,7 @@ const DonatePageNew = () => {
             </div>
           </div>
           <div className="footer-bottom">
-            <p>© 2024 Srila Prabhupada Annakshetra. All rights reserved. | Serving with devotion and compassion</p>
+            <p>©️ 2025 Annakshetra. All rights reserved. | Developed by <a href="https://indraopstech.com" target="_blank" rel="noopener noreferrer">IndraOps Technologies</a></p>
           </div>
         </footer>
       </div>

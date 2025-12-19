@@ -1,0 +1,140 @@
+/* Footer Styles */
+.site-footer {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  color: #e5e5e5;
+  padding: 60px 0 0;
+  margin-top: 80px;
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+}
+
+.footer-section h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #FF6B6B;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+
+.footer-section h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 16px;
+  letter-spacing: -0.3px;
+}
+
+.footer-section p {
+  font-size: 0.95rem;
+  color: #b3b3b3;
+  line-height: 1.8;
+  margin: 8px 0;
+}
+
+.footer-quote {
+  font-style: italic;
+  margin-top: 16px;
+  color: #d4d4d4;
+  border-left: 3px solid #FF6B6B;
+  padding-left: 16px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.footer-social a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b3b3b3;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-social a:hover {
+  background: #FF6B6B;
+  color: white;
+  border-color: #FF6B6B;
+  transform: translateY(-3px);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 24px 40px;
+  text-align: center;
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.footer-bottom a {
+  color: #FF6B6B;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.footer-bottom a:hover {
+  color: #FF8E53;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  
+  .footer-section:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-footer {
+    padding: 40px 0 0;
+    margin-top: 60px;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    padding: 0 20px 32px;
+    gap: 32px;
+    text-align: center;
+  }
+  
+  .footer-section:last-child {
+    grid-column: 1;
+  }
+  
+  .footer-quote {
+    border-left: none;
+    border-top: 3px solid #FF6B6B;
+    padding-left: 0;
+    padding-top: 16px;
+  }
+  
+  .footer-social {
+    justify-content: center;
+  }
+  
+  .footer-bottom {
+    padding: 20px;
+    font-size: 0.85rem;
+  }
+}
