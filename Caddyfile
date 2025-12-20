@@ -11,7 +11,7 @@
 # Production server with automatic HTTPS
 donationapp.ddns.net {
     # Reverse proxy to Next.js
-    reverse_proxy nextjs-app:3000 {
+    reverse_proxy nextjs-dev:3000 {
         header_up Host {host}
         header_up X-Real-IP {remote}
         header_up X-Forwarded-For {remote}
