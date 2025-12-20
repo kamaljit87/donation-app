@@ -1,15 +1,15 @@
 # Caddyfile for Donation App
 # Development/Local: localhost:80
-# Production: Replace with your domain
+# Production: donationapp.ddns.net with HTTPS
 
 {
     # Global options
-    auto_https off
-    admin off
+    # Email for Let's Encrypt notifications
+    email admin@donationapp.ddns.net
 }
 
-# Development server
-:80 {
+# Production server with automatic HTTPS
+donationapp.ddns.net {
     # Reverse proxy to Next.js
     reverse_proxy nextjs-app:3000 {
         header_up Host {host}
