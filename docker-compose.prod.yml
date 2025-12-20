@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  # Caddy Web Server
+  caddy:
+    image: caddy:2.7-alpine
+    container_name: donation-caddy-prod
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - donation-network
+    depends_on:
+      - nextjs-prod
+
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: donation-mysql-prod
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: donation_db
+      MYSQL_USER: donation_user
+      MYSQL_PASSWORD: donation_pass
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_prod_data:/var/lib/mysql
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql:ro
+    networks:
+      - donation-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # Next.js Production Server
+  nextjs-prod:
+    build:
+      context: ./nextjs-app
+      dockerfile: Dockerfile.prod
+    container_name: donation-nextjs-prod
+    restart: unless-stopped
+    expose:
+      - "3000"
+    environment:
+      NODE_ENV: production
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: donation_db
+      DB_USERNAME: donation_user
+      DB_PASSWORD: donation_pass
+      JWT_SECRET: change_this_jwt_secret_in_production
+      RAZORPAY_KEY_ID: your_razorpay_key_id
+      RAZORPAY_KEY_SECRET: your_razorpay_secret
+      NEXT_PUBLIC_RAZORPAY_KEY_ID: your_razorpay_key_id
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - donation-network
+
+volumes:
+  caddy_data:
+  caddy_config:
+  mysql_prod_data:
+
+networks:
+  donation-network:
+    driver: bridge

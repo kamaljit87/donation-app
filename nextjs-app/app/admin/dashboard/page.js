@@ -6,6 +6,8 @@ import { toast } from 'react-toastify';
 import { useAuth } from '@/components/AuthContext';
 import '../../AdminDashboard.css';
 
+export const dynamic = 'force-dynamic';
+
 export default function AdminDashboardPage() {
   const router = useRouter();
   const { user, logout } = useAuth();
