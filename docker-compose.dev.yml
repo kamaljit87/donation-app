@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: donation-mysql-dev
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: donation_db
+      MYSQL_USER: donation_user
+      MYSQL_PASSWORD: donation_pass
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_dev_data:/var/lib/mysql
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql:ro
+    networks:
+      - donation-dev-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # Next.js Development Server
+  nextjs-dev:
+    build:
+      context: ./nextjs-app
+      dockerfile: Dockerfile.dev
+    container_name: donation-nextjs-dev
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      # Database
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: donation_db
+      DB_USERNAME: donation_user
+      DB_PASSWORD: donation_pass
+      
+      # Application
+      NEXT_PUBLIC_APP_NAME: "Donation App (Dev)"
+      NEXT_PUBLIC_APP_URL: http://localhost:3000
+      
+      # JWT Secret
+      JWT_SECRET: "dev_secret_change_in_production"
+      
+      # Razorpay Test Keys
+      RAZORPAY_KEY_ID: "rzp_test_your_key"
+      RAZORPAY_KEY_SECRET: "your_test_secret"
+      NEXT_PUBLIC_RAZORPAY_KEY_ID: "rzp_test_your_key"
+      
+      # Environment
+      NODE_ENV: development
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - donation-dev-network
+    volumes:
+      - ./nextjs-app:/app
+      - /app/node_modules
+      - /app/.next
+
+volumes:
+  mysql_dev_data:
+    driver: local
+
+networks:
+  donation-dev-network:
+    driver: bridge

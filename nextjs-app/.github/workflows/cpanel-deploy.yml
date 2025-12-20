@@ -1,0 +1,128 @@
+name: Deploy Next.js to cPanel
+
+on:
+  push:
+    branches: [ main, production ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: nextjs-app/package-lock.json
+    
+    - name: Install dependencies
+      working-directory: nextjs-app
+      run: npm ci
+    
+    - name: Create .env file
+      working-directory: nextjs-app
+      run: |
+        cat > .env <<EOF
+        DB_HOST=${{ secrets.DB_HOST }}
+        DB_PORT=${{ secrets.DB_PORT }}
+        DB_DATABASE=${{ secrets.DB_DATABASE }}
+        DB_USERNAME=${{ secrets.DB_USERNAME }}
+        DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+        
+        NEXT_PUBLIC_APP_NAME="${{ secrets.APP_NAME }}"
+        NEXT_PUBLIC_APP_URL=${{ secrets.APP_URL }}
+        
+        JWT_SECRET=${{ secrets.JWT_SECRET }}
+        
+        RAZORPAY_KEY_ID=${{ secrets.RAZORPAY_KEY_ID }}
+        RAZORPAY_KEY_SECRET=${{ secrets.RAZORPAY_KEY_SECRET }}
+        NEXT_PUBLIC_RAZORPAY_KEY_ID=${{ secrets.RAZORPAY_KEY_ID }}
+        
+        NODE_ENV=production
+        EOF
+    
+    - name: Build Next.js app
+      working-directory: nextjs-app
+      run: npm run build
+    
+    - name: Create deployment package
+      working-directory: nextjs-app
+      run: |
+        mkdir -p deploy
+        cp -r .next deploy/
+        cp -r public deploy/
+        cp -r node_modules deploy/
+        cp package.json package-lock.json next.config.js .env deploy/
+        cp server.js deploy/ || echo "server.js will be created on server"
+    
+    - name: Deploy to cPanel via SSH
+      uses: appleboy/scp-action@v0.1.4
+      with:
+        host: ${{ secrets.CPANEL_HOST }}
+        username: ${{ secrets.CPANEL_USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        source: "nextjs-app/deploy/*"
+        target: "/home/${{ secrets.CPANEL_USERNAME }}/donation-nextjs"
+        strip_components: 2
+        rm: false
+    
+    - name: Setup and restart application
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.CPANEL_HOST }}
+        username: ${{ secrets.CPANEL_USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd ~/donation-nextjs
+          
+          # Create server.js if not exists
+          if [ ! -f server.js ]; then
+            cat > server.js <<'SERVERJS'
+          const { createServer } = require('http');
+          const { parse } = require('url');
+          const next = require('next');
+
+          const dev = process.env.NODE_ENV !== 'production';
+          const hostname = 'localhost';
+          const port = parseInt(process.env.PORT || '3000', 10);
+
+          const app = next({ dev, hostname, port });
+          const handle = app.getRequestHandler();
+
+          app.prepare().then(() => {
+            createServer(async (req, res) => {
+              try {
+                const parsedUrl = parse(req.url, true);
+                await handle(req, res, parsedUrl);
+              } catch (err) {
+                console.error('Error occurred handling', req.url, err);
+                res.statusCode = 500;
+                res.end('Internal server error');
+              }
+            }).listen(port, (err) => {
+              if (err) throw err;
+              console.log(\`> Ready on http://\${hostname}:\${port}\`);
+            });
+          });
+          SERVERJS
+          fi
+          
+          # Set permissions
+          chmod 644 .env
+          chmod 755 server.js
+          
+          # Restart using PM2 if available, otherwise use touch restart.txt for Passenger
+          if command -v pm2 &> /dev/null; then
+            pm2 restart donation-app || pm2 start server.js --name donation-app
+          else
+            # Passenger restart
+            mkdir -p tmp
+            touch tmp/restart.txt
+          fi
+          
+          echo "✅ Deployment complete!"

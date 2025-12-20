@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: donation-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password_change_this
+      MYSQL_DATABASE: donation_db
+      MYSQL_USER: donation_user
+      MYSQL_PASSWORD: donation_password_change_this
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql:ro
+    networks:
+      - donation-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # Next.js Application
+  nextjs-app:
+    build:
+      context: ./nextjs-app
+      dockerfile: Dockerfile
+    container_name: donation-nextjs
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      # Database
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: donation_db
+      DB_USERNAME: donation_user
+      DB_PASSWORD: donation_password_change_this
+      
+      # Application
+      NEXT_PUBLIC_APP_NAME: "Donation App"
+      NEXT_PUBLIC_APP_URL: http://localhost:3000
+      
+      # JWT Secret (change this!)
+      JWT_SECRET: "change_this_to_random_secret_in_production"
+      
+      # Razorpay (add your keys)
+      RAZORPAY_KEY_ID: "your_razorpay_key_id"
+      RAZORPAY_KEY_SECRET: "your_razorpay_secret"
+      NEXT_PUBLIC_RAZORPAY_KEY_ID: "your_razorpay_key_id"
+      
+      # Environment
+      NODE_ENV: production
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - donation-network
+    volumes:
+      - ./nextjs-app:/app
+      - /app/node_modules
+      - /app/.next
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  donation-network:
+    driver: bridge

@@ -1,4 +1,42 @@
-# Donation Application
+# 🎉 Donation Application - Migrated to Next.js!
+
+## ⚡ IMPORTANT: Project has been migrated to Next.js
+
+**This project has been completely migrated from Laravel + React to Next.js full-stack.**
+
+### 👉 Use the New Version
+
+**Go to:** [`nextjs-app/`](nextjs-app/)
+
+**Quick Start:**
+```bash
+cd nextjs-app
+npm install
+cp .env.example .env  # Edit with your settings
+npm run dev
+```
+
+**Documentation:**
+- [MIGRATION_SUMMARY.md](MIGRATION_SUMMARY.md) - Complete migration overview
+- [nextjs-app/README.md](nextjs-app/README.md) - Full Next.js documentation
+- [nextjs-app/CPANEL_DEPLOYMENT.md](nextjs-app/CPANEL_DEPLOYMENT.md) - Deployment guide
+
+---
+
+## 📦 What Changed
+
+- ✅ Laravel backend → Next.js API routes
+- ✅ React frontend → Next.js pages
+- ✅ Same database (no migration needed!)
+- ✅ Same UI/UX (all CSS preserved)
+- ✅ Simpler deployment (one app instead of two)
+
+---
+
+# Legacy Documentation (Laravel + React)
+
+> **⚠️ Note:** The information below is for the **deprecated Laravel + React** version.
+> For the new Next.js version, see [`nextjs-app/`](nextjs-app/) folder.
 
 A full-stack donation application with Laravel backend and React frontend, featuring Razorpay payment integration and admin dashboard.
 
