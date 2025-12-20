@@ -9,13 +9,17 @@
 docker-compose -f docker-compose.dev.yml up -d
 
 # View logs
+docker-compose -f docker-compose.dev.yml logs -f
+
+# View specific service logs
+docker-compose -f docker-compose.dev.yml logs -f caddy
 docker-compose -f docker-compose.dev.yml logs -f nextjs-dev
 
 # Stop
 docker-compose -f docker-compose.dev.yml down
 ```
 
-Visit: **http://localhost:3000**
+Visit: **http://localhost** (Caddy proxies to Next.js on port 3000)
 
 ### Production Mode
 
@@ -33,17 +37,21 @@ docker-compose -f docker-compose.nextjs.yml down
 ## 📋 What's Included
 
 ### Development Setup (`docker-compose.dev.yml`)
+- ✅ Caddy web server (ports 80, 443)
 - ✅ MySQL 8.0 database (port 3307)
 - ✅ Next.js dev server with hot reload
 - ✅ Auto-created database tables
 - ✅ Sample admin user (email: admin@example.com, password: password)
 - ✅ Volume mounting for instant code changes
+- ✅ Reverse proxy with compression and security headers
 
 ### Production Setup (`docker-compose.nextjs.yml`)
-- ✅ MySQL 8.0 database (port 3306)
+- ✅ Caddy web server with automatic HTTPS (ports 80, 443)
+- ✅ MySQL 8.0 database
 - ✅ Optimized Next.js build
 - ✅ Multi-stage Docker build
 - ✅ Production-ready configuration
+- ✅ Let's Encrypt SSL certificates (when using your domain)
 
 ## 🔧 Configuration
 
@@ -102,9 +110,10 @@ docker-compose -f docker-compose.dev.yml logs -f
 
 ### 3. Access Application
 
-- **Frontend**: http://localhost:3000
-- **API Health**: http://localhost:3000/api/auth/user (should return 401)
-- **Admin Login**: http://localhost:3000/admin/login
+- **Frontend**: http://localhost (via Caddy)
+- **Direct Next.js** (dev only): http://localhost:3000
+- **API Health**: http://localhost/api/auth/user (should return 401)
+- **Admin Login**: http://localhost/admin/login
 
 ### 4. Test Database
 
@@ -178,6 +187,9 @@ docker exec -i donation-mysql-dev mysql -u donation_user -pdonation_pass donatio
 # All services
 docker-compose -f docker-compose.dev.yml logs -f
 
+# Caddy only
+docker-compose -f docker-compose.dev.yml logs -f caddy
+
 # Next.js only
 docker-compose -f docker-compose.dev.yml logs -f nextjs-dev
 
@@ -217,18 +229,42 @@ docker-compose -f docker-compose.dev.yml up -d
 
 After testing in Docker:
 
-1. **Build locally**:
+### Option 1: Deploy to cPanel
 ```bash
 cd nextjs-app
 npm run build
+# Upload to cPanel (see nextjs-app/CPANEL_DEPLOYMENT.md)
 ```
 
-2. **Upload to cPanel** (see CPANEL_DEPLOYMENT.md)
+### Option 2: Deploy Docker to VPS with Your Domain
 
-3. **Or deploy Docker to VPS**:
+1. **Update Caddyfile for your domain**:
+```bash
+# Edit docker-compose.nextjs.yml to use Caddyfile.production
+# Change: ./Caddyfile:/etc/caddy/Caddyfile:ro
+# To: ./Caddyfile.production:/etc/caddy/Caddyfile:ro
+```
+
+2. **Edit Caddyfile.production**:
+```bash
+# Replace yourdomain.com with your actual domain
+# Update email address for Let's Encrypt
+```
+
+3. **Update environment variables**:
+```bash
+# Edit docker-compose.nextjs.yml
+# Set NEXT_PUBLIC_APP_URL to https://yourdomain.com
+# Add production Razorpay keys
+# Generate strong JWT_SECRET
+```
+
+4. **Deploy**:
 ```bash
 docker-compose -f docker-compose.nextjs.yml up -d
 ```
+
+Caddy will automatically obtain SSL certificates from Let's Encrypt! 🎉
 
 ## 🔐 Security Notes
 
@@ -242,10 +278,32 @@ docker-compose -f docker-compose.nextjs.yml up -d
 
 - `Dockerfile` - Production build
 - `Dockerfile.dev` - Development build
-- `docker-compose.nextjs.yml` - Production compose
-- `docker-compose.dev.yml` - Development compose
+- `docker-compose.nextjs.yml` - Production compose (with Caddy)
+- `docker-compose.dev.yml` - Development compose (with Caddy)
+- `Caddyfile` - Development Caddy config
+- `Caddyfile.production` - Production Caddy config (with HTTPS)
 - `init-db.sql` - Database initialization
 - `DOCKER_TESTING.md` - This file
+
+## 🔐 SSL Certificates (Production)
+
+Caddy automatically handles SSL certificates:
+- ✅ Obtains certificates from Let's Encrypt
+- ✅ Automatic renewal before expiration
+- ✅ HTTP to HTTPS redirect
+- ✅ HTTP/3 support
+- ✅ OCSP stapling
+
+**Requirements:**
+- Valid domain name pointing to your server
+- Ports 80 and 443 open
+- Server accessible from the internet
+
+**Testing SSL before production:**
+```bash
+# Edit Caddyfile.production and uncomment staging CA
+# acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+```
 
 ---
 

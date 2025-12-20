@@ -1,0 +1,70 @@
+# Caddyfile for Production
+# Replace yourdomain.com with your actual domain
+
+{
+    # Email for Let's Encrypt
+    email admin@yourdomain.com
+    
+    # Staging for testing (remove for production)
+    # acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+}
+
+# Main domain with automatic HTTPS
+yourdomain.com, www.yourdomain.com {
+    # Reverse proxy to Next.js
+    reverse_proxy nextjs-app:3000 {
+        header_up Host {host}
+        header_up X-Real-IP {remote}
+        header_up X-Forwarded-For {remote}
+        header_up X-Forwarded-Proto {scheme}
+    }
+
+    # Enable compression
+    encode gzip zstd
+
+    # Security headers
+    header {
+        # HSTS
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        
+        # XSS Protection
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        X-XSS-Protection "1; mode=block"
+        
+        # Referrer Policy
+        Referrer-Policy "strict-origin-when-cross-origin"
+        
+        # Permissions Policy
+        Permissions-Policy "geolocation=(), microphone=(), camera=()"
+        
+        # Hide server info
+        -Server
+    }
+
+    # Rate limiting (optional)
+    # rate_limit {
+    #     zone dynamic {
+    #         key {remote_host}
+    #         events 100
+    #         window 1m
+    #     }
+    # }
+
+    # Access logs
+    log {
+        output file /var/log/caddy/access.log
+        format json
+        level INFO
+    }
+
+    # Error handling
+    handle_errors {
+        respond "{err.status_code} {err.status_text}"
+    }
+}
+
+# Redirect www to non-www (optional - comment out if you want both)
+# www.yourdomain.com {
+#     redir https://yourdomain.com{uri} permanent
+# }

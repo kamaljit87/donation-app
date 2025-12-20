@@ -1,0 +1,37 @@
+# Caddyfile for Donation App
+# Development/Local: localhost:80
+# Production: Replace with your domain
+
+{
+    # Global options
+    auto_https off
+    admin off
+}
+
+# Development server
+:80 {
+    # Reverse proxy to Next.js
+    reverse_proxy nextjs-app:3000 {
+        header_up Host {host}
+        header_up X-Real-IP {remote}
+        header_up X-Forwarded-For {remote}
+        header_up X-Forwarded-Proto {scheme}
+    }
+
+    # Enable compression
+    encode gzip
+
+    # Security headers
+    header {
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        -Server
+    }
+
+    # Access logs
+    log {
+        output stdout
+        format console
+    }
+}

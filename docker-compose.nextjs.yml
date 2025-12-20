@@ -1,6 +1,29 @@
 version: '3.8'
 
 services:
+  # Caddy Web Server with Automatic HTTPS
+  caddy:
+    image: caddy:2.7-alpine
+    container_name: donation-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"  # HTTP/3
+    volumes:
+      # Use Caddyfile.production for production with your domain
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+      - caddy_logs:/var/log/caddy
+    networks:
+      - donation-network
+    depends_on:
+      - nextjs-app
+    environment:
+      # Set your email for Let's Encrypt notifications
+      CADDY_ADMIN: "off"
+
   # MySQL Database
   mysql:
     image: mysql:8.0
@@ -11,8 +34,8 @@ services:
       MYSQL_DATABASE: donation_db
       MYSQL_USER: donation_user
       MYSQL_PASSWORD: donation_password_change_this
-    ports:
-      - "3306:3306"
+    expose:
+      - "3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql:ro
@@ -30,8 +53,8 @@ services:
       dockerfile: Dockerfile
     container_name: donation-nextjs
     restart: unless-stopped
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     environment:
       # Database
       DB_HOST: mysql
@@ -40,9 +63,9 @@ services:
       DB_USERNAME: donation_user
       DB_PASSWORD: donation_password_change_this
       
-      # Application
+      # Application (Update this to your domain)
       NEXT_PUBLIC_APP_NAME: "Donation App"
-      NEXT_PUBLIC_APP_URL: http://localhost:3000
+      NEXT_PUBLIC_APP_URL: https://yourdomain.com
       
       # JWT Secret (change this!)
       JWT_SECRET: "change_this_to_random_secret_in_production"
@@ -59,13 +82,15 @@ services:
         condition: service_healthy
     networks:
       - donation-network
-    volumes:
-      - ./nextjs-app:/app
-      - /app/node_modules
-      - /app/.next
 
 volumes:
   mysql_data:
+    driver: local
+  caddy_data:
+    driver: local
+  caddy_config:
+    driver: local
+  caddy_logs:
     driver: local
 
 networks:
