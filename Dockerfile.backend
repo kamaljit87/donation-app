@@ -1,38 +1,39 @@
-FROM php:8.2-fpm
-
-# Set working directory
-WORKDIR /var/www/html
+FROM php:8.2-fpm-alpine
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y \
+RUN apk add --no-cache \
     git \
     curl \
     libpng-dev \
-    libonig-dev \
     libxml2-dev \
     zip \
     unzip \
-    libzip-dev \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    mysql-client \
+    oniguruma-dev
 
-# Install Composer
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd xml
+
+# Get Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy application files first
-COPY backend ./
+# Set working directory
+WORKDIR /var/www
 
-# Install dependencies (no autoloader generation yet)
-RUN composer install --optimize-autoloader --no-dev --no-scripts
+# Copy existing application directory
+COPY ./backend /var/www
 
-# Create directories if they don't exist and set permissions
-RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache
+# Create required directories
+RUN mkdir -p storage/framework/{sessions,views,cache} \
+    && mkdir -p storage/logs \
+    && mkdir -p bootstrap/cache
 
-RUN chown -R www-data:www-data /var/www/html && \
-    chmod -R 775 /var/www/html/storage && \
-    chmod -R 775 /var/www/html/bootstrap/cache
+# Set permissions
+RUN chown -R www-data:www-data /var/www \
+    && chmod -R 755 /var/www/storage \
+    && chmod -R 755 /var/www/bootstrap/cache
 
-# Expose port
+# Expose port 9000 for PHP-FPM
 EXPOSE 9000
 
 CMD ["php-fpm"]

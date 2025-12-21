@@ -4,24 +4,16 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Copy package files
-COPY frontend/package*.json ./
+COPY ./frontend/package*.json ./
 
-# Install dependencies (cached layer - only rebuilds if package.json changes)
-RUN npm install --legacy-peer-deps && npm install ajv@^8.12.0 --save-dev
+# Install dependencies
+RUN npm install --legacy-peer-deps
 
 # Copy application files
-COPY frontend ./
+COPY ./frontend .
 
-# Build application
-ARG REACT_APP_API_URL
-ENV REACT_APP_API_URL=${REACT_APP_API_URL}
-RUN npm run build
-
-# Expose port for serve
+# Expose port
 EXPOSE 3000
 
-# Install serve globally to run the static build
-RUN npm install -g serve
-
-# Serve the build directory
-CMD ["serve", "-s", "build", "-l", "3000"]
+# Start development server
+CMD ["npm", "start"]

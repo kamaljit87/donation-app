@@ -2,17 +2,17 @@ version: '3.8'
 
 services:
   # MySQL Database
-  db:
+  mysql:
     image: mysql:8.0
-    container_name: donation-app-db
+    container_name: donation-mysql
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: ${DB_DATABASE:-donation_app}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-secret}
-      MYSQL_PASSWORD: ${DB_PASSWORD:-secret}
-      MYSQL_USER: ${DB_USERNAME:-donation_user}
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: donation_app
+      MYSQL_USER: donation_user
+      MYSQL_PASSWORD: donation_pass
     volumes:
-      - db_data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
     ports:
       - "3306:3306"
     networks:
@@ -26,87 +26,81 @@ services:
   # Laravel Backend
   backend:
     build:
-      context: .
-      dockerfile: Dockerfile.backend
-    container_name: donation-app-backend
+      context: ./backend
+      dockerfile: ../Dockerfile.backend
+    container_name: donation-backend
     restart: unless-stopped
-    working_dir: /var/www/html
+    working_dir: /var/www
     environment:
-      APP_NAME: ${APP_NAME:-DonationApp}
-      APP_ENV: ${APP_ENV:-production}
-      APP_KEY: ${APP_KEY}
-      APP_DEBUG: ${APP_DEBUG:-false}
-      APP_URL: ${APP_URL:-http://localhost}
-      DB_CONNECTION: mysql
-      DB_HOST: db
-      DB_PORT: 3306
-      DB_DATABASE: ${DB_DATABASE:-donation_app}
-      DB_USERNAME: ${DB_USERNAME:-donation_user}
-      DB_PASSWORD: ${DB_PASSWORD:-secret}
-      RAZORPAY_KEY_ID: ${RAZORPAY_KEY_ID}
-      RAZORPAY_KEY_SECRET: ${RAZORPAY_KEY_SECRET}
-      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000}
+      - DB_HOST=mysql
+      - DB_DATABASE=donation_app
+      - DB_USERNAME=donation_user
+      - DB_PASSWORD=donation_pass
     volumes:
-      - ./backend:/var/www/html
-      - backend_storage:/var/www/html/storage
-      - backend_cache:/var/www/html/bootstrap/cache
+      - ./backend:/var/www
+      - backend_vendor:/var/www/vendor
     depends_on:
-      db:
+      mysql:
         condition: service_healthy
     networks:
       - donation-network
-    command: sh -c "php artisan migrate --force && php artisan db:seed --force && php-fpm"
-    expose:
-      - "9000"
+    command: >
+      sh -c "
+        composer install --optimize-autoloader &&
+        php artisan key:generate &&
+        php artisan migrate --force &&
+        php artisan config:cache &&
+        php-fpm
+      "
 
   # React Frontend
   frontend:
     build:
-      context: .
-      dockerfile: Dockerfile.frontend
-      args:
-        REACT_APP_API_URL: ${REACT_APP_API_URL:-https://donationapp.ddns.net/api}
-    container_name: donation-app-frontend
+      context: ./frontend
+      dockerfile: ../Dockerfile.frontend
+    container_name: donation-frontend
     restart: unless-stopped
-    expose:
-      - "3000"
+    working_dir: /app
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_API_URL=http://localhost/api
+    volumes:
+      - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
     depends_on:
       - backend
     networks:
       - donation-network
+    command: npm start
 
-  # Caddy Reverse Proxy with Auto SSL
+  # Caddy Reverse Proxy
   caddy:
     image: caddy:2-alpine
-    container_name: donation-app-caddy
+    container_name: donation-caddy
     restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
-      - "443:443/udp"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
-      - ./backend:/var/www/html:ro
       - caddy_data:/data
       - caddy_config:/config
     depends_on:
-      - frontend
       - backend
+      - frontend
     networks:
       - donation-network
-    environment:
-      - DOMAIN=${DOMAIN:-donationapp.ddns.net}
 
 networks:
   donation-network:
     driver: bridge
 
 volumes:
-  db_data:
+  mysql_data:
     driver: local
-  backend_storage:
+  backend_vendor:
     driver: local
-  backend_cache:
+  frontend_node_modules:
     driver: local
   caddy_data:
     driver: local

@@ -39,3 +39,22 @@
 *.swo
 *~
 .env
+
+# Backup and temporary files
+*.backup
+*.bak
+*.old
+*.tmp
+
+# Design files
+design-reference.pdf
+*.psd
+*.ai
+
+# Deployment
+/ssl/
+/cpanel-deploy/
+
+# Docker
+.env.docker
+docker-compose.override.yml
