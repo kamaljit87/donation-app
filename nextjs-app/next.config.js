@@ -1,24 +1,35 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  output: 'standalone',
   
-  // Image optimization
-  images: {
-    unoptimized: process.env.NODE_ENV === 'development',
-    domains: ['localhost', 'prabhupadannakshetra.org'],
-  },
-  
-  // For cPanel Node.js hosting
+  // Optimize for production
+  swcMinify: true,
   compress: true,
   poweredByHeader: false,
   
-  // TypeScript and ESLint (for Docker builds)
+  // Image optimization
+  images: {
+    unoptimized: true, // cPanel doesn't support Next.js image optimization
+    domains: ['localhost', 'prabhupadannakshetra.org'],
+  },
+  
+  // Output optimization for cPanel
+  output: 'standalone',
+  
+  // Disable development features in production
+  productionBrowserSourceMaps: false,
+  
+  // TypeScript and ESLint
   eslint: {
     ignoreDuringBuilds: true,
   },
   typescript: {
     ignoreBuildErrors: true,
+  },
+  
+  // Optimize runtime
+  experimental: {
+    optimizeCss: true,
   },
 };
 

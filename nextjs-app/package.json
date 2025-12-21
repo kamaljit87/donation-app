@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "node server.js",
+    "start": "node start-optimized.js",
     "start:nextjs": "next start",
+    "postinstall": "echo 'Dependencies installed successfully'",
     "lint": "next lint"
   },
   "dependencies": {
@@ -27,5 +28,9 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.0.4"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
   }
 }
