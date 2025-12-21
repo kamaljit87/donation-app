@@ -36,9 +36,14 @@ async function checkAndBuild() {
   }
 }
 
+console.log('========================================');
 console.log('Starting Next.js application...');
 console.log(`Environment: ${process.env.NODE_ENV}`);
 console.log(`Port: ${port}`);
+console.log(`Working Directory: ${__dirname}`);
+console.log(`Build Path: ${buildIdPath}`);
+console.log(`Build Exists: ${fs.existsSync(buildIdPath)}`);
+console.log('========================================');
 
 // Validate required environment variables
 function validateEnv() {
