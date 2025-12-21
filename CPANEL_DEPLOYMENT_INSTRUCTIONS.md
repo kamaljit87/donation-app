@@ -31,19 +31,27 @@ Upload these files/folders to your cPanel public_html or application directory:
 
 Add these variables in the cPanel interface:
 
-| Variable Name | Value |
-|--------------|-------|
-| NODE_ENV | production |
-| PORT | (leave empty, cPanel sets this automatically) |
-| DB_HOST | localhost |
-| DB_PORT | 3306 |
-| DB_DATABASE | your_database_name |
-| DB_USERNAME | your_database_user |
-| DB_PASSWORD | your_database_password |
-| JWT_SECRET | your_jwt_secret_key_here |
-| RAZORPAY_KEY_ID | your_razorpay_key_id |
-| RAZORPAY_KEY_SECRET | your_razorpay_secret |
-| NEXT_PUBLIC_RAZORPAY_KEY_ID | your_razorpay_key_id |
+| Variable Name | Value | Required |
+|--------------|-------|----------|
+| NODE_ENV | production | ✅ Yes |
+| PORT | (leave empty, cPanel sets this automatically) | No |
+| DB_HOST | localhost | ✅ Yes |
+| DB_PORT | 3306 | No (defaults to 3306) |
+| DB_DATABASE | your_database_name | ✅ Yes |
+| DB_USERNAME | your_database_user | ✅ Yes |
+| DB_PASSWORD | your_database_password | ✅ Yes |
+| JWT_SECRET | your_jwt_secret_key_here | ✅ Yes |
+| RAZORPAY_KEY_ID | your_razorpay_key_id | No (optional) |
+| RAZORPAY_KEY_SECRET | your_razorpay_secret | No (optional) |
+| NEXT_PUBLIC_RAZORPAY_KEY_ID | your_razorpay_key_id | No (optional) |
+
+**⚠️ IMPORTANT:** Variables marked as "✅ Yes" are REQUIRED. The app will not start without them.
+
+**Generate JWT Secret:**
+```bash
+# Run this to generate a secure secret:
+openssl rand -base64 32
+```
 
 ### 5. Install Dependencies
 

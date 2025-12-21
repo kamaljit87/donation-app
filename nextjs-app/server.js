@@ -40,6 +40,40 @@ console.log('Starting Next.js application...');
 console.log(`Environment: ${process.env.NODE_ENV}`);
 console.log(`Port: ${port}`);
 
+// Validate required environment variables
+function validateEnv() {
+  const required = [
+    'DB_HOST',
+    'DB_DATABASE',
+    'DB_USERNAME',
+    'DB_PASSWORD',
+    'JWT_SECRET'
+  ];
+  
+  const missing = required.filter(key => !process.env[key]);
+  
+  if (missing.length > 0) {
+    console.error('❌ Missing required environment variables:');
+    missing.forEach(key => console.error(`   - ${key}`));
+    console.error('\nPlease set these in cPanel Node.js environment variables.');
+    return false;
+  }
+  
+  // Warn about optional Razorpay credentials
+  if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+    console.warn('⚠️  Razorpay credentials not set - payment features will be disabled');
+  }
+  
+  console.log('✓ Environment variables validated');
+  return true;
+}
+
+// Validate environment before starting
+if (!validateEnv() && process.env.NODE_ENV === 'production') {
+  console.error('\n❌ Cannot start in production without required environment variables');
+  process.exit(1);
+}
+
 // Build if needed, then start
 checkAndBuild().then(() => {
   // Initialize Next.js app
