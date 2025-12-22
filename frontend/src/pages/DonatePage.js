@@ -6,7 +6,6 @@ import { donationService, paymentService } from '../services';
 import Gallery from '../components/Gallery';
 import Header from '../components/Header';
 import './DonatePage.css';
-import './DonatePageModern.css';
 
 const DonatePageNew = () => {
   const navigate = useNavigate();
