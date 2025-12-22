@@ -5,7 +5,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // Pages
 import DonatePage from './pages/DonatePage';
-import DonatePageNew from './pages/DonatePageNew';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import ThankYouPage from './pages/ThankYouPage';
@@ -25,7 +24,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<DonatePage />} />
-          <Route path="/donate" element={<DonatePageNew />} />
+          <Route path="/donate" element={<DonatePage />} />
           <Route path="/about" element={<InspirationPage />} />
           <Route path="/inspiration" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
