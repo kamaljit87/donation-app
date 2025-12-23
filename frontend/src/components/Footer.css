@@ -1,26 +1,25 @@
-/* Footer Styles */
 .site-footer {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-  color: #e5e5e5;
-  padding: 60px 0 0;
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 48px 0 8px;
   margin-top: 80px;
 }
 
 .footer-content {
-  max-width: 1400px;
+  max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 0 40px 40px;
+  padding: 0 40px 32px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 48px;
+  gap: 40px;
 }
 
 .footer-section h3 {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  color: #FF6B6B;
-  margin-bottom: 16px;
-  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  letter-spacing: -0.3px;
 }
 
 .footer-section h4 {
@@ -33,7 +32,7 @@
 
 .footer-section p {
   font-size: 0.95rem;
-  color: #b3b3b3;
+  color: var(--text-secondary);
   line-height: 1.8;
   margin: 8px 0;
 }
@@ -55,41 +54,41 @@
 .footer-social a {
   width: 40px;
   height: 40px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #b3b3b3;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  transition: all 0.18s ease;
+  border: 1px solid rgba(15,23,42,0.04);
 }
 
 .footer-social a:hover {
-  background: #FF6B6B;
+  background: var(--primary-color);
   color: white;
-  border-color: #FF6B6B;
+  border-color: var(--primary-color);
   transform: translateY(-3px);
 }
 
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 24px 40px;
+  border-top: 1px solid rgba(15,23,42,0.04);
+  padding: 18px 40px;
   text-align: center;
-  color: #999;
+  color: var(--text-secondary);
   font-size: 0.9rem;
 }
 
 .footer-bottom a {
-  color: #FF6B6B;
+  color: var(--primary-color);
   text-decoration: none;
   font-weight: 600;
-  transition: color 0.3s ease;
+  transition: color 0.18s ease;
 }
 
 .footer-bottom a:hover {
-  color: #FF8E53;
+  color: var(--primary-dark);
   text-decoration: underline;
 }
 

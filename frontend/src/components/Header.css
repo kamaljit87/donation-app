@@ -1,12 +1,12 @@
-/* ===== Social Media Top Bar ===== */
+/* ===== Social Media Top Bar (subtle) ===== */
 .top-bar {
-  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 8px 0;
+  background: transparent;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.04);
+  padding: 6px 0;
 }
 
 .top-bar-content {
-  max-width: 1400px;
+  max-width: var(--container-max-width);
   margin: 0 auto;
   padding: 0 40px;
   display: flex;
@@ -21,21 +21,22 @@
 }
 
 .social-links a {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  width: 32px;
-  height: 32px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  transition: all 0.18s ease;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid rgba(15,23,42,0.04);
 }
 
 .social-links a:hover {
-  color: #FF6B6B;
-  background: rgba(255, 107, 107, 0.1);
+  color: var(--primary-color);
+  background: rgba(99,102,241,0.06);
   transform: translateY(-2px);
 }
 
@@ -66,19 +67,19 @@
 
 /* ===== Header Navigation ===== */
 .donate-header {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: saturate(120%) blur(6px);
+  box-shadow: 0 6px 18px rgba(15,23,42,0.04);
   position: sticky;
   top: 0;
-  z-index: 100;
-  border-bottom: none;
+  z-index: 120;
+  border-bottom: 1px solid rgba(15,23,42,0.04);
 }
 
 .header-nav {
-  max-width: 1400px;
+  max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 20px 40px;
+  padding: 18px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -89,11 +90,11 @@
   align-items: center;
   gap: 14px;
   text-decoration: none;
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #1a202c;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
   letter-spacing: -0.3px;
-  transition: transform 0.3s ease;
+  transition: transform 0.18s ease;
 }
 
 .logo:hover {
@@ -109,19 +110,19 @@
 
 .nav-links {
   display: flex;
-  gap: 40px;
+  gap: 28px;
   align-items: center;
 }
 
 .nav-links a,
 .dropdown-toggle {
   text-decoration: none;
-  color: #4b5563;
-  font-weight: 500;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.18s ease, transform 0.18s ease;
   position: relative;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.2px;
   background: none;
   border: none;
   cursor: pointer;
@@ -160,11 +161,11 @@
   margin-top: 8px;
   background: white;
   border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-  min-width: 240px;
+  box-shadow: 0 8px 30px rgba(15,23,42,0.06);
+  min-width: 220px;
   padding: 8px;
   z-index: 9999;
-  animation: dropdownFadeIn 0.3s ease;
+  animation: dropdownFadeIn 0.18s ease;
   pointer-events: auto;
 }
 
@@ -181,22 +182,22 @@
 
 .dropdown-menu button {
   width: 100%;
-  padding: 12px 16px;
+  padding: 14px 16px;
   text-align: left;
-  background: none;
+  background: transparent;
   border: none;
-  color: #4b5563;
-  font-size: 0.9rem;
-  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
   border-radius: 8px;
-  transition: all 0.2s ease;
+  transition: background 0.12s ease, color 0.12s ease, padding-left 0.18s ease;
   font-family: inherit;
 }
 
 .dropdown-menu button:hover {
-  background: #f9fafb;
-  color: #FF6B6B;
+  background: rgba(99,102,241,0.06);
+  color: var(--primary-dark);
   padding-left: 20px;
 }
 
@@ -220,26 +221,27 @@
   gap: 8px;
 }
 
+.donate-button-nav {
+  padding: 10px 22px;
+  background: var(--primary-color);
+  color: white;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  letter-spacing: 0.2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 18px rgba(99,102,241,0.08);
+}
+
 .donate-button-nav:hover {
-  background: #374151;
-  border-color: #374151;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(99,102,241,0.10);
 }
-
-.heart-icon {
-  color: #FF6B6B;
-  animation: heartbeat 1.5s ease-in-out infinite;
-}
-
-@keyframes heartbeat {
-  0%, 100% {
-    transform: scale(1);
-  }
-  10%, 30% {
-    transform: scale(1.2);
-  }
-  20%, 40% {
-    transform: scale(1);
   }
 }
 

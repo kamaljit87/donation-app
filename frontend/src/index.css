@@ -36,7 +36,7 @@
   --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --box-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --container-max-width: 1400px;
+  --container-max-width: 1500px;
 }
 
 body {
@@ -46,7 +46,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   letter-spacing: -0.011em;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #f8fafc;
   background-attachment: fixed;
   min-height: 100vh;
   color: var(--text-primary);
@@ -144,26 +144,25 @@ p {
   line-height: 1.7;
 }
 
-/* Wide hero used across homepage and internal pages */
 .wide-hero {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 80px 0 80px;
-  color: rgba(17,24,39,0.95);
+  background: transparent;
+  padding: 80px 0 56px;
+  color: var(--text-primary);
 }
 .wide-hero .hero-inner {
   max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 40px;
 }
 .wide-hero h1 {
-  font-size: 4rem;
-  font-weight: 900;
-  margin: 8px 0 16px;
-  line-height: 1.05;
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin: 8px 0 12px;
+  line-height: 1.08;
 }
 .wide-hero p.lead {
   font-size: 1.05rem;
-  color: rgba(17,24,39,0.7);
+  color: var(--text-secondary);
   max-width: 900px;
 }
 .back-link {
