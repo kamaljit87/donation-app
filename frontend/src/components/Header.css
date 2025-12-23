@@ -47,7 +47,7 @@
 }
 
 .contact-info a {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-secondary);
   text-decoration: none;
   font-size: 0.85rem;
   display: flex;
@@ -205,22 +205,7 @@
   display: none;
 }
 
-.donate-button-nav {
-  padding: 10px 24px;
-  background: #1a202c;
-  color: white;
-  border: 1px solid #1a202c;
-  border-radius: 6px;
-  font-weight: 500;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  letter-spacing: 0.3px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
+/* primary donate button */
 .donate-button-nav {
   padding: 10px 22px;
   background: var(--primary-color);
@@ -242,8 +227,7 @@
   transform: translateY(-2px);
   box-shadow: 0 10px 30px rgba(99,102,241,0.10);
 }
-  }
-}
+/* end header */
 
 /* Mobile Menu Toggle */
 .mobile-menu-toggle {
