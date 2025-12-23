@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { donationService, paymentService } from '../services';
 import Gallery from '../components/Gallery';
 import Header from '../components/Header';
+import HeroCarousel from '../components/HeroCarousel';
 import './DonatePage.css';
 
 const faqs = [
@@ -171,6 +172,8 @@ const DonatePageNew = () => {
       </Helmet>
 
       <Header />
+
+      <HeroCarousel />
 
       <div className="donate-page">
         {/* Hero Section */}
