@@ -13,14 +13,16 @@ COOLDOWN_SECONDS=3
 
 usage() {
   cat <<EOF
-Usage: $0 [start|stop|restart|status]
+Usage: $0 [start|stop|restart|status|cache|route-cache]
 
 Commands:
-  start     Start backend then frontend (default)
-  stop      Stop frontend and backend (by saved PIDs or fuser)
-  restart   Stop then start
-  status    Show running status
-  help      Show this message
+  start        Start backend then frontend (default)
+  stop         Stop frontend and backend (by saved PIDs or fuser)
+  restart      Stop then start (rebuilds before starting)
+  status       Show running status
+  cache        Run Laravel cache maintenance (cache:clear, config:cache, view:clear)
+  route-cache  Generate Laravel route cache (route:cache)
+  help         Show this message
 EOF
 }
 
@@ -187,6 +189,13 @@ case "$CMD" in
     kill_ports
     echo "Rebuilding backend and frontend before restart..."
     rebuild_backend
+    # Run cache maintenance and route caching as part of restart
+    echo "Running cache maintenance and route caching..."
+    cd "$ROOT_DIR/backend"
+    php artisan cache:clear || true
+    php artisan config:cache || true
+    php artisan view:clear || true
+    php artisan route:cache || true
     rebuild_frontend
     start_backend
     if ! wait_for_backend; then
@@ -194,6 +203,20 @@ case "$CMD" in
       exit 1
     fi
     start_frontend
+    ;;
+  cache)
+    echo "Running Laravel cache maintenance commands..."
+    cd "$ROOT_DIR/backend"
+    php artisan cache:clear || true
+    php artisan config:cache || true
+    php artisan view:clear || true
+    echo "Cache commands completed. See $BACKEND_LOG for backend logs."
+    ;;
+  route-cache)
+    echo "Generating Laravel route cache..."
+    cd "$ROOT_DIR/backend"
+    php artisan route:cache || true
+    echo "Route cache complete."
     ;;
   status)
     status_all
