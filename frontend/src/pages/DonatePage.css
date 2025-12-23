@@ -107,14 +107,14 @@
   max-width: var(--container-max-width);
   margin: 0 auto;
   padding: 60px 40px 40px;
-  text-align: center;
+  text-align: left;
 }
 
 .hero-badge {
   display: inline-block;
   padding: 6px 16px;
-  background: transparent;
-  border: 1px solid #FF6B6B;
+  background: rgba(255, 107, 107, 0.1);
+  border: none;
   border-radius: 50px;
   font-size: 0.85rem;
   font-weight: 500;
@@ -130,6 +130,7 @@
   line-height: 1.4;
   margin-bottom: 20px;
   letter-spacing: -0.5px;
+  text-align: left;
 }
 
 .donate-hero h1 .gradient-text {
@@ -141,9 +142,10 @@
   font-size: 1.1rem;
   color: #6b7280;
   max-width: 700px;
-  margin: 0 auto 16px;
+  margin: 0 0 16px;
   line-height: 1.7;
   font-weight: 300;
+  text-align: left;
 }
 
 .hero-quote {
@@ -151,8 +153,9 @@
   color: #9ca3af;
   font-style: italic;
   max-width: 600px;
-  margin: 0 auto 40px;
+  margin: 0 0 40px;
   font-weight: 300;
+  text-align: left;
 }
 
 /* ===== Statistics Grid ===== */
@@ -161,27 +164,27 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 32px;
   max-width: 900px;
-  margin: 0 auto 50px;
+  margin: 0 0 50px;
   padding: 40px 0;
-  border-top: 1px solid #f3f4f6;
-  border-bottom: 1px solid #f3f4f6;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
 .stat-item {
-  text-align: center;
+  text-align: left;
   padding: 0;
   background: transparent;
   transition: all 0.3s ease;
 }
 
 .stat-item:hover {
-  transform: translateY(-2px);
+  transform: translateX(4px);
 }
 
 .stat-icon {
   font-size: 2rem;
   margin-bottom: 12px;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .stat-number {
@@ -200,10 +203,10 @@
 /* ===== Trust Indicators ===== */
 .trust-badges {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 60px;
   flex-wrap: wrap;
-  margin: 0 auto 50px;
+  margin: 0 0 50px;
   padding: 0;
   background: transparent;
   max-width: 900px;
@@ -212,14 +215,17 @@
 .trust-badge {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .badge-icon {
   font-size: 2.5rem;
   margin-bottom: 4px;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .badge-label {
@@ -259,6 +265,7 @@
   color: #1a202c;
   margin-bottom: 20px;
   letter-spacing: -0.3px;
+  text-align: left;
 }
 
 .about-intro {
@@ -267,6 +274,7 @@
   font-weight: 400;
   line-height: 1.7;
   margin-bottom: 20px;
+  text-align: left;
 }
 
 .about-text p {
@@ -275,6 +283,7 @@
   line-height: 1.7;
   margin-bottom: 16px;
   font-weight: 300;
+  text-align: left;
 }
 
 .about-features {
@@ -290,8 +299,11 @@
   align-items: flex-start;
   padding: 0 0 20px 0;
   background: transparent;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
   transition: all 0.3s ease;
+  box-shadow: none;
+  backdrop-filter: none;
+  border-radius: 0;
 }
 
 .feature-item:last-child {
@@ -305,7 +317,7 @@
 .feature-icon {
   font-size: 1.8rem;
   flex-shrink: 0;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .feature-item strong {
@@ -314,6 +326,7 @@
   color: #1a202c;
   margin-bottom: 6px;
   font-weight: 600;
+  text-align: left;
 }
 
 .feature-item p {
@@ -322,6 +335,7 @@
   margin: 0;
   line-height: 1.6;
   font-weight: 300;
+  text-align: left;
 }
 
 .about-image {
@@ -389,17 +403,17 @@
 .impact-card {
   background: white;
   padding: 40px 32px;
-  border-radius: 20px;
-  text-align: center;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  text-align: left;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   transition: var(--transition);
-  border: 2px solid transparent;
+  border: 1px solid rgba(0,0,0,0.05);
 }
 
 .impact-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
-  border-color: #FFE5E5;
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border-color: rgba(255, 107, 107, 0.2);
 }
 
 .impact-icon {
@@ -452,15 +466,17 @@
 .story-card {
   background: white;
   padding: 40px 32px;
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   position: relative;
   transition: var(--transition);
+  border: 1px solid rgba(0,0,0,0.05);
+  text-align: left;
 }
 
 .story-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 .story-quote {
@@ -495,7 +511,7 @@
 }
 
 .donation-section-title {
-  text-align: center;
+  text-align: left;
   font-size: 2.8rem;
   font-weight: 700;
   color: #1a202c;
@@ -504,15 +520,24 @@
 }
 
 .donate-form-card {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-radius: 24px;
   padding: 64px;
-  border: 1px solid #f0f0f0;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04);
-  max-width: 900px;
-  margin: 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  max-width: 1200px;
+  margin: 0;
   position: relative;
   overflow: hidden;
+}
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(20px)) {
+  .donate-form-card {
+    background: rgba(255, 255, 255, 0.95);
+  }
 }
 
 .donate-form-card::before {
@@ -521,7 +546,7 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
+  height: 3px;
   background: linear-gradient(90deg, #FF6B6B, #FF8E53, #FFB84D);
 }
 
@@ -535,7 +560,7 @@
   font-weight: 600;
   color: #1a202c;
   margin-bottom: 24px;
-  text-align: center;
+  text-align: left;
   letter-spacing: -0.3px;
 }
 
@@ -547,13 +572,14 @@
 }
 
 .toggle-option {
-  padding: 28px 32px;
-  border: 2px solid #e5e7eb;
-  border-radius: 16px;
-  background: #fafafa;
+  padding: 24px 28px;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
   cursor: pointer;
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  text-align: center;
+  text-align: left;
   position: relative;
   overflow: hidden;
 }
@@ -574,17 +600,17 @@
 }
 
 .toggle-option:hover {
-  border-color: #FF6B6B;
-  background: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.15);
+  border-color: rgba(255, 107, 107, 0.3);
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateX(2px);
 }
 
 .toggle-option.active {
   border-color: #FF6B6B;
-  background: linear-gradient(135deg, #FFF5F5 0%, #ffffff 100%);
-  box-shadow: 0 8px 24px rgba(255, 107, 107, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  transform: translateY(-2px);
+  background: rgba(255, 245, 245, 0.8);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.15);
+  transform: translateX(2px);
 }
 
 .toggle-option input[type="radio"] {
@@ -628,10 +654,11 @@
 }
 
 .amount-button {
-  padding: 24px 16px;
-  border: 2px solid #e5e7eb;
-  border-radius: 14px;
-  background: #fafafa;
+  padding: 20px 16px;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
   font-size: 1.3rem;
   font-weight: 700;
   color: #1a202c;
@@ -651,10 +678,9 @@
 }
 
 .amount-button:hover {
-  border-color: #FF6B6B;
-  background: #ffffff;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(255, 107, 107, 0.2);
+  border-color: rgba(255, 107, 107, 0.3);
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateX(2px);
 }
 
 .amount-button:hover::before {
@@ -665,8 +691,8 @@
   border-color: transparent;
   background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
   color: white;
-  box-shadow: 0 12px 30px rgba(255, 107, 107, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.25);
+  transform: translateX(2px) scale(1.02);
 }
 
 .amount-button.active::before {
@@ -675,26 +701,27 @@
 
 .custom-amount-input {
   width: 100%;
-  padding: 22px 24px;
-  border: 2px solid #e5e7eb;
-  border-radius: 14px;
+  padding: 20px 24px;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
   font-size: 1.15rem;
   font-weight: 600;
   color: #1a202c;
-  background: #fafafa;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .custom-amount-input:hover {
-  border-color: #d1d5db;
-  background: #ffffff;
+  border-color: rgba(0,0,0,0.15);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .custom-amount-input:focus {
   outline: none;
   border-color: #FF6B6B;
-  background: #ffffff;
-  box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.12), 0 4px 12px rgba(255, 107, 107, 0.15);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
 }
 
 .custom-amount-input::placeholder {
@@ -731,20 +758,21 @@
 .form-select,
 .form-textarea {
   padding: 18px 20px;
-  border: 2px solid #e5e7eb;
+  border: 1px solid rgba(0,0,0,0.08);
   border-radius: 12px;
   font-size: 1rem;
   font-family: inherit;
   color: #1a202c;
-  background: #fafafa;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .form-input:hover,
 .form-select:hover,
 .form-textarea:hover {
-  border-color: #d1d5db;
-  background: #ffffff;
+  border-color: rgba(0,0,0,0.15);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .form-input:focus,
@@ -752,9 +780,9 @@
 .form-textarea:focus {
   outline: none;
   border-color: #FF6B6B;
-  background: #ffffff;
-  box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.12), 0 2px 8px rgba(255, 107, 107, 0.1);
-  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+  transform: translateX(2px);
 }
 
 .form-textarea {
@@ -823,18 +851,18 @@
 /* ===== Submit Button ===== */
 .submit-button {
   width: 100%;
-  padding: 22px 32px;
+  padding: 20px 32px;
   background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 50%, #FFB84D 100%);
   background-size: 200% 100%;
   background-position: left;
   color: white;
   border: none;
-  border-radius: 14px;
-  font-size: 1.3rem;
+  border-radius: 12px;
+  font-size: 1.2rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 24px rgba(255, 107, 107, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(255, 107, 107, 0.25);
   margin-top: 40px;
   position: relative;
   overflow: hidden;
@@ -860,14 +888,14 @@
 }
 
 .submit-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(255, 107, 107, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: translateX(4px);
+  box-shadow: 0 8px 24px rgba(255, 107, 107, 0.35);
   background-position: right;
 }
 
 .submit-button:active {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+  transform: translateX(2px);
+  box-shadow: 0 4px 16px rgba(255, 107, 107, 0.3);
 }
 
 .submit-button:disabled {
@@ -1019,10 +1047,12 @@
 
 .quote-section {
   margin-top: 2rem;
-  padding: 2rem;
-  background: #fff8e1;
-  border-left: 4px solid #ff9800;
-  border-radius: 8px;
+  padding: 2rem 0 2rem 2rem;
+  background: transparent;
+  border-left: 3px solid #ff9800;
+  border-radius: 0;
+  backdrop-filter: none;
+  box-shadow: none;
 }
 
 .divine-quote {

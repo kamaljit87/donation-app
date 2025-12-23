@@ -9,15 +9,15 @@
   max-width: var(--container-max-width);
   margin: 0 auto;
   padding: 60px 40px 40px;
-  text-align: center;
+  text-align: left;
 }
 
 .hero-badge {
   display: inline-block;
   padding: 6px 16px;
-  background: transparent;
+  background: rgba(255, 107, 107, 0.1);
   color: #FF6B6B;
-  border: 1px solid #FF6B6B;
+  border: none;
   border-radius: 50px;
   font-weight: 500;
   font-size: 0.85rem;
@@ -32,6 +32,7 @@
   margin-bottom: 24px;
   line-height: 1.4;
   letter-spacing: -0.5px;
+  text-align: left;
 }
 
 .gradient-text {
@@ -43,9 +44,10 @@
   font-size: 1.1rem;
   color: #6b7280;
   max-width: 700px;
-  margin: 0 auto;
+  margin: 0;
   line-height: 1.7;
   font-weight: 300;
+  text-align: left;
 }
 
 /* Content Section */
@@ -67,7 +69,7 @@
 .card-icon {
   font-size: 2.5rem;
   margin-bottom: 16px;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .content-card h2 {
@@ -76,6 +78,7 @@
   margin-bottom: 16px;
   font-weight: 600;
   letter-spacing: -0.3px;
+  text-align: left;
 }
 
 .content-card p {
@@ -84,6 +87,7 @@
   color: #4b5563;
   margin-bottom: 16px;
   font-weight: 300;
+  text-align: left;
 }
 
 .content-card strong {
@@ -103,7 +107,7 @@
   gap: 20px;
   align-items: flex-start;
   padding: 0 0 24px 0;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
   margin-bottom: 24px;
   transition: all 0.3s ease;
 }
@@ -121,7 +125,7 @@
 .list-icon {
   font-size: 1.8rem;
   flex-shrink: 0;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .feature-list strong {
@@ -130,6 +134,7 @@
   display: block;
   margin-bottom: 8px;
   font-weight: 600;
+  text-align: left;
 }
 
 .feature-list p {
@@ -138,14 +143,15 @@
   margin: 0;
   line-height: 1.6;
   font-weight: 300;
+  text-align: left;
 }
 
 /* CTA Section */
 .cta-section {
-  text-align: center;
+  text-align: left;
   padding: 48px 0;
   background: transparent;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid rgba(0,0,0,0.05);
   border-radius: 0;
   margin-top: 20px;
 }
@@ -156,6 +162,7 @@
   color: #1a202c;
   font-weight: 600;
   letter-spacing: -0.3px;
+  text-align: left;
 }
 
 .cta-section p {
@@ -163,6 +170,7 @@
   margin-bottom: 32px;
   color: #6b7280;
   font-weight: 300;
+  text-align: left;
 }
 
 .cta-button {
@@ -182,7 +190,7 @@
 .cta-button:hover {
   background: #374151;
   border-color: #374151;
-  transform: translateY(-1px);
+  transform: translateX(2px);
 }
 
 /* Responsive Design */
