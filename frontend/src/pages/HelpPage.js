@@ -54,6 +54,11 @@ MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS="noreply@yoursite.com"
 MAIL_FROM_NAME="Prabhupada Annakshetra"`}</code></pre>
             </div>
+            
+            <p className="note" style={{ marginTop: '16px', padding: '12px', background: 'rgba(255, 193, 7, 0.1)', borderLeft: '3px solid #ffc107', borderRadius: '0 4px 4px 0', fontSize: '0.9rem' }}>
+              ⚠️ <strong>Security Note:</strong> Never commit your actual credentials to version control. 
+              Use environment-specific values and keep your <code>.env</code> file in <code>.gitignore</code>.
+            </p>
           </div>
 
           <div className="help-section">
@@ -69,7 +74,8 @@ MAIL_FROM_NAME="Prabhupada Annakshetra"`}</code></pre>
                   <p><strong>MAIL_ENCRYPTION:</strong> tls</p>
                   <p className="note">
                     Note: You'll need to use an App Password instead of your regular Gmail password.
-                    Enable 2FA and generate an App Password in your Google Account settings.
+                    Enable 2-Step Verification in your Google Account, then go to Security → 
+                    App Passwords to generate one specifically for this application.
                   </p>
                 </div>
               </div>
