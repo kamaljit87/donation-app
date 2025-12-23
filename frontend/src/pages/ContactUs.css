@@ -1,7 +1,7 @@
-/* Contact Us Page */
+/* Contact Us Page - Modern Charity Design */
 .contact-page {
   min-height: 100vh;
-  background: #fafafa;
+  background: var(--gray-50);
   padding: 80px 0;
 }
 
@@ -59,12 +59,11 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
 }
 
-.form-card h2 {
-  font-size: 1.8rem;
+.contact-form-section h2 {
+  font-size: 1.75rem;
   font-weight: 700;
-  color: #1a202c;
-  margin-bottom: 32px;
-  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  margin-bottom: 24px;
 }
 
 .form-group {
