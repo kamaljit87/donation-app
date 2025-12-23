@@ -6,7 +6,7 @@
 
 /* Hero Section */
 .about-hero {
-  max-width: 1000px;
+  max-width: var(--container-max-width);
   margin: 0 auto;
   padding: 60px 40px 40px;
   text-align: center;

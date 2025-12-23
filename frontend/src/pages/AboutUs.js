@@ -19,13 +19,15 @@ const AboutUs = () => {
       <Header />
 
       <div className="about-us-page">
-        <div className="about-hero">
-          <div className="hero-badge">🙏 About Our Mission</div>
-          <h1>Serving Society with <span className="gradient-text">Compassion</span></h1>
-          <p className="hero-subtitle">
-            An ISKCON initiative dedicated to ending hunger through prasadam distribution
-          </p>
-        </div>
+        <div className="about-hero wide-hero">
+            <div className="hero-inner">
+              <div className="hero-badge">🙏 About Our Mission</div>
+              <h1>Serving Society with <span className="gradient-text">Compassion</span></h1>
+              <p className="hero-subtitle lead">
+                An ISKCON initiative dedicated to ending hunger through prasadam distribution
+              </p>
+            </div>
+          </div>
 
         <div className="about-content">
           <div className="content-card">

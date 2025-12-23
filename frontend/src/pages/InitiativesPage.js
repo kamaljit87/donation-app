@@ -13,16 +13,25 @@ const InitiativesPage = () => {
   const heading = categoryHeadings[category] || 'Our Feeding Initiatives';
 
   return (
-    <div className="initiatives-page">
-      <h1>{heading}</h1>
-      <div className="initiatives-content">
-        {/* Content for each initiative can be conditionally rendered here */}
-        <p>
-          {/* Example content, replace with real info */}
-          {heading} initiative details and stories will appear here. All initiatives share this page but are categorized for clarity.
-        </p>
+    <>
+      <div className="wide-hero">
+        <div className="hero-inner">
+          <a className="back-link" href="/">&lt; Back to Home</a>
+          <h1>{heading}</h1>
+          <p className="lead">{heading} initiative details and stories will appear here. All initiatives share this page but are categorized for clarity.</p>
+        </div>
       </div>
-    </div>
+
+      <div className="initiatives-page page-container">
+        <div className="initiatives-content container">
+          {/* Content for each initiative can be conditionally rendered here */}
+          <p>
+            {/* Example content, replace with real info */}
+            Detailed information, stories, images and volunteer calls-to-action can be added here for the initiative.
+          </p>
+        </div>
+      </div>
+    </>
   );
 };
 

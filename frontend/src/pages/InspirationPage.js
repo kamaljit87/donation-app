@@ -19,13 +19,15 @@ const InspirationPage = () => {
       <Header />
 
       <div className="inspiration-page">
-        <div className="inspiration-hero">
-          <div className="hero-badge">🕉️ The Inspiration Behind Our Existence</div>
-          <h1>
-            Nurtured By The Compassionate Vision<br />
-            <span className="gradient-text">Of Srila Prabhupada</span>
-          </h1>
-        </div>
+        <div className="inspiration-hero wide-hero">
+            <div className="hero-inner">
+              <div className="hero-badge">🕉️ The Inspiration Behind Our Existence</div>
+              <h1>
+                Nurtured By The Compassionate Vision<br />
+                <span className="gradient-text">Of Srila Prabhupada</span>
+              </h1>
+            </div>
+          </div>
 
         <div className="inspiration-content">
           {/* Featured Image Section */}

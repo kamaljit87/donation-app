@@ -29,11 +29,15 @@ const InitiativeDetail = () => {
   return (
     <>
       <Header />
-      <main className="initiative-detail page-container">
-        <Link to="/initiatives" className="back-link">← Back to Initiatives</Link>
-        <h1>{content.title}</h1>
-        <p className="lead">{content.description}</p>
+      <div className="wide-hero">
+        <div className="hero-inner">
+          <Link to="/initiatives" className="back-link">← Back to Initiatives</Link>
+          <h1>{content.title}</h1>
+          <p className="lead">{content.description}</p>
+        </div>
+      </div>
 
+      <main className="initiative-detail page-container container">
         <section className="initiative-actions">
           <h3>Get Involved</h3>
           <p>Support by volunteering, donating, or spreading the word.</p>
