@@ -13,6 +13,7 @@ import ThankYouPage from './pages/ThankYouPage';
 import AboutUs from './pages/AboutUs';
 import InspirationPage from './pages/InspirationPage';
 import ContactUs from './pages/ContactUs';
+import HelpPage from './pages/HelpPage';
 
 // Context
 import { AuthProvider } from './context/AuthContext';
@@ -32,6 +33,7 @@ function App() {
           <Route path="/initiatives" element={<InitiativesPage />} />
           <Route path="/initiatives/:slug" element={<InitiativeDetail />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/help" element={<HelpPage />} />
           <Route path="/thank-you" element={<ThankYouPage />} />
           <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
           <Route path="/admin/login" element={<AdminLogin />} />

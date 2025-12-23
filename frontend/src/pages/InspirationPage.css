@@ -9,15 +9,15 @@
   max-width: var(--container-max-width);
   margin: 0 auto;
   padding: 60px 40px 40px;
-  text-align: center;
+  text-align: left;
 }
 
 .hero-badge {
   display: inline-block;
   padding: 6px 16px;
-  background: transparent;
+  background: rgba(255, 107, 107, 0.1);
   color: #FF6B6B;
-  border: 1px solid #FF6B6B;
+  border: none;
   border-radius: 50px;
   font-weight: 500;
   font-size: 0.85rem;
@@ -32,6 +32,7 @@
   margin-bottom: 0;
   line-height: 1.4;
   letter-spacing: -0.5px;
+  text-align: left;
 }
 
 .gradient-text {
@@ -103,14 +104,14 @@
 }
 
 .story-header {
-  text-align: center;
+  text-align: left;
   margin-bottom: 32px;
 }
 
 .story-icon {
   font-size: 2.5rem;
   margin-bottom: 16px;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .story-content h2 {
@@ -119,6 +120,7 @@
   margin-bottom: 0;
   font-weight: 600;
   letter-spacing: -0.3px;
+  text-align: left;
 }
 
 .story-text {
@@ -175,7 +177,7 @@
 .impact-section h2 {
   font-size: 1.8rem;
   color: #1a202c;
-  text-align: center;
+  text-align: left;
   margin-bottom: 40px;
   font-weight: 600;
   letter-spacing: -0.3px;
@@ -188,19 +190,19 @@
 }
 
 .impact-card {
-  text-align: center;
+  text-align: left;
   padding: 0;
   transition: all 0.3s ease;
 }
 
 .impact-card:hover {
-  transform: translateY(-2px);
+  transform: translateX(4px);
 }
 
 .impact-icon {
   font-size: 2.5rem;
   margin-bottom: 16px;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .impact-card h3 {
@@ -208,6 +210,7 @@
   color: #1a202c;
   margin-bottom: 12px;
   font-weight: 600;
+  text-align: left;
 }
 
 .impact-card p {
@@ -215,6 +218,7 @@
   line-height: 1.7;
   color: #6b7280;
   font-weight: 300;
+  text-align: left;
 }
 
 /* Legacy Section */
@@ -228,7 +232,7 @@
   color: #1a202c;
   margin-bottom: 24px;
   font-weight: 600;
-  text-align: center;
+  text-align: left;
   letter-spacing: -0.3px;
 }
 
@@ -245,10 +249,10 @@
 
 /* CTA Section */
 .cta-section {
-  text-align: center;
+  text-align: left;
   padding: 48px 0;
   background: transparent;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid rgba(0,0,0,0.05);
   border-radius: 0;
   color: inherit;
 }
@@ -259,6 +263,7 @@
   color: #1a202c;
   font-weight: 600;
   letter-spacing: -0.3px;
+  text-align: left;
 }
 
 .cta-section p {
@@ -266,6 +271,7 @@
   margin-bottom: 32px;
   color: #6b7280;
   font-weight: 300;
+  text-align: left;
 }
 
 .cta-buttons {
@@ -308,7 +314,7 @@
 }
 
 .cta-button:hover {
-  transform: translateY(-1px);
+  transform: translateX(2px);
 }
 
 /* Responsive Design */
