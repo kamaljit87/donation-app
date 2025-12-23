@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet-async';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { donationService, paymentService } from '../services';
-import Gallery from '../components/Gallery';
 import Header from '../components/Header';
 import HeroCarousel from '../components/HeroCarousel';
 import './DonatePage.css';
@@ -230,9 +229,6 @@ const DonatePageNew = () => {
             </div>
           </div>
         </section>
-
-        {/* Gallery Section */}
-        <Gallery />
 
         {/* Donation Form */}
         <div className="donate-container" id="donation-form">
