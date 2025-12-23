@@ -11,6 +11,8 @@
   --primary-color: #FF6B35;
   --primary-dark: #E85A2B;
   --primary-light: #FF8C61;
+  --primary-color-light: rgba(255, 107, 53, 0.05);
+  --primary-color-10: rgba(255, 107, 53, 0.1);
   --secondary-color: #004E89;
   --accent-color: #FFD23F;
   --success-color: #06D6A0;

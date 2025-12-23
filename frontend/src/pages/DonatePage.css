@@ -211,7 +211,7 @@
 
 .toggle-option.active {
   border-color: var(--primary-color);
-  background: rgba(255, 107, 53, 0.05);
+  background: var(--primary-color-light);
 }
 
 .toggle-title {
@@ -252,7 +252,7 @@
 
 .amount-button:hover {
   border-color: var(--primary-light);
-  background: rgba(255, 107, 53, 0.05);
+  background: var(--primary-color-light);
 }
 
 .amount-button.active {
