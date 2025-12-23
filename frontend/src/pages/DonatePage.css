@@ -1,3 +1,101 @@
+/* ===== Donate Page Columns Layout ===== */
+.donate-main-columns {
+  display: flex;
+  gap: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 20px 0 20px;
+}
+
+.donate-left {
+  flex: 3;
+  min-width: 0;
+}
+
+.donate-right {
+  flex: 2;
+  min-width: 340px;
+  position: sticky;
+  top: 40px;
+  align-self: flex-start;
+  z-index: 2;
+}
+
+@media (max-width: 1024px) {
+  .donate-main-columns {
+    flex-direction: column;
+    gap: 0;
+    padding: 20px 0 0 0;
+  }
+  .donate-right {
+    position: static;
+    min-width: 0;
+    margin-top: 32px;
+  }
+}
+
+/* ===== FAQ Section ===== */
+.faq-section {
+  margin: 48px 0 0 0;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  padding: 32px 24px;
+}
+.faq-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #FF6B6B;
+}
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.faq-item {
+  border-bottom: 1px solid #f3f3f3;
+  padding-bottom: 12px;
+}
+.faq-item.open .faq-question {
+  color: #FF6B6B;
+}
+.faq-question {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a202c;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+}
+.faq-toggle-icon {
+  font-size: 1.5rem;
+  color: #FF6B6B;
+  margin-left: 12px;
+}
+.faq-answer {
+  font-size: 1rem;
+  color: #444;
+  margin-top: 8px;
+  transition: all 0.3s;
+}
+
+/* Blinking Heart Icon for Donate Button */
+.donate-button-nav .heart-icon {
+  animation: blink-heart 1s infinite;
+  color: #FF6B6B;
+  margin-right: 8px;
+}
+@keyframes blink-heart {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
 /* ===== Donate Page ===== */
 .donate-page {
   min-height: 100vh;

@@ -7,6 +7,25 @@ import Gallery from '../components/Gallery';
 import Header from '../components/Header';
 import './DonatePage.css';
 
+const faqs = [
+  {
+    question: 'Is my donation tax-exempt?',
+    answer: 'Yes, all donations are eligible for 80G tax exemption. You will receive a certificate after your donation.'
+  },
+  {
+    question: 'How do I know my donation is used properly?',
+    answer: 'We provide photo proof and updates for every meal distribution. Transparency is our core value.'
+  },
+  {
+    question: 'Can I donate in memory of someone or on a special day?',
+    answer: 'Absolutely! You can sponsor meals on birthdays, anniversaries, or memorial days. Mention your intent in the form.'
+  },
+  {
+    question: 'What payment methods are accepted?',
+    answer: 'We accept all major credit/debit cards, UPI, and net banking via Razorpay.'
+  },
+];
+
 const DonatePageNew = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -29,18 +48,7 @@ const DonatePageNew = () => {
     tax_exemption_certificate: true,
   });
 
-  // Handle scrolling to specific sections
-  useEffect(() => {
-    if (location.state?.scrollTo) {
-      const sectionId = location.state.scrollTo;
-      setTimeout(() => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 100);
-    }
-  }, [location]);
+  const [openFaq, setOpenFaq] = useState(null);
 
   const predefinedAmounts = [1100, 2500, 5000, 10000, 25000];
 

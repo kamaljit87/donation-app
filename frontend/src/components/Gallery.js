@@ -133,17 +133,7 @@ const Gallery = () => {
             )}
           </button>
 
-          {/* Indicator Dots */}
-          <div className="carousel-indicators">
-            {images.map((_, index) => (
-              <button
-                key={index}
-                className={`carousel-indicator ${index === currentIndex ? 'active' : ''}`}
-                onClick={() => goToSlide(index)}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
+          {/* Only next/prev buttons for pagination; indicator dots removed for minimal UI */}
         </div>
 
         {/* Image Counter */}

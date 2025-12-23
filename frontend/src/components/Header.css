@@ -101,9 +101,10 @@
 }
 
 .logo-image {
-  width: 60px;
-  height: 60px;
+  width: 90px;
+  height: 90px;
   object-fit: contain;
+  transition: width 0.3s, height 0.3s;
 }
 
 .nav-links {
@@ -253,20 +254,40 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
-  .top-bar-content {
-    padding: 0 20px;
-  }
-
-  .contact-info {
-    gap: 16px;
-  }
-
-  .contact-info span {
-    display: none;
-  }
-
+@media (max-width: 768px) {
   .header-nav {
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px 8px;
+    align-items: stretch;
+  }
+
+  .logo {
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .donate-button-nav {
+    width: 100%;
+    justify-content: center;
+    margin-top: 8px;
+  }
+
+  .dropdown-menu {
+    left: 0;
+    right: 0;
+    min-width: unset;
+    width: 100%;
+  }
+
+  .donate-hero h1 {
     padding: 12px 20px;
   }
 

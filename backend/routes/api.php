@@ -14,6 +14,9 @@ use App\Http\Controllers\Api\PaymentController;
 
 // Public routes
 Route::post('/auth/login', [AuthController::class, 'login']);
+// Contact form
+use App\Http\Controllers\Api\ContactController;
+Route::post('/contact', [ContactController::class, 'send']);
 
 // Donation routes (public)
 Route::post('/donations', [DonationController::class, 'store']);

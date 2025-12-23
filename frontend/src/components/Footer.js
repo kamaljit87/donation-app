@@ -37,7 +37,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>©️ 2025 Annakshetra. All rights reserved. | Developed by <a href="https://indraopstech.com" target="_blank" rel="noopener noreferrer">IndraOps Technologies</a></p>
+        <p>©️2025 Anna Ksehtra. Developed by <a href="https://indraopstech.com" target="_blank" rel="noopener noreferrer">IndraOpsTech&lt;indraopstech.com&gt;</a></p>
       </div>
     </footer>
   );

@@ -1,37 +1,52 @@
+
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import './Header.css';
 
 const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const scrollToDonate = () => {
     navigate('/donate');
   };
 
-  const handleInitiativeClick = (section) => {
-    navigate('/', { state: { scrollTo: section } });
+  const handleInitiativeClick = (category) => {
+    navigate('/initiatives', { state: { category } });
+      setDropdownOpen(false);
     setShowDropdown(false);
   };
+    // Handle dropdown for both hover (desktop) and click (mobile)
+    const handleDropdownToggle = () => setDropdownOpen((open) => !open);
+    const handleDropdownClose = () => setDropdownOpen(false);
+
+    // Detect mobile
+    const isMobile = window.innerWidth <= 1024;
 
   return (
     <>
+      <Helmet>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Srila Prabhupada Annakshetra - Modern, mobile-friendly food donation platform. Feed the hungry, support sacred service, and join our mission." />
+        <title>Srila Prabhupada Annakshetra</title>
+      </Helmet>
       {/* Social Media Top Bar */}
       <div className="top-bar">
         <div className="top-bar-content">
           <div className="social-links">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <a href="https://www.facebook.com/profile.php?id=61584742552500" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <i className="fab fa-facebook-f"></i>
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <i className="fab fa-linkedin-in"></i>
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <a href="https://www.instagram.com/annakshetra?igsh=MWRxZGh2M3l4dHo3" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <i className="fab fa-instagram"></i>
             </a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <i className="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
               <i className="fab fa-youtube"></i>
             </a>
           </div>
@@ -58,28 +73,33 @@ const Header = () => {
             <Link to="/">Home</Link>
             <Link to="/about">About Us</Link>
             <Link to="/inspiration">Our Inspiration</Link>
-            <div 
+            <div
               className="dropdown"
-              onMouseEnter={() => setShowDropdown(true)}
-              onMouseLeave={() => setShowDropdown(false)}
+              onMouseEnter={() => { if (window.innerWidth > 1024) setShowDropdown(true); }}
+              onMouseLeave={() => { if (window.innerWidth > 1024) setShowDropdown(false); }}
             >
-              <button className="dropdown-toggle">
+              <button
+                className="dropdown-toggle"
+                aria-haspopup="true"
+                aria-expanded={dropdownOpen || showDropdown}
+                onClick={() => setDropdownOpen((v) => !v)}
+              >
                 Our Feeding Initiatives
                 <i className="fas fa-chevron-down"></i>
               </button>
-              {showDropdown && (
-                <div 
+              {(dropdownOpen || showDropdown) && (
+                <div
                   className="dropdown-menu"
-                  onMouseEnter={() => setShowDropdown(true)}
-                  onMouseLeave={() => setShowDropdown(false)}
+                  onMouseEnter={() => { if (window.innerWidth > 1024) setShowDropdown(true); }}
+                  onMouseLeave={() => { if (window.innerWidth > 1024) setShowDropdown(false); }}
                 >
-                  <button onClick={() => handleInitiativeClick('daily-distribution')}>
+                  <button onClick={() => { navigate('/initiatives/daily-food-distribution'); setDropdownOpen(false); setShowDropdown(false); }}>
                     Daily Food Distribution
                   </button>
-                  <button onClick={() => handleInitiativeClick('special-day')}>
+                  <button onClick={() => { navigate('/initiatives/make-your-day-special'); setDropdownOpen(false); setShowDropdown(false); }}>
                     Make Your Day Special
                   </button>
-                  <button onClick={() => handleInitiativeClick('mental-abled')}>
+                  <button onClick={() => { navigate('/initiatives/mental-abled-child'); setDropdownOpen(false); setShowDropdown(false); }}>
                     Mental Abled Child
                   </button>
                 </div>
